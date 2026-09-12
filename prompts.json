@@ -242,7 +242,198 @@
   "version": "1.0",
   "prompt": "請修改此既有 PLC FB，但只修改我指定的功能。\n\n先分析目前程式的實際控制邏輯，再列出本次修改會影響的 Network、State、Timer、Interlock 與 Output。\n\n未要求修改的功能必須保持原有行為。\n\n修改前先說明變更範圍與可能風險，確認後再產生程式修改建議。"
 },
-  
+  {
+  "id": "DOC-FB-REPORT-001",
+  "category": "Documentation",
+  "title": "PLC FB 功能說明報告",
+  "tags": [
+    "Documentation",
+    "FB",
+    "Function Report",
+    "PLC"
+  ],
+  "description": "分析既有 PLC FB 後，產生可直接閱讀的功能說明報告。",
+  "usage": "適合已完成 PLC FB 分析，希望將程式邏輯整理成工程文件、交付文件或教育訓練資料。",
+  "requiredInput": [
+    "完整 PLC FB 或程式內容",
+    "PLC Tag 資訊",
+    "必要的設備背景",
+    "已知功能需求"
+  ],
+  "officialCategory": "Documentation",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請根據此 PLC FB 的實際控制邏輯產生功能說明報告。\n\n先說明整體功能，再依控制流程說明主要 Input、Condition、Internal State、Timer、Interlock 與 Output 的關係。\n\n不得只依 Tag 名稱推測功能，必須以實際程式邏輯為依據。\n\n內容以工程人員可以直接閱讀與交接為原則，不要重新產生程式碼。"
+},
+{
+  "id": "DOC-PLAIN-001",
+  "category": "Documentation",
+  "title": "非程式背景人員功能說明",
+  "tags": [
+    "Documentation",
+    "Plain Language",
+    "Training",
+    "Explanation"
+  ],
+  "description": "將 PLC 程式功能轉換成非程式背景人員也能理解的自然語言說明。",
+  "usage": "適合向主管、業務、學生、客戶或沒有 PLC 程式背景的人說明設備功能。",
+  "requiredInput": [
+    "PLC 程式或功能分析結果",
+    "設備名稱",
+    "主要 Input",
+    "主要 Output",
+    "設備動作流程"
+  ],
+  "officialCategory": "Documentation",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請將此 PLC 功能轉換成沒有 PLC 程式背景的人也能理解的自然語言說明。\n\n不要從程式語法開始解釋，也不要大量使用 SCL、LAD 或資料型別術語。\n\n請用設備實際動作說明：什麼條件發生、設備做什麼、等待多久、什麼條件進入下一步、什麼情況停止。\n\n若需要使用專有名詞，請同時用簡單語言解釋。"
+},
+{
+  "id": "DOC-ENGINEERING-001",
+  "category": "Documentation",
+  "title": "自然語言轉工程功能敘述",
+  "tags": [
+    "Documentation",
+    "Engineering Description",
+    "Requirement",
+    "PLC"
+  ],
+  "description": "將口語或簡單自然語言控制需求整理成正式工程功能敘述。",
+  "usage": "適合將使用者、學員或客戶描述的設備需求轉換成後續 PLC Programming 與 Testing 可使用的工程規格。",
+  "requiredInput": [
+    "自然語言功能需求",
+    "Input",
+    "Output",
+    "時間條件",
+    "模式條件",
+    "異常或停止要求"
+  ],
+  "officialCategory": "Documentation",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請將以下自然語言 PLC 功能需求整理成正式工程功能敘述。\n\n請明確區分初始條件、輸入事件、控制條件、時間條件、設備動作、預期輸出與停止條件。\n\n不得自行增加使用者沒有提出的控制功能。\n\n若需求存在矛盾、缺少優先權或無法判斷的訊號語意，請另外列出待確認事項。"
+},
+{
+  "id": "DOC-SEQUENCE-001",
+  "category": "Documentation",
+  "title": "設備動作流程說明",
+  "tags": [
+    "Documentation",
+    "Sequence",
+    "Process Flow",
+    "State"
+  ],
+  "description": "將 PLC 控制邏輯整理成依時間或狀態順序排列的設備動作流程。",
+  "usage": "適合建立設備操作說明、試車流程、教學文件與後續 State Machine 設計。",
+  "requiredInput": [
+    "PLC 程式或功能需求",
+    "初始狀態",
+    "主要設備動作",
+    "切換條件",
+    "時間條件",
+    "停止或復歸條件"
+  ],
+  "officialCategory": "Documentation",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請將此 PLC 控制功能整理成設備動作流程。\n\n依實際發生順序說明：初始狀態 → 觸發條件 → 設備動作 → 等待或時間條件 → 下一個狀態 → 完成或停止。\n\n若存在分支、互鎖或優先權，請在對應步驟說明。\n\n流程描述必須能讓工程師不查看程式碼也能理解設備的實際動作。"
+},
+{
+  "id": "DOC-IO-001",
+  "category": "Documentation",
+  "title": "I/O 功能與因果說明",
+  "tags": [
+    "Documentation",
+    "I/O",
+    "Cause Effect",
+    "PLC Tag"
+  ],
+  "description": "將 PLC I/O 與程式邏輯整理成可閱讀的 I/O 功能與因果關係說明。",
+  "usage": "適合設備交機文件、I/O Check、試車文件與工程人員交接。",
+  "requiredInput": [
+    "PLC Tag List",
+    "PLC 程式",
+    "I/O Comment",
+    "必要的外部接線語意"
+  ],
+  "officialCategory": "Documentation",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請根據 PLC Tag List 與實際程式邏輯整理 I/O 功能說明。\n\n每個重要 I/O 請說明 Tag、工程用途、觸發條件、影響的 Internal State 或 Logic，以及最終 Output。\n\n不得只依 Comment 或 Tag 名稱推測完整功能。\n\n若 NO、NC、Sensor Active Level 或外部 Wiring 無法確認，請標示為待確認。"
+},
+{
+  "id": "DOC-COMMENT-001",
+  "category": "Documentation",
+  "title": "SCL 程式註解生成",
+  "tags": [
+    "Documentation",
+    "SCL",
+    "Comment",
+    "Code Documentation"
+  ],
+  "description": "根據既有 SCL 實際邏輯產生工程用途清楚的程式註解。",
+  "usage": "適合既有 SCL 程式缺少註解，或需要統一程式文件風格時使用。",
+  "requiredInput": [
+    "完整 SCL 程式",
+    "設備功能背景",
+    "重要 Tag 說明",
+    "註解語言要求"
+  ],
+  "officialCategory": "Documentation",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請為此 SCL 程式補充工程註解，但不得修改任何程式邏輯。\n\n註解應說明每段程式要解決的控制問題、條件用途、狀態切換、Timer、Interlock 與 Output 行為。\n\n不要把每一行程式重新翻譯成中文，也不要加入程式中不存在的功能描述。\n\n註解以後續維護工程師可以快速理解控制思路為原則。"
+},
+{
+  "id": "DOC-TEST-SPEC-001",
+  "category": "Documentation",
+  "title": "Application Test 測試規格文件",
+  "tags": [
+    "Documentation",
+    "Application Test",
+    "Test Specification",
+    "Testing"
+  ],
+  "description": "將 PLC 功能與 Application Test 需求整理成自然語言測試規格文件。",
+  "usage": "適合在產生 Test Script 前先建立可供工程師、教師與學員確認的測試規格。",
+  "requiredInput": [
+    "PLC Tag List",
+    "被測功能",
+    "初始條件",
+    "測試刺激",
+    "時間條件",
+    "預期輸出",
+    "驗收條件"
+  ],
+  "officialCategory": "Documentation",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請將此 PLC 測試需求整理成自然語言 Application Test 規格文件。\n\n請包含測試目的、前置條件、初始狀態、輸入動作、時間條件、預期輸出、結束條件與 PASS 判定方式。\n\n此階段不要產生 VAR、STEP、RUN、ASSERT 等 Script 語法。\n\n文件確認完成後，再進入 Application Test Script 生成。"
+},
+{
+  "id": "DOC-UPLOAD-001",
+  "category": "Documentation",
+  "title": "依上傳文件產生工程摘要",
+  "tags": [
+    "Documentation",
+    "Uploaded Document",
+    "RAG",
+    "Engineering Summary"
+  ],
+  "description": "根據上傳至 Eigen 的技術文件整理與目前工程任務相關的重點。",
+  "usage": "適合使用技術規格、Programming Style Guide、設備文件或專案規範作為 Eigen 的工程參考資料。",
+  "requiredInput": [
+    "已上傳的技術文件",
+    "本次工程任務",
+    "需要關注的章節或主題",
+    "希望產出的摘要用途"
+  ],
+  "officialCategory": "Documentation",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請只根據本次對話已上傳的文件，整理與目前工程任務直接相關的內容。\n\n請區分文件中明確規定的要求、建議事項與沒有提供資訊的部分。\n\n不得使用一般知識補寫文件沒有說明的規格。\n\n請列出來源文件名稱或可辨識的章節，並整理成可供後續 PLC Programming 或 Testing 使用的工程摘要。"
+},
   {
     "id": "TEST-AT-001",
     "category": "Testing / QA",
