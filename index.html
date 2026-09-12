@@ -207,18 +207,47 @@ Output
 <script>
   const searchInput = document.getElementById("searchInput");
   const promptCards = document.querySelectorAll(".prompt-card");
+  const categoryButtons = document.querySelectorAll(".category-button");
 
-  searchInput.addEventListener("input", function () {
-    const keyword = this.value.toLowerCase().trim();
+  let activeCategory = "全部";
+
+  function filterPrompts() {
+    const keyword = searchInput.value.toLowerCase().trim();
 
     promptCards.forEach(card => {
       const text = card.innerText.toLowerCase();
 
-      if (text.includes(keyword)) {
+      const matchesKeyword =
+        keyword === "" || text.includes(keyword);
+
+      const matchesCategory =
+        activeCategory === "全部" ||
+        text.includes(activeCategory.toLowerCase());
+
+      if (matchesKeyword && matchesCategory) {
         card.style.display = "block";
       } else {
         card.style.display = "none";
       }
+    });
+  }
+
+  searchInput.addEventListener("input", filterPrompts);
+
+  categoryButtons.forEach(button => {
+    button.addEventListener("click", function () {
+
+      activeCategory = this.innerText.trim();
+
+      categoryButtons.forEach(btn => {
+        btn.style.background = "white";
+        btn.style.fontWeight = "normal";
+      });
+
+      this.style.background = "#e5eef5";
+      this.style.fontWeight = "bold";
+
+      filterPrompts();
     });
   });
 </script>
