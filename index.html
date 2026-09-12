@@ -204,5 +204,24 @@ Output
 
 </main>
 
+<script>
+  const searchInput = document.getElementById("searchInput");
+  const promptCards = document.querySelectorAll(".prompt-card");
+
+  searchInput.addEventListener("input", function () {
+    const keyword = this.value.toLowerCase().trim();
+
+    promptCards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+
+      if (text.includes(keyword)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+</script>
+  
 </body>
 </html>
