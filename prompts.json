@@ -267,5 +267,179 @@
     "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
     "version": "1.0",
     "prompt": "以上是本次測試可使用的 PLC Tag List。\n\n從下一則訊息開始，\n我會直接使用自然語言描述 PLC 的輸入動作、\n時間條件與預期輸出。\n\n請將需求轉換為 TIA Portal Application Test Script。"
-  }
+  },
+  {
+  "id": "TEST-POSITIVE-001",
+  "category": "Testing / QA",
+  "title": "正向功能測試",
+  "tags": [
+    "Testing / QA",
+    "Positive Test",
+    "Application Test",
+    "TIA Portal"
+  ],
+  "description": "依使用者描述的正常功能需求建立正向驗證案例。",
+  "usage": "適合先驗證設備在正常輸入、正常條件與預期操作流程下，是否產生正確輸出。",
+  "requiredInput": [
+    "PLC Tag List",
+    "測試功能名稱",
+    "正常初始條件",
+    "輸入動作",
+    "時間條件",
+    "預期輸出",
+    "結束條件"
+  ],
+  "officialCategory": "Testing / QA",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請先針對我描述的 PLC 功能建立正向功能測試。\n\n先確認正常初始條件、輸入動作、時間條件與預期輸出。\n\n正向測試只驗證功能在正常使用條件下是否符合需求，不要先加入故障、互鎖或邊界條件。\n\n只能使用我提供的 PLC Tag List 中存在的 Tag。\n\n完成後請以自然語言說明測試目的，再產生 TIA Portal Application Test Script。"
+},
+{
+  "id": "TEST-NEGATIVE-001",
+  "category": "Testing / QA",
+  "title": "反向功能測試",
+  "tags": [
+    "Testing / QA",
+    "Negative Test",
+    "Application Test",
+    "TIA Portal"
+  ],
+  "description": "針對不應成立的條件、錯誤操作或禁止行為建立反向驗證案例。",
+  "usage": "適合正向功能已完成後，進一步確認系統在不符合條件時不會產生錯誤輸出或不安全動作。",
+  "requiredInput": [
+    "PLC Tag List",
+    "已確認通過的正向功能",
+    "禁止條件",
+    "錯誤輸入或反向操作",
+    "不應發生的輸出"
+  ],
+  "officialCategory": "Testing / QA",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "正向功能測試已完成。\n\n請根據相同功能需求建立反向功能測試。\n\n反向測試要確認在條件不成立、操作錯誤、禁止狀態或不應啟動的情況下，相關輸出不得成立。\n\n不要自行增加不存在的 PLC Tag。\n\n請先列出反向測試目的與條件，再產生 TIA Portal Application Test Script。"
+},
+{
+  "id": "TEST-BOUNDARY-001",
+  "category": "Testing / QA",
+  "title": "Boundary Test 邊界條件測試",
+  "tags": [
+    "Testing / QA",
+    "Boundary Test",
+    "Application Test",
+    "TIA Portal"
+  ],
+  "description": "驗證時間、計數、上下限與狀態切換邊界是否符合需求。",
+  "usage": "適合 Timer、Counter、Delay、Threshold、Timeout 或狀態切換點的邊界驗證。",
+  "requiredInput": [
+    "PLC Tag List",
+    "邊界值",
+    "時間或計數條件",
+    "邊界前預期結果",
+    "邊界成立時預期結果",
+    "邊界後預期結果"
+  ],
+  "officialCategory": "Testing / QA",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請針對此 PLC 功能建立 Boundary Test。\n\n重點驗證時間、計數、上下限或狀態切換的臨界點。\n\n請至少考慮邊界前、邊界成立時、邊界後三種狀態。\n\n若為時間條件，請明確定義測試時間與允許誤差；若為數值條件，請測試臨界值前後。\n\n完成後請產生對應的 TIA Portal Application Test Script。"
+},
+{
+  "id": "TEST-TIMING-001",
+  "category": "Testing / QA",
+  "title": "Timing Test 時序測試",
+  "tags": [
+    "Testing / QA",
+    "Timing Test",
+    "Timer",
+    "Application Test"
+  ],
+  "description": "驗證 PLC 輸入、Timer、等待時間與輸出之間的時序關係。",
+  "usage": "適合延遲啟動、延遲停止、脈衝、閃爍、等待與多段時序控制。",
+  "requiredInput": [
+    "PLC Tag List",
+    "輸入動作",
+    "時間條件",
+    "預期輸出時間",
+    "允許時間誤差",
+    "結束條件"
+  ],
+  "officialCategory": "Testing / QA",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請針對此 PLC 功能建立 Timing Test。\n\n請分析輸入事件、等待時間、Timer 行為與輸出變化之間的時序關係。\n\n時間驗證不得只確認最終輸出狀態，還要確認輸出發生的時間點或持續時間。\n\n若需求有允許誤差，請使用適當的上下限 ASSERT 驗證。\n\n完成後請產生 TIA Portal Application Test Script。"
+},
+{
+  "id": "TEST-INTERLOCK-001",
+  "category": "Testing / QA",
+  "title": "Interlock Test 互鎖測試",
+  "tags": [
+    "Testing / QA",
+    "Interlock",
+    "Application Test",
+    "Safety Logic"
+  ],
+  "description": "驗證互斥輸出、禁止條件與模式衝突時的控制結果。",
+  "usage": "適合正反轉、去回方向、自動手動模式、閥件互鎖與其他不可同時成立的控制功能。",
+  "requiredInput": [
+    "PLC Tag List",
+    "互鎖條件",
+    "互斥輸出",
+    "模式條件",
+    "競爭條件",
+    "優先權規則"
+  ],
+  "officialCategory": "Testing / QA",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請建立此 PLC 功能的 Interlock Test。\n\n請找出所有不可同時成立的 Output、Mode 或 Command，並驗證互鎖條件成立時不會產生衝突輸出。\n\n若兩個命令同時成立，必須依功能需求確認優先權，不得自行猜測。\n\n請先列出互鎖關係與競爭條件，再產生 TIA Portal Application Test Script。"
+},
+{
+  "id": "TEST-STOP-PRIORITY-001",
+  "category": "Testing / QA",
+  "title": "Stop Priority Test",
+  "tags": [
+    "Testing / QA",
+    "Stop Priority",
+    "Application Test",
+    "Interlock"
+  ],
+  "description": "驗證停止命令在設備運轉、時序執行或其他命令成立時具有最高優先權。",
+  "usage": "適合馬達、輸送帶、汽缸或其他需要立即停止與狀態重置的控制功能。",
+  "requiredInput": [
+    "PLC Tag List",
+    "Stop 輸入定義",
+    "Stop 的 NO 或 NC 訊號語意",
+    "設備運轉輸出",
+    "Timer 或 State",
+    "停止後預期狀態"
+  ],
+  "officialCategory": "Testing / QA",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請建立 Stop Priority Test。\n\n先確認 Stop 按鈕的實際訊號語意，不得只依 Tag 名稱判斷 TRUE 或 FALSE 是否代表按下。\n\n測試時請讓設備先進入運轉或時序執行狀態，再觸發 Stop。\n\n驗證 Stop 是否立即停止相關 Output，並確認必要的 Timer、State 或 Internal State 是否依需求重置。\n\nStop 必須優先於其他啟動或方向命令。"
+},
+{
+  "id": "TEST-DEBUG-001",
+  "category": "Testing / QA",
+  "title": "Application Test Script 檢查與除錯",
+  "tags": [
+    "Testing / QA",
+    "Application Test",
+    "Debug",
+    "Script"
+  ],
+  "description": "分析 Application Test Script 的語法、Tag、時序與 ASSERT 問題。",
+  "usage": "適合 Application Test 出現 FAIL、語法錯誤、Alias 錯誤或測試結果與 PLC 實際功能不一致時使用。",
+  "requiredInput": [
+    "Application Test Script",
+    "PLC Tag List",
+    "FAIL 或錯誤訊息",
+    "被測 PLC 功能",
+    "預期測試結果"
+  ],
+  "officialCategory": "Testing / QA",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請檢查此 TIA Portal Application Test Script。\n\n請依序檢查 PLC Tag Reference、Alias、Assignment、RUN、ASSERT、時間條件與測試刺激是否正確。\n\n不得自行建立不存在的 PLC Tag，也不要把 %Q 輸出當成外部測試刺激。\n\n若 Script FAIL，請先判斷是 Script 問題、測試條件問題或 PLC 程式本身不符合需求。\n\n請先說明原因，再提出最小修改方案。"
+}
 ]
