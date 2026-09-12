@@ -1954,7 +1954,32 @@
     gap: 1px;
   }
 }
-    
+/* =========================================================
+   UI v3.1.3
+   Engineering Library Heading Spacing
+   ========================================================= */
+
+.library-heading {
+  max-width: 1180px;
+  margin: 0 auto 22px;
+
+  padding-top: 12px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+@media (max-width: 700px) {
+  .library-heading {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 4px;
+    padding-top: 8px;
+  }
+}    
   </style>
 </head>
 
@@ -2615,13 +2640,7 @@ TON(IN := #Start, PT := T#5s);
 <!-- Engineering Prompt Library 標題 -->
 
 <div
-  style="
-    max-width:1180px;
-    margin:0 auto 18px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-  "
+class="library-heading"
 >
   <h2 style="margin:0;font-size:22px;">
     📖 工程 Prompt Library
