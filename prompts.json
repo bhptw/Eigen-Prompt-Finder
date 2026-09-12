@@ -1231,5 +1231,207 @@
   "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
   "version": "1.0",
   "prompt": "請檢查 PLC 與 SINAMICS Drive 的通訊設定。\n\n請依序確認 PROFINET Device Name、IP Address、Subnet、Telegram、PLC I/O Address、Control Word 與 Status Word。\n\n請區分為網路設定問題、Telegram Mapping 問題、PLC 程式問題與 Drive 狀態問題。\n\n不要直接修改設定，先列出檢查結果與可能原因。"
+},
+{
+  "id": "CTX-PROJECT-001",
+  "category": "Project Context",
+  "title": "建立專案背景 Context",
+  "tags": [
+    "Project Context",
+    "Project",
+    "Context",
+    "Engineering"
+  ],
+  "description": "整理專案目的、設備範圍、控制需求與工程限制，作為 Eigen 後續任務的共同背景。",
+  "usage": "適合在開始 PLC Programming、Testing、Documentation 或 Hardware 任務前，先建立共用專案背景。",
+  "requiredInput": [
+    "專案名稱",
+    "設備目的",
+    "PLC 平台",
+    "主要硬體",
+    "控制範圍",
+    "工程限制",
+    "驗收目標"
+  ],
+  "officialCategory": "Project Context",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請先建立本次工程專案的 Project Context。\n\n請整理專案目的、設備範圍、PLC 平台、主要硬體、控制功能、工程限制與驗收目標。\n\n此階段不要直接產生程式碼。\n\n若資訊不足，請列出需要補充的項目，作為後續 PLC Programming、Testing 與 Documentation 的共同背景。"
+},
+{
+  "id": "CTX-REQUIREMENT-001",
+  "category": "Project Context",
+  "title": "整理控制需求與限制",
+  "tags": [
+    "Project Context",
+    "Requirement",
+    "Constraint",
+    "PLC"
+  ],
+  "description": "將使用者需求整理成專案層級的控制需求、限制與不可變更條件。",
+  "usage": "適合在程式開發前確認哪些是功能需求、哪些是限制、哪些內容不得自行推測。",
+  "requiredInput": [
+    "自然語言需求",
+    "設備功能",
+    "操作模式",
+    "時間條件",
+    "優先權",
+    "不可修改條件"
+  ],
+  "officialCategory": "Project Context",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請整理本專案的控制需求與工程限制。\n\n請區分為功能需求、操作條件、時間條件、互鎖、優先權、禁止條件與不可修改項目。\n\n不得自行補充使用者未提出的功能。\n\n若需求存在矛盾或資訊不足，請列為待確認事項。"
+},
+{
+  "id": "CTX-NAMING-001",
+  "category": "Project Context",
+  "title": "定義 Tag 與命名規則",
+  "tags": [
+    "Project Context",
+    "Naming",
+    "PLC Tag",
+    "Style Guide"
+  ],
+  "description": "建立專案內 PLC Tag、FB、DB、Timer、State 與其他工程物件的命名規則。",
+  "usage": "適合希望 Eigen 後續生成內容時維持一致命名風格。",
+  "requiredInput": [
+    "既有 Tag Naming",
+    "FB 命名方式",
+    "DB 命名方式",
+    "Input Output Prefix",
+    "語言規則",
+    "禁止使用的命名方式"
+  ],
+  "officialCategory": "Project Context",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請整理本專案的命名規則。\n\n請包含 PLC Tag、FB、FC、DB、Input、Output、Internal State、Timer、Counter 與 State 的命名方式。\n\n既有命名規則優先，不得自行改名或縮寫。\n\n若不同文件存在命名衝突，請先列出差異。"
+},
+{
+  "id": "CTX-DOCUMENT-PRIORITY-001",
+  "category": "Project Context",
+  "title": "定義文件優先權",
+  "tags": [
+    "Project Context",
+    "Document Priority",
+    "RAG",
+    "Reference"
+  ],
+  "description": "定義 Eigen 在多份上傳文件之間的參考優先順序。",
+  "usage": "適合專案同時包含需求書、Style Guide、PLC Tag、舊程式與測試文件時使用。",
+  "requiredInput": [
+    "上傳文件清單",
+    "需求文件",
+    "Style Guide",
+    "PLC Tag 文件",
+    "既有程式",
+    "測試規格"
+  ],
+  "officialCategory": "Project Context",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請建立本專案的文件參考優先權。\n\n請依我提供的文件，明確定義需求文件、Style Guide、PLC Tag、既有程式與測試規格的優先順序。\n\n若文件內容衝突，不得自行選擇其中一個版本，請先列出衝突與來源。\n\n後續回答應優先依高優先權文件。"
+},
+{
+  "id": "CTX-IO-MAP-001",
+  "category": "Project Context",
+  "title": "建立 I/O Mapping Context",
+  "tags": [
+    "Project Context",
+    "I/O Mapping",
+    "PLC Tag",
+    "Hardware"
+  ],
+  "description": "整理設備 I/O、PLC Tag、Logical Address 與工程用途的專案背景。",
+  "usage": "適合在 PLC Programming 與 Testing 前先固定 I/O 對應關係。",
+  "requiredInput": [
+    "PLC Tag List",
+    "Logical Address",
+    "Data Type",
+    "Comment",
+    "設備 I/O 名稱",
+    "外部接線語意"
+  ],
+  "officialCategory": "Project Context",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請建立本專案的 I/O Mapping Context。\n\n請整理 PLC Tag Name、Logical Address、Data Type、Comment 與設備實際 I/O 功能。\n\nLogical Address 只用於核對，不得取代 Symbolic Tag。\n\n若 NO、NC、Active High 或 Active Low 無法確認，請標示為待確認。"
+},
+{
+  "id": "CTX-TEST-CRITERIA-001",
+  "category": "Project Context",
+  "title": "定義驗收與測試標準",
+  "tags": [
+    "Project Context",
+    "Acceptance",
+    "Testing",
+    "Criteria"
+  ],
+  "description": "建立本專案共用的驗收條件與測試判定標準。",
+  "usage": "適合讓 PLC Programming、Application Test 與 Documentation 使用相同 PASS/FAIL 基準。",
+  "requiredInput": [
+    "功能需求",
+    "驗收條件",
+    "時間容許值",
+    "輸出條件",
+    "異常條件",
+    "PASS FAIL 定義"
+  ],
+  "officialCategory": "Project Context",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請整理本專案的驗收與測試標準。\n\n請明確定義正常功能、時間條件、互鎖、停止、異常與邊界條件的 PASS/FAIL 判定方式。\n\n後續 PLC Programming 與 Application Test 必須使用相同驗收標準。\n\n若驗收條件不明確，請先列出需要確認的項目。"
+},
+{
+  "id": "CTX-CHANGE-001",
+  "category": "Project Context",
+  "title": "專案變更影響分析",
+  "tags": [
+    "Project Context",
+    "Change",
+    "Impact Analysis",
+    "Regression"
+  ],
+  "description": "在修改需求、Tag、硬體或程式前分析可能影響的工程範圍。",
+  "usage": "適合專案追加功能、修改 I/O、變更 Timer、調整硬體或修改既有 FB 前使用。",
+  "requiredInput": [
+    "目前專案背景",
+    "要修改的內容",
+    "受影響的 PLC Block",
+    "受影響的 Tag",
+    "測試規格",
+    "不可改變的功能"
+  ],
+  "officialCategory": "Project Context",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請分析本次專案變更的影響範圍。\n\n請列出可能受影響的 Hardware、PLC Tag、FB、State、Timer、HMI、Drive、Application Test 與 Documentation。\n\n未要求修改的功能應視為 Regression 保護範圍。\n\n請先產生影響分析，不要直接修改程式。"
+},
+{
+  "id": "CTX-HANDOFF-001",
+  "category": "Project Context",
+  "title": "建立工程交接 Context",
+  "tags": [
+    "Project Context",
+    "Handover",
+    "Documentation",
+    "Engineering"
+  ],
+  "description": "將專案目前狀態整理成下一位工程師或下一次 Eigen 對話可直接使用的交接內容。",
+  "usage": "適合長期專案、多人協作、版本切換或需要重新開始 Eigen 對話時使用。",
+  "requiredInput": [
+    "專案目前狀態",
+    "已完成工作",
+    "未完成工作",
+    "已知問題",
+    "固定規則",
+    "下一步任務"
+  ],
+  "officialCategory": "Project Context",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請整理本專案目前的工程交接 Context。\n\n請包含專案目的、目前完成項目、固定規則、已知限制、未解決問題、重要決策與下一步工作。\n\n內容應讓新的工程師或新的 Eigen 對話不需重新閱讀全部歷史，也能正確延續工作。\n\n不得省略已凍結或不得回退的規則。"
 }
+  
 ]
