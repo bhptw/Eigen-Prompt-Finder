@@ -14,12 +14,72 @@
       color: #222;
     }
 
-    header {
-      background: white;
-      border-bottom: 1px solid #ddd;
-      padding: 30px;
-      text-align: center;
-    }
+.site-header {
+  background: white;
+  border-bottom: 1px solid #ddd;
+  padding: 24px 30px;
+}
+
+.brand-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.brand-logo-link {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.brand-logo {
+  max-width: 260px;
+  max-height: 90px;
+  width: auto;
+  height: auto;
+  display: block;
+}
+
+.brand-text {
+  flex: 1;
+}
+
+.brand-text h1 {
+  margin: 0 0 8px 0;
+  font-size: 32px;
+}
+
+.subtitle {
+  margin: 0 0 8px 0;
+  color: #444;
+}
+
+.company-link {
+  color: #444;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.company-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+  .brand-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .brand-logo {
+    max-width: 220px;
+  }
+
+  .brand-text h1 {
+    font-size: 26px;
+  }
+}
 
     main {
       max-width: 1100px;
@@ -163,9 +223,40 @@
 
 <body>
 
-<header>
-  <h1>Eigen Prompt Finder</h1>
-  <p>Siemens Eigen Engineering Agent Plain Text Prompt Library</p>
+<header class="site-header">
+  <div class="brand-wrap">
+
+    <a
+      href="https://www.bhp.com.tw/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="brand-logo-link"
+    >
+      <img
+        src="bhp-logo.png"
+        alt="BHP 司騰達股份有限公司"
+        class="brand-logo"
+      >
+    </a>
+
+    <div class="brand-text">
+      <h1>Eigen Prompt Finder</h1>
+
+      <p class="subtitle">
+        Siemens Eigen Engineering Agent Plain Text Prompt Library
+      </p>
+
+      <a
+        href="https://www.bhp.com.tw/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="company-link"
+      >
+        BHP 司騰達股份有限公司 · www.bhp.com.tw
+      </a>
+    </div>
+
+  </div>
 </header>
 
 <main>
