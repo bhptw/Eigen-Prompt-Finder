@@ -242,6 +242,204 @@
   "version": "1.0",
   "prompt": "請修改此既有 PLC FB，但只修改我指定的功能。\n\n先分析目前程式的實際控制邏輯，再列出本次修改會影響的 Network、State、Timer、Interlock 與 Output。\n\n未要求修改的功能必須保持原有行為。\n\n修改前先說明變更範圍與可能風險，確認後再產生程式修改建議。"
 },
+{
+  "id": "HW-CATALOG-001",
+  "category": "Hardware",
+  "title": "搜尋硬體目錄",
+  "tags": [
+    "Hardware",
+    "Hardware Catalog",
+    "MLFB",
+    "TIA Portal"
+  ],
+  "description": "依設備類型、規格或 Order Number 搜尋適合的 Siemens 硬體。",
+  "usage": "適合在建立 TIA Portal Hardware Configuration 前，先確認正確 CPU、I/O Module、通訊模組或其他硬體型號。",
+  "requiredInput": [
+    "設備類型",
+    "系列或產品家族",
+    "功能需求",
+    "已知 MLFB 或 Order Number",
+    "必要的電氣規格"
+  ],
+  "officialCategory": "Hardware",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請協助我搜尋適合的 Siemens 硬體。\n\n請先確認設備類型、產品系列、功能需求與必要規格。\n\n若我已提供 MLFB 或 Order Number，請優先依該型號確認。\n\n若型號不確定，請先搜尋 Hardware Catalog，不要自行猜測完整 Order Number。\n\n請列出候選硬體與選擇理由，再進行後續硬體配置。"
+},
+{
+  "id": "HW-MLFB-001",
+  "category": "Hardware",
+  "title": "依 MLFB 新增硬體",
+  "tags": [
+    "Hardware",
+    "MLFB",
+    "Order Number",
+    "TIA Portal"
+  ],
+  "description": "依 Siemens MLFB 或 Order Number 建立指定硬體。",
+  "usage": "適合已取得正確設備型號，希望 Eigen 直接依 Order Number 建立硬體配置。",
+  "requiredInput": [
+    "MLFB 或 Order Number",
+    "硬體版本",
+    "Station 名稱",
+    "安裝位置",
+    "必要的網路設定"
+  ],
+  "officialCategory": "Hardware",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請依我提供的 Siemens MLFB 或 Order Number 新增硬體。\n\n請先確認 Order Number 與硬體版本是否完整。\n\n不得自行修改或猜測 MLFB。\n\n若 Hardware Catalog 中找不到完全相符的型號，請先回報，不要自動替換成其他硬體。\n\n建立完成後請說明新增的設備名稱、型號與所在 Station。"
+},
+{
+  "id": "HW-PLC-STATION-001",
+  "category": "Hardware",
+  "title": "建立 PLC Station",
+  "tags": [
+    "Hardware",
+    "PLC",
+    "Station",
+    "CPU"
+  ],
+  "description": "建立新的 PLC Station 並加入指定 CPU。",
+  "usage": "適合新建 TIA Portal 專案、教學範例或建立新控制站。",
+  "requiredInput": [
+    "PLC Family",
+    "CPU 型號",
+    "Order Number",
+    "硬體版本",
+    "Station 名稱",
+    "IP 規劃"
+  ],
+  "officialCategory": "Hardware",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請建立一個新的 PLC Station。\n\n請先確認 PLC Family、CPU 型號、Order Number、硬體版本與 Station 名稱。\n\n若需要設定 PROFINET Interface，請另外確認 IP Address 與 Device Name。\n\n未確認 CPU 型號前不要建立其他近似型號。"
+},
+{
+  "id": "HW-IO-MODULE-001",
+  "category": "Hardware",
+  "title": "新增 I/O Module",
+  "tags": [
+    "Hardware",
+    "I/O Module",
+    "DI",
+    "DQ",
+    "AI",
+    "AQ"
+  ],
+  "description": "依設備 I/O 需求新增數位或類比 I/O 模組。",
+  "usage": "適合擴充 PLC Station、Remote I/O 或建立設備 I/O Configuration。",
+  "requiredInput": [
+    "Station",
+    "I/O 類型",
+    "通道數",
+    "訊號規格",
+    "Order Number",
+    "安裝 Slot"
+  ],
+  "officialCategory": "Hardware",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請依設備需求新增 I/O Module。\n\n請先確認 DI、DQ、AI 或 AQ 類型、通道數、訊號規格、Order Number 與安裝位置。\n\n若我沒有提供確切 Order Number，請先搜尋 Hardware Catalog。\n\n不要自行使用近似模組替代。\n\n完成後請列出 Module、Slot 與主要 I/O 資源。"
+},
+{
+  "id": "HW-ADDRESS-001",
+  "category": "Hardware",
+  "title": "設定 I/O Address",
+  "tags": [
+    "Hardware",
+    "I/O Address",
+    "Address",
+    "PLC"
+  ],
+  "description": "規劃並檢查 PLC I/O Module 的 Logical Address。",
+  "usage": "適合建立 I/O Mapping、避免 Address 重疊，或確認硬體配置與 PLC Tag Table 的對應關係。",
+  "requiredInput": [
+    "Hardware Configuration",
+    "I/O Module",
+    "目前 Address",
+    "預計 Address",
+    "PLC Tag List"
+  ],
+  "officialCategory": "Hardware",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請檢查並規劃此 PLC Hardware Configuration 的 I/O Address。\n\n請確認各 I/O Module 的 Input 與 Output Address 是否重疊。\n\n若已有 PLC Tag List，請同時核對 Logical Address。\n\n不得只修改 Tag 而忽略 Hardware Configuration 的實際 Address。\n\n請先列出目前 Address、衝突與建議調整結果。"
+},
+{
+  "id": "HW-PROFINET-001",
+  "category": "Hardware",
+  "title": "PROFINET Device 設定",
+  "tags": [
+    "Hardware",
+    "PROFINET",
+    "Device",
+    "Network"
+  ],
+  "description": "建立或檢查 PLC 與 PROFINET Device 的網路配置。",
+  "usage": "適合 Remote I/O、Drive、HMI 或其他 PROFINET Device 的初始設定與網路規劃。",
+  "requiredInput": [
+    "PLC",
+    "PROFINET Device",
+    "Device Name",
+    "IP Address",
+    "Subnet Mask",
+    "PROFINET Interface"
+  ],
+  "officialCategory": "Hardware",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請建立或檢查此 PROFINET Device 的網路設定。\n\n請確認 PLC Interface、Device Name、IP Address 與 Subnet Mask。\n\n請檢查是否存在 IP 重複、Device Name 重複或不在同一 Subnet 的問題。\n\n若網路資訊不完整，請先列出缺少項目，不要自行猜測位址。"
+},
+{
+  "id": "HW-NETWORK-001",
+  "category": "Hardware",
+  "title": "IP 與 Device Name 規劃",
+  "tags": [
+    "Hardware",
+    "IP Address",
+    "Device Name",
+    "PROFINET"
+  ],
+  "description": "規劃 PLC、HMI、Drive 與其他 PROFINET Device 的 IP 與 Device Name。",
+  "usage": "適合新專案網路架構規劃或既有專案網路檢查。",
+  "requiredInput": [
+    "設備清單",
+    "現有 IP Address",
+    "Subnet",
+    "Device Name",
+    "設備角色"
+  ],
+  "officialCategory": "Hardware",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請根據此設備清單規劃 PROFINET IP Address 與 Device Name。\n\n請避免 IP 重複與 Device Name 重複，並確認設備位於正確的 Subnet。\n\n請以設備角色與網路結構為依據整理，不要任意改變已明確指定的位址。\n\n完成後請產生設備、Device Name、IP Address 與用途對照表。"
+},
+{
+  "id": "HW-CHECK-001",
+  "category": "Hardware",
+  "title": "硬體配置檢查",
+  "tags": [
+    "Hardware",
+    "Configuration",
+    "Validation",
+    "TIA Portal"
+  ],
+  "description": "檢查 TIA Portal Hardware Configuration 是否存在型號、Slot、Address 或網路配置問題。",
+  "usage": "適合完成 Hardware Configuration 後進行工程檢查，或在 Compile 前確認硬體配置合理性。",
+  "requiredInput": [
+    "完整 Hardware Configuration",
+    "CPU 型號",
+    "Module 清單",
+    "I/O Address",
+    "Network Configuration"
+  ],
+  "officialCategory": "Hardware",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請檢查目前 TIA Portal Hardware Configuration。\n\n請依序檢查 CPU 與 Module 型號、Order Number、硬體版本、Slot、I/O Address、PROFINET Interface、IP Address 與 Device Name。\n\n請區分為確定錯誤、可能風險與需要人工確認的項目。\n\n不要直接修改硬體配置，先產生檢查報告。"
+},
+  
   {
   "id": "DOC-FB-REPORT-001",
   "category": "Documentation",
