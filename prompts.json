@@ -831,6 +831,205 @@
   "version": "1.0",
   "prompt": "請檢查此 TIA Portal Application Test Script。\n\n請依序檢查 PLC Tag Reference、Alias、Assignment、RUN、ASSERT、時間條件與測試刺激是否正確。\n\n不得自行建立不存在的 PLC Tag，也不要把 %Q 輸出當成外部測試刺激。\n\n若 Script FAIL，請先判斷是 Script 問題、測試條件問題或 PLC 程式本身不符合需求。\n\n請先說明原因，再提出最小修改方案。"
 },
+{
+  "id": "HMI-CREATE-001",
+  "category": "HMI",
+  "title": "建立 HMI Device",
+  "tags": [
+    "HMI",
+    "Device",
+    "TIA Portal",
+    "Panel"
+  ],
+  "description": "在 TIA Portal 專案中建立指定 HMI Device。",
+  "usage": "適合新建 HMI 專案、增加操作面板或建立 PLC 與 HMI 的基本架構。",
+  "requiredInput": [
+    "HMI 系列",
+    "HMI 型號",
+    "Order Number",
+    "硬體版本",
+    "Device Name",
+    "IP Address"
+  ],
+  "officialCategory": "HMI",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請依我提供的 HMI 型號建立 HMI Device。\n\n請先確認 HMI 系列、型號、Order Number、硬體版本、Device Name 與 IP Address。\n\n若型號不完整，請先確認 Hardware Catalog，不要自行猜測近似型號。\n\n完成後請說明新增的 HMI Device 與主要網路設定。"
+},
+{
+  "id": "HMI-TAG-001",
+  "category": "HMI",
+  "title": "建立 HMI Tag",
+  "tags": [
+    "HMI",
+    "Tag",
+    "PLC Tag",
+    "TIA Portal"
+  ],
+  "description": "依 PLC Tag 建立對應的 HMI Tag。",
+  "usage": "適合建立操作畫面、狀態顯示、輸入欄位與 Alarm 前的 Tag 對應。",
+  "requiredInput": [
+    "PLC Tag List",
+    "PLC Connection",
+    "需要使用的 PLC Tag",
+    "Data Type",
+    "HMI Tag 名稱規則"
+  ],
+  "officialCategory": "HMI",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請依我提供的 PLC Tag List 建立 HMI Tag。\n\nHMI Tag 必須對應已存在的 PLC Tag，不得自行建立不存在的 PLC Symbol。\n\n請確認 Connection、Tag Name、Data Type 與 Address Reference。\n\n若 PLC Tag 不存在或型別不相符，請先回報，不要自行猜測。"
+},
+{
+  "id": "HMI-TAG-MAPPING-001",
+  "category": "HMI",
+  "title": "PLC Tag 與 HMI Tag 對應檢查",
+  "tags": [
+    "HMI",
+    "PLC Tag",
+    "Mapping",
+    "Validation"
+  ],
+  "description": "檢查 PLC Tag 與 HMI Tag 的名稱、型別與連線對應是否一致。",
+  "usage": "適合 HMI 顯示錯誤、數值不更新或操作命令無法寫入 PLC 時使用。",
+  "requiredInput": [
+    "PLC Tag List",
+    "HMI Tag List",
+    "Connection",
+    "Data Type",
+    "異常現象"
+  ],
+  "officialCategory": "HMI",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請檢查 PLC Tag 與 HMI Tag 的對應關係。\n\n請確認 Tag Name、PLC Connection、Data Type 與 Symbolic Reference 是否正確。\n\n請區分為 Tag 不存在、型別不一致、Connection 錯誤與畫面物件綁定錯誤。\n\n不要直接修改，先產生檢查結果。"
+},
+{
+  "id": "HMI-CONTROL-001",
+  "category": "HMI",
+  "title": "建立 HMI 按鈕與操作元件",
+  "tags": [
+    "HMI",
+    "Button",
+    "Operator Control",
+    "Command"
+  ],
+  "description": "依 PLC 功能建立 HMI 按鈕、開關與操作命令。",
+  "usage": "適合 Start、Stop、Reset、自動手動切換或其他操作指令畫面。",
+  "requiredInput": [
+    "操作功能",
+    "PLC Tag",
+    "按鈕或開關類型",
+    "按下與放開行為",
+    "操作條件",
+    "權限要求"
+  ],
+  "officialCategory": "HMI",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請依 PLC 功能建立 HMI 操作元件設計。\n\n請先確認控制對象、PLC Tag、按下與放開時的預期行為，以及是否需要 Momentary、Set、Reset 或 Toggle 行為。\n\n不得只依 Tag 名稱推測操作語意。\n\n若操作受模式、權限或安全條件限制，請另外標示。"
+},
+{
+  "id": "HMI-STATUS-001",
+  "category": "HMI",
+  "title": "建立狀態顯示與燈號",
+  "tags": [
+    "HMI",
+    "Status",
+    "Lamp",
+    "Indicator"
+  ],
+  "description": "依 PLC 狀態建立 HMI 燈號、文字與設備狀態顯示。",
+  "usage": "適合運轉、停止、故障、Ready、Warning 與 Mode 等狀態呈現。",
+  "requiredInput": [
+    "PLC 狀態 Tag",
+    "狀態意義",
+    "顯示文字",
+    "顯示條件",
+    "顏色規則"
+  ],
+  "officialCategory": "HMI",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請依 PLC 狀態設計 HMI 狀態顯示。\n\n請先確認每個 PLC Tag 的實際工程語意，不得只依 TRUE 或 FALSE 直接推測正常或異常。\n\n請整理各狀態對應的文字、燈號與顯示條件。\n\n若存在互斥狀態或優先顯示條件，請一併說明。"
+},
+{
+  "id": "HMI-ALARM-001",
+  "category": "HMI",
+  "title": "建立 HMI Alarm 與 Event",
+  "tags": [
+    "HMI",
+    "Alarm",
+    "Event",
+    "Diagnostics"
+  ],
+  "description": "依 PLC 故障與事件條件建立 HMI Alarm 與 Event 設計。",
+  "usage": "適合設備異常、警告、維護提示與操作事件紀錄。",
+  "requiredInput": [
+    "Alarm Tag",
+    "Alarm 條件",
+    "Alarm Text",
+    "Alarm Priority",
+    "Ack 要求",
+    "復歸條件"
+  ],
+  "officialCategory": "HMI",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請依 PLC 故障與事件條件建立 HMI Alarm 設計。\n\n請先確認 Alarm Tag、觸發條件、Alarm Text、Priority、Acknowledgement 與復歸條件。\n\n請區分 Alarm、Warning 與一般 Event。\n\n不得自行增加 PLC 中不存在的故障條件。"
+},
+{
+  "id": "HMI-NAV-001",
+  "category": "HMI",
+  "title": "HMI 畫面切換與 Navigation 設計",
+  "tags": [
+    "HMI",
+    "Navigation",
+    "Screen",
+    "UI"
+  ],
+  "description": "規劃 HMI 畫面階層、首頁、設備頁與診斷頁的 Navigation。",
+  "usage": "適合建立新 HMI 畫面架構或整理既有畫面切換流程。",
+  "requiredInput": [
+    "畫面清單",
+    "主要操作流程",
+    "首頁",
+    "設備頁",
+    "Alarm 頁",
+    "權限需求"
+  ],
+  "officialCategory": "HMI",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請規劃此 HMI 的畫面 Navigation。\n\n請依操作流程建立清楚的首頁、設備頁、設定頁、Alarm 頁與診斷頁層級。\n\n請避免使用者進入無法返回的畫面。\n\n若部分畫面需要權限，請標示其進入條件。\n\n請先輸出畫面架構與切換關係。"
+},
+{
+  "id": "HMI-COMM-001",
+  "category": "HMI",
+  "title": "HMI 與 PLC 通訊檢查",
+  "tags": [
+    "HMI",
+    "PLC",
+    "Communication",
+    "PROFINET"
+  ],
+  "description": "檢查 HMI 與 PLC 的網路、Connection 與 Tag 通訊。",
+  "usage": "適合 HMI 顯示值不更新、操作無法寫入或 Connection 異常的情況。",
+  "requiredInput": [
+    "PLC 型號",
+    "HMI 型號",
+    "IP Address",
+    "Subnet",
+    "Connection",
+    "HMI Tag",
+    "異常現象"
+  ],
+  "officialCategory": "HMI",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請檢查 HMI 與 PLC 的通訊設定。\n\n請依序確認 PLC 與 HMI 的 IP Address、Subnet、Connection、PLC Tag、HMI Tag 與畫面物件綁定。\n\n請區分為網路問題、Connection 問題、Tag Mapping 問題與畫面設定問題。\n\n不要直接修改設定，先列出檢查結果與可能原因。"
+},
+  
   {
   "id": "DRV-CATALOG-001",
   "category": "Drive",
