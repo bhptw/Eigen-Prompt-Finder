@@ -182,7 +182,7 @@
       gap: 26px;
 
       transition:
-        padding 0.2s ease;
+        padding 0.28s ease;
     }
 
     .site-header.compact .header-wrap {
@@ -234,7 +234,7 @@
       object-fit: contain;
 
       transition:
-        width 0.2s ease;
+        width 0.28s ease;
     }
 
     .site-header.compact .brand-logo {
@@ -263,7 +263,7 @@
       letter-spacing: -0.3px;
 
       transition:
-        font-size 0.2s ease;
+        font-size 0.28s ease;
     }
 
     .site-header.compact .brand-text h1 {
@@ -2084,41 +2084,83 @@
        ===================================================== */
 
     function updateStickyState() {
+/* =====================================================
+   Header / Sticky UI
+   UI v3.1.1 - Anti Jitter
+   ===================================================== */
 
-      const compact =
-        window.scrollY > 80;
+let headerIsCompact = false;
 
-
-      siteHeader.classList.toggle(
-        "compact",
-        compact
-      );
-
-
-      const rect =
-        categoryStickyWrap
-          .getBoundingClientRect();
+const HEADER_COMPACT_ON = 140;
+const HEADER_COMPACT_OFF = 40;
 
 
-      const headerHeight =
-        siteHeader.offsetHeight;
+function updateStickyState() {
+
+  const scrollY =
+    window.scrollY ||
+    document.documentElement.scrollTop;
 
 
-      const stuck =
-        rect.top <=
-        headerHeight + 2;
+  /* ---------------------------------------------
+     Header Hysteresis
+     超過 140px 才縮小
+     回到 40px 以下才恢復
+     40～140px 維持原狀態
+     --------------------------------------------- */
+
+  if (
+    !headerIsCompact &&
+    scrollY >= HEADER_COMPACT_ON
+  ) {
+
+    headerIsCompact = true;
+
+  }
+
+  else if (
+    headerIsCompact &&
+    scrollY <= HEADER_COMPACT_OFF
+  ) {
+
+    headerIsCompact = false;
+
+  }
 
 
-      categoryStickyWrap
-        .classList
-        .toggle(
-          "stuck",
-          stuck
-        );
-
-    }
+  siteHeader.classList.toggle(
+    "compact",
+    headerIsCompact
+  );
 
 
+  /* ---------------------------------------------
+     Sticky Category
+     --------------------------------------------- */
+
+  const rect =
+    categoryStickyWrap
+      .getBoundingClientRect();
+
+
+  const headerHeight =
+    siteHeader.offsetHeight;
+
+
+  const stuck =
+    rect.top <=
+    headerHeight + 2;
+
+
+  categoryStickyWrap
+    .classList
+    .toggle(
+      "stuck",
+      stuck
+    );
+
+}
+    
     window.addEventListener(
       "scroll",
       updateStickyState,
