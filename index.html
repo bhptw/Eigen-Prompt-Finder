@@ -109,6 +109,34 @@
 .copy-button:hover {
   background: #eef2f5;
 }
+    .details-button {
+  margin-top: 15px;
+  margin-left: 8px;
+  padding: 10px 16px;
+  border: 1px solid #bbb;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.details-button:hover {
+  background: #eef2f5;
+}
+
+.prompt-details {
+  display: none;
+  margin-top: 15px;
+  padding: 15px;
+  background: #f8f9fb;
+  border-radius: 8px;
+  line-height: 1.6;
+}
+
+.prompt-details ul {
+  margin-top: 6px;
+  padding-left: 22px;
+}
   </style>
 </head>
 
@@ -165,7 +193,6 @@
       }
 
       prompts = await response.json();
-
       renderPrompts();
 
     } catch (error) {
@@ -192,8 +219,10 @@
         item.title,
         item.category,
         item.description,
+        item.usage || "",
         item.prompt,
-        ...(item.tags || [])
+        ...(item.tags || []),
+        ...(item.requiredInput || [])
       ]
       .join(" ")
       .toLowerCase();
@@ -231,6 +260,11 @@
           )
           .join("");
 
+        const requiredInput =
+          (item.requiredInput || [])
+          .map(input => `<li>${input}</li>`)
+          .join("");
+
         return `
           <div class="prompt-card">
 
@@ -251,12 +285,61 @@
               複製 Prompt
             </button>
 
+            <button
+              class="details-button"
+              data-id="${item.id}"
+            >
+              詳細資訊
+            </button>
+
+            <div
+              class="prompt-details"
+              id="details-${item.id}"
+            >
+              <p>
+                <strong>適用情境：</strong><br>
+                ${item.usage || "尚未設定"}
+              </p>
+
+              <p>
+                <strong>需要準備：</strong>
+              </p>
+
+              ${
+                requiredInput
+                ? `<ul>${requiredInput}</ul>`
+                : `<p>尚未設定</p>`
+              }
+
+              <p>
+                <strong>官方分類：</strong>
+                ${item.officialCategory || "尚未設定"}
+              </p>
+
+              <p>
+                <strong>官方參考：</strong>
+                ${item.officialReference || "尚未設定"}
+              </p>
+
+              <p>
+                <strong>版本：</strong>
+                ${item.version || "尚未設定"}
+              </p>
+
+              <p>
+                <strong>Prompt ID：</strong>
+                ${item.id}
+              </p>
+
+            </div>
+
           </div>
         `;
 
       }).join("");
 
     addCopyButtonEvents();
+    addDetailsButtonEvents();
   }
 
   function addCopyButtonEvents() {
@@ -299,6 +382,40 @@
 
           alert("複製失敗，請手動選取 Prompt 文字。");
         }
+      });
+
+    });
+  }
+
+  function addDetailsButtonEvents() {
+
+    const detailButtons =
+      document.querySelectorAll(".details-button");
+
+    detailButtons.forEach(button => {
+
+      button.addEventListener("click", function () {
+
+        const promptId =
+          this.getAttribute("data-id");
+
+        const details =
+          document.getElementById(
+            `details-${promptId}`
+          );
+
+        if (!details) {
+          return;
+        }
+
+        const isOpen =
+          details.style.display === "block";
+
+        details.style.display =
+          isOpen ? "none" : "block";
+
+        this.innerText =
+          isOpen ? "詳細資訊" : "收合資訊";
       });
 
     });
