@@ -44,6 +44,205 @@
     "version": "1.0",
     "prompt": "我要建立一個 SCL Function Block。\n\n請先確認：\nPLC Family\nProgramming Language\nInput\nOutput\n功能需求\n驗收條件\n\n需求不完整時，不要直接 Coding。"
   },
+
+{
+  "id": "PLC-MOTOR-001",
+  "category": "PLC Programming",
+  "title": "建立 Start Stop 馬達控制",
+  "tags": [
+    "PLC Programming",
+    "Motor",
+    "Start Stop",
+    "SCL"
+  ],
+  "description": "依啟動、停止與輸出需求建立基本馬達控制邏輯。",
+  "usage": "適合建立最基本的馬達啟停、自保持、停止優先等控制邏輯，可作為 SCL FB 教學與範例。",
+  "requiredInput": [
+    "PLC Family",
+    "Programming Language",
+    "Start 輸入定義",
+    "Stop 輸入定義",
+    "Motor 輸出定義",
+    "NO 或 NC 接點語意",
+    "優先權要求"
+  ],
+  "officialCategory": "PLC Programming",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "我要建立一個馬達 Start/Stop 控制程式。\n\n請先確認 PLC Family、Programming Language、Start 與 Stop 的接點型態及馬達輸出。\n\n請依實際訊號語意建立控制邏輯，不要只依 Tag 名稱推測 TRUE 或 FALSE 的工程意義。\n\n停止功能必須具有較高優先權。\n\n完成後請說明控制邏輯與主要 I/O 因果關係。"
+},
+{
+  "id": "PLC-TIMER-001",
+  "category": "PLC Programming",
+  "title": "建立 Timer 時序控制",
+  "tags": [
+    "PLC Programming",
+    "Timer",
+    "TON",
+    "TOF",
+    "TP",
+    "SCL"
+  ],
+  "description": "依自然語言時序需求建立 TON、TOF 或 TP 控制邏輯。",
+  "usage": "適合包含延遲啟動、延遲停止、脈衝時間或多段等待時間的 PLC 控制。",
+  "requiredInput": [
+    "PLC Family",
+    "Programming Language",
+    "觸發條件",
+    "時間條件",
+    "預期輸出",
+    "Timer 類型或允許 Eigen 判斷"
+  ],
+  "officialCategory": "PLC Programming",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "我要建立一個含 Timer 的 PLC 控制功能。\n\n請先依功能需求判斷應使用 TON、TOF 或 TP。\n\n請明確說明每個 Timer 的 IN、PT、Q 與 ET 用途。\n\nTimer 每次呼叫時，不論 IN 為 TRUE 或 FALSE，都必須明確指定 PT，例如 PT := T#0s 或指定時間變數，不得省略 PT。\n\n完成後請說明時序流程與各 Timer 的重置條件。"
+},
+{
+  "id": "PLC-STATE-001",
+  "category": "PLC Programming",
+  "title": "建立 State Machine",
+  "tags": [
+    "PLC Programming",
+    "State Machine",
+    "Sequence",
+    "SCL"
+  ],
+  "description": "將多步驟控制流程整理成可追蹤的 PLC State Machine。",
+  "usage": "適合順序控制、設備循環、等待條件、步驟切換與異常復歸等應用。",
+  "requiredInput": [
+    "初始狀態",
+    "各步驟動作",
+    "步驟切換條件",
+    "停止條件",
+    "異常條件",
+    "復歸條件"
+  ],
+  "officialCategory": "PLC Programming",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請將以下 PLC 動作流程整理成 State Machine。\n\n先列出 State ID、State 名稱、進入條件、執行動作與離開條件。\n\n狀態切換必須單向且可追蹤，避免同一掃描週期產生多個競爭狀態。\n\n停止或異常條件若有較高優先權，請先處理。\n\n確認流程後，再生成 SCL 草稿。"
+},
+{
+  "id": "PLC-LAD-SCL-001",
+  "category": "PLC Programming",
+  "title": "LAD 轉 SCL 等效轉換",
+  "tags": [
+    "PLC Programming",
+    "LAD",
+    "SCL",
+    "Conversion"
+  ],
+  "description": "將既有 LAD 邏輯轉換成等效 SCL，不主動最佳化控制邏輯。",
+  "usage": "適合既有 LAD 程式移轉到 SCL，同時保留 Network 執行順序與原控制語意。",
+  "requiredInput": [
+    "完整 LAD 或 XML",
+    "Network 執行順序",
+    "PLC Tag 資訊",
+    "Timer 或 Counter 定義",
+    "特殊 Edge 或 Set Reset 邏輯"
+  ],
+  "officialCategory": "PLC Programming",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請將此 LAD 轉換為功能等效的 SCL。\n\n要求保留原 Network 執行順序、掃描順序、Set/Reset、Edge、Timer、Counter 與 Internal State 的實際控制語意。\n\n不得為了程式美化而改變控制流程，也不要主動最佳化。\n\n若存在可能造成等效性差異的模糊點，請先列出問題，不要直接猜測。"
+},
+{
+  "id": "PLC-DEBUG-001",
+  "category": "PLC Programming",
+  "title": "SCL 程式除錯",
+  "tags": [
+    "PLC Programming",
+    "SCL",
+    "Debug",
+    "Compile"
+  ],
+  "description": "分析 SCL 編譯錯誤、控制邏輯錯誤與可能的執行風險。",
+  "usage": "適合已有 SCL 程式但存在 Compile Error、邏輯異常或輸出行為不符合預期的情況。",
+  "requiredInput": [
+    "完整 SCL 程式",
+    "Compile Error 訊息",
+    "預期功能",
+    "實際異常行為"
+  ],
+  "officialCategory": "PLC Programming",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請分析此 SCL 程式的問題。\n\n先區分為語法錯誤、資料型別錯誤、控制邏輯錯誤、掃描順序問題與潛在執行風險。\n\n請先說明問題原因，再提出最小修改方案。\n\n不得在未說明原因前直接重寫整個程式。\n\n修改後請再次檢查是否仍符合原功能需求。"
+},
+{
+  "id": "PLC-IO-001",
+  "category": "PLC Programming",
+  "title": "I/O 因果分析",
+  "tags": [
+    "PLC Programming",
+    "I/O",
+    "Cause Effect",
+    "Analysis"
+  ],
+  "description": "追蹤 PLC Input、Internal State、Logic 與 Output 之間的完整因果鏈。",
+  "usage": "適合需要確認某個輸入如何影響內部狀態、互鎖與最終輸出的工程分析。",
+  "requiredInput": [
+    "PLC 程式",
+    "PLC Tag List",
+    "需追蹤的 Input 或 Output",
+    "必要的硬體接線語意"
+  ],
+  "officialCategory": "PLC Programming",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請分析此 PLC 程式的 I/O 因果關係。\n\n對重要 Input 必須追蹤完整因果鏈：\nInput → Contact 或 Edge polarity → Internal State → Logic → Output。\n\n不得直接假設 Input = TRUE 就代表按下、啟動、正常或異常。\n\n若 NO、NC wiring 或實際訊號語意無法由程式判斷，請明確列出需要確認的資訊。"
+},
+{
+  "id": "PLC-TAG-001",
+  "category": "PLC Programming",
+  "title": "依既有 Tag 建立 PLC Logic",
+  "tags": [
+    "PLC Programming",
+    "PLC Tag",
+    "SCL",
+    "Logic"
+  ],
+  "description": "只能使用既有 PLC Tag 建立控制邏輯，不自行新增或猜測不存在的 Tag。",
+  "usage": "適合專案已完成 Tag Table，希望 Eigen 依現有 Symbolic Tag 建立 FB、FC 或控制邏輯。",
+  "requiredInput": [
+    "完整 PLC Tag List",
+    "Tag Name",
+    "Data Type",
+    "Logical Address",
+    "Comment",
+    "功能需求"
+  ],
+  "officialCategory": "PLC Programming",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "以上是本次可使用的 PLC Tag List。\n\n請只使用清單中存在的 Tag 建立 PLC 控制邏輯。\n\n不得自行新增、修改、縮寫或猜測不存在的 Tag。\n\nTag Name 作為實際 Symbolic Reference；Logical Address 只用於核對；Comment 用於理解工程用途。\n\n若功能需求需要不存在的 Tag，請先指出缺少的 Tag，不要自行建立。"
+},
+{
+  "id": "PLC-MODIFY-001",
+  "category": "PLC Programming",
+  "title": "修改既有 FB 並保留原功能",
+  "tags": [
+    "PLC Programming",
+    "FB",
+    "Modification",
+    "Regression"
+  ],
+  "description": "修改既有 PLC FB 的指定功能，同時避免破壞未要求修改的既有邏輯。",
+  "usage": "適合既有設備程式追加功能、修改時序、增加互鎖或修正單一控制行為。",
+  "requiredInput": [
+    "完整既有 FB",
+    "目前功能說明",
+    "要修改的功能",
+    "不可改變的既有功能",
+    "驗收條件"
+  ],
+  "officialCategory": "PLC Programming",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請修改此既有 PLC FB，但只修改我指定的功能。\n\n先分析目前程式的實際控制邏輯，再列出本次修改會影響的 Network、State、Timer、Interlock 與 Output。\n\n未要求修改的功能必須保持原有行為。\n\n修改前先說明變更範圍與可能風險，確認後再產生程式修改建議。"
+},
+  
   {
     "id": "TEST-AT-001",
     "category": "Testing / QA",
