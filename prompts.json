@@ -1,16 +1,25 @@
 [
   {
-    "id": "PLC-ANALYSIS-001",
-    "category": "PLC Programming",
-    "title": "分析 PLC FB 控制邏輯",
-    "tags": [
-      "PLC Programming",
-      "FB",
-      "Analysis"
-    ],
-    "description": "用於分析既有 PLC Function Block 的控制目的、Network 邏輯、I/O 因果與狀態切換。",
-    "prompt": "請分析此完整 PLC FB 的實際控制邏輯，不修改程式。\n\n先說明整體目的與控制思路，\n再依 Network 執行順序分析各段 Condition、Action、Result 與前後因果。"
-  },
+  "id": "PLC-ANALYSIS-001",
+  "category": "PLC Programming",
+  "title": "分析 PLC FB 控制邏輯",
+  "tags": [
+    "PLC Programming",
+    "FB",
+    "Analysis"
+  ],
+  "description": "用於分析既有 PLC Function Block 的控制目的、Network 邏輯、I/O 因果與狀態切換。",
+  "usage": "適合已取得 PLC FB、SCL、LAD 或相關程式內容，希望 Eigen 先理解實際控制邏輯、因果關係與程式架構時使用。",
+  "requiredInput": [
+    "完整 PLC FB 或程式內容",
+    "必要的 PLC Tag 或 I/O 資訊",
+    "若有特殊硬體或操作條件，需一併提供"
+  ],
+  "officialCategory": "PLC Programming",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請分析此完整 PLC FB 的實際控制邏輯，不修改程式。\n\n先說明整體目的與控制思路，\n再依 Network 執行順序分析各段 Condition、Action、Result 與前後因果。"
+},
   {
     "id": "PLC-SCL-001",
     "category": "PLC Programming",
