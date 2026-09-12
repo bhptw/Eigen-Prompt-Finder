@@ -1475,6 +1475,117 @@
         text-align: center;
       }
     }
+
+/* =========================================================
+   UI v3.1 Fine Tuning
+   ========================================================= */
+
+/* 1. Search / Statistics / Category 統一內容寬度 */
+
+.search-section,
+.stats-panel,
+.category-section {
+  max-width: 1020px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* 2. Statistics Area：
+      增加可用寬度，避免 Project Context 換行 */
+
+.stats-panel {
+  gap: 18px;
+}
+
+.stats-main {
+  min-width: 205px;
+}
+
+.stats-detail {
+  flex: 1;
+  min-width: 0;
+
+  font-size: 13px;
+  line-height: 1.5;
+
+  white-space: nowrap;
+}
+
+
+/* 3. Category Sticky 區域維持同一寬度 */
+
+.category-sticky-wrap .category-section {
+  max-width: 1020px;
+}
+
+.category-buttons {
+  width: 100%;
+}
+
+
+/* 4. Prompt Preview 稍微縮短，
+      讓第一屏更容易看到操作按鈕 */
+
+.prompt-content {
+  height: 175px;
+}
+
+
+/* 5. 展開後仍顯示完整 Prompt */
+
+.prompt-content.expanded {
+  height: auto;
+  max-height: 3000px;
+}
+
+
+/* 6. Desktop 略微縮小卡片上下 Padding，
+      改善畫面密度 */
+
+@media (min-width: 901px) {
+  .prompt-card {
+    padding-top: 21px;
+    padding-bottom: 21px;
+  }
+}
+
+
+/* 7. 中等螢幕：
+      若寬度不足，Statistics 可以自然換行，
+      避免文字互相擠壓 */
+
+@media (max-width: 1100px) {
+  .stats-detail {
+    white-space: normal;
+  }
+}
+
+
+/* 8. Mobile 維持原本兩段式顯示 */
+
+@media (max-width: 700px) {
+
+  .search-section,
+  .stats-panel,
+  .category-section {
+    max-width: 100%;
+  }
+
+  .stats-main {
+    min-width: 0;
+  }
+
+  .stats-detail {
+    white-space: normal;
+    font-size: 13px;
+  }
+
+  .prompt-content {
+    height: 170px;
+  }
+}
+    
   </style>
 </head>
 
