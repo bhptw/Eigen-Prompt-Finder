@@ -212,10 +212,11 @@
         throw new Error("Failed to load prompts.json");
       }
 
-prompts = await response.json();
+      prompts = await response.json();
 
-renderStats();
-renderPrompts();
+      renderStats();
+      renderCategoryCounts();
+      renderPrompts();
 
     } catch (error) {
 
@@ -228,6 +229,61 @@ renderPrompts();
 
       console.error(error);
     }
+  }
+
+  function renderStats() {
+
+    const total = prompts.length;
+    const categoryCounts = {};
+
+    prompts.forEach(item => {
+      const category = item.category || "未分類";
+
+      categoryCounts[category] =
+        (categoryCounts[category] || 0) + 1;
+    });
+
+    const categoryText =
+      Object.entries(categoryCounts)
+        .map(([category, count]) =>
+          `${category}：${count}`
+        )
+        .join("　｜　");
+
+    promptStats.innerHTML = `
+      <strong>目前共 ${total} 筆工程 Prompt</strong><br>
+      ${categoryText}
+    `;
+  }
+
+  function renderCategoryCounts() {
+
+    const total = prompts.length;
+    const categoryCounts = {};
+
+    prompts.forEach(item => {
+      const category = item.category || "未分類";
+
+      categoryCounts[category] =
+        (categoryCounts[category] || 0) + 1;
+    });
+
+    categoryButtons.forEach(button => {
+
+      const category =
+        button.innerText
+          .replace(/\s*\(\d+\)\s*$/, "")
+          .trim();
+
+      if (category === "全部") {
+        button.innerText = `全部 (${total})`;
+      } else {
+        const count = categoryCounts[category] || 0;
+        button.innerText = `${category} (${count})`;
+      }
+
+      button.dataset.category = category;
+    });
   }
 
   function renderPrompts() {
@@ -453,7 +509,7 @@ renderPrompts();
     button.addEventListener("click", function () {
 
       activeCategory =
-        this.innerText.trim();
+        this.dataset.category;
 
       categoryButtons.forEach(btn => {
         btn.style.background = "white";
@@ -469,32 +525,6 @@ renderPrompts();
   });
 
   loadPrompts();
-
-function renderStats() {
-
-  const total = prompts.length;
-  const categoryCounts = {};
-
-  prompts.forEach(item => {
-    const category = item.category || "未分類";
-
-    categoryCounts[category] =
-      (categoryCounts[category] || 0) + 1;
-  });
-
-  const categoryText =
-    Object.entries(categoryCounts)
-      .map(([category, count]) =>
-        `${category}：${count}`
-      )
-      .join("　｜　");
-
-  promptStats.innerHTML = `
-    <strong>目前共 ${total} 筆工程 Prompt</strong><br>
-    ${categoryText}
-  `;
-}
-  
 </script>
 
 </body>
