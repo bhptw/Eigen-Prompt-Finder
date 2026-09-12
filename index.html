@@ -137,6 +137,21 @@
   margin-top: 6px;
   padding-left: 22px;
 }
+
+.prompt-stats {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: #f8f9fb;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.prompt-stats strong {
+  color: #222;
+}    
+    
   </style>
 </head>
 
@@ -159,6 +174,10 @@
       placeholder="例如：分析 FB、建立 SCL、Application Test"
     >
 
+    <div class="prompt-stats" id="promptStats">
+  正在載入 Prompt 統計資料...
+</div>
+
     <div class="categories">
       <button class="category-button">全部</button>
       <button class="category-button">Hardware</button>
@@ -180,6 +199,7 @@
   const searchInput = document.getElementById("searchInput");
   const categoryButtons = document.querySelectorAll(".category-button");
   const results = document.getElementById("results");
+  const promptStats = document.getElementById("promptStats");
 
   let prompts = [];
   let activeCategory = "全部";
@@ -192,8 +212,10 @@
         throw new Error("Failed to load prompts.json");
       }
 
-      prompts = await response.json();
-      renderPrompts();
+prompts = await response.json();
+
+renderStats();
+renderPrompts();
 
     } catch (error) {
 
@@ -317,7 +339,7 @@
               </p>
 
               <p>
-                <strong>官方參考：</strong>
+                <strong>參考版本：</strong>
                 ${item.officialReference || "尚未設定"}
               </p>
 
@@ -447,6 +469,32 @@
   });
 
   loadPrompts();
+
+function renderStats() {
+
+  const total = prompts.length;
+  const categoryCounts = {};
+
+  prompts.forEach(item => {
+    const category = item.category || "未分類";
+
+    categoryCounts[category] =
+      (categoryCounts[category] || 0) + 1;
+  });
+
+  const categoryText =
+    Object.entries(categoryCounts)
+      .map(([category, count]) =>
+        `${category}：${count}`
+      )
+      .join("　｜　");
+
+  promptStats.innerHTML = `
+    <strong>目前共 ${total} 筆工程 Prompt</strong><br>
+    ${categoryText}
+  `;
+}
+  
 </script>
 
 </body>
