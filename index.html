@@ -151,6 +151,12 @@
 .prompt-stats strong {
   color: #222;
 }    
+
+.category-button.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background: #f5f5f5;
+}
     
   </style>
 </head>
@@ -276,13 +282,26 @@
           .trim();
 
       if (category === "全部") {
-        button.innerText = `全部 (${total})`;
-      } else {
-        const count = categoryCounts[category] || 0;
-        button.innerText = `${category} (${count})`;
-      }
+  button.innerText = `全部 (${total})`;
+  button.disabled = false;
+  button.classList.remove("disabled");
 
-      button.dataset.category = category;
+} else {
+
+  const count = categoryCounts[category] || 0;
+
+  button.innerText = `${category} (${count})`;
+
+  if (count === 0) {
+    button.disabled = true;
+    button.classList.add("disabled");
+  } else {
+    button.disabled = false;
+    button.classList.remove("disabled");
+  }
+}
+
+button.dataset.category = category;
     });
   }
 
