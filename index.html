@@ -1585,6 +1585,375 @@
     height: 170px;
   }
 }
+
+/* =========================================================
+   20. BHP Prompt Framework
+   ========================================================= */
+
+.framework-section {
+  max-width: 1180px;
+  margin: 36px auto 34px;
+  padding: 24px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  box-shadow: var(--shadow-small);
+}
+
+.framework-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  margin-bottom: 22px;
+}
+
+.framework-title-wrap {
+  min-width: 0;
+}
+
+.framework-title-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.framework-title {
+  margin: 0;
+
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.framework-name {
+  color: var(--accent);
+
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.framework-badge {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 4px 9px;
+
+  background: var(--accent-soft);
+  color: var(--accent);
+
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.framework-intro {
+  margin: 7px 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+}
+
+.framework-guidance {
+  max-width: 430px;
+
+  color: var(--text-secondary);
+
+  font-size: 13px;
+  text-align: right;
+}
+
+
+/* Framework Grid */
+
+.framework-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+
+/* Framework Card */
+
+.framework-card {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+
+  padding: 20px;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+  border-radius: 15px;
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.framework-card:hover {
+  transform: translateY(-2px);
+
+  border-color: var(--border-strong);
+
+  box-shadow: var(--shadow-medium);
+}
+
+.framework-card-a {
+  --framework-color: #0878d1;
+}
+
+.framework-card-b {
+  --framework-color: #15945c;
+}
+
+.framework-card-c {
+  --framework-color: #7650d8;
+}
+
+
+/* Card Heading */
+
+.framework-card-heading {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  margin-bottom: 8px;
+}
+
+.framework-letter {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--framework-color);
+  color: #ffffff;
+
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.framework-card-title {
+  margin: 0;
+
+  color: var(--framework-color);
+
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.framework-structure {
+  margin: 2px 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 12px;
+}
+
+
+/* Use Cases */
+
+.framework-use {
+  margin: 12px 0 14px;
+  padding: 13px;
+
+  background: var(--surface-soft);
+
+  border-radius: 10px;
+}
+
+.framework-use-title {
+  margin-bottom: 6px;
+
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.framework-use ul {
+  margin: 0;
+  padding-left: 20px;
+
+  color: var(--text-secondary);
+
+  font-size: 13px;
+}
+
+.framework-use li {
+  margin: 3px 0;
+}
+
+
+/* Buttons */
+
+.framework-actions {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 8px;
+
+  margin-top: auto;
+  margin-bottom: 13px;
+}
+
+.framework-button {
+  padding: 9px 10px;
+
+  background: var(--surface);
+  color: var(--text);
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.framework-button:hover {
+  border-color: var(--framework-color);
+}
+
+.framework-button.primary {
+  background: var(--framework-color);
+  color: #ffffff;
+
+  border-color: var(--framework-color);
+}
+
+
+/* Structure / Example */
+
+.framework-definition {
+  padding: 12px 13px;
+
+  background: var(--surface-soft);
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  font-size: 12px;
+}
+
+.framework-definition-row {
+  display: grid;
+
+  grid-template-columns:
+    88px 1fr;
+
+  gap: 8px;
+
+  margin: 4px 0;
+}
+
+.framework-definition-key {
+  font-weight: 750;
+}
+
+.framework-definition-value {
+  color: var(--text-secondary);
+}
+
+.framework-example {
+  display: none;
+
+  margin-top: 12px;
+  padding: 13px;
+
+  background: var(--surface-code);
+
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--framework-color);
+  border-radius: 10px;
+
+  color: var(--text);
+
+  white-space: pre-wrap;
+  word-break: break-word;
+
+  font-family:
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    Menlo,
+    monospace;
+
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.framework-example.open {
+  display: block;
+}
+
+
+/* Framework Section Responsive */
+
+@media (max-width: 950px) {
+
+  .framework-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .framework-header {
+    flex-direction: column;
+  }
+
+  .framework-guidance {
+    max-width: none;
+    text-align: left;
+  }
+}
+
+@media (max-width: 700px) {
+
+  .framework-section {
+    margin-top: 25px;
+    padding: 16px;
+  }
+
+  .framework-title {
+    font-size: 21px;
+  }
+
+  .framework-name {
+    font-size: 16px;
+  }
+
+  .framework-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .framework-definition-row {
+    grid-template-columns: 1fr;
+    gap: 1px;
+  }
+}
     
   </style>
 </head>
@@ -1746,6 +2115,532 @@
 
     </div>
 
+    <!-- =====================================================
+     BHP PROMPT FRAMEWORK
+     ===================================================== -->
+
+<section
+  class="framework-section"
+  aria-labelledby="frameworkTitle"
+>
+
+  <div class="framework-header">
+
+    <div class="framework-title-wrap">
+
+      <div class="framework-title-line">
+
+        <h2
+          id="frameworkTitle"
+          class="framework-title"
+        >
+          💡 通用提示詞框架
+        </h2>
+
+        <span class="framework-name">
+          BHP Prompt Framework
+        </span>
+
+        <span class="framework-badge">
+          BHP 自有方法論
+        </span>
+
+      </div>
+
+      <p class="framework-intro">
+        選擇適合的提示詞架構，快速建立高品質的工程 Prompt，
+        提升與 Siemens Eigen Engineering Agent 的溝通效率。
+      </p>
+
+    </div>
+
+    <div class="framework-guidance">
+      三種架構各有適用情境。先選擇合適的框架，
+      再進入下方 Engineering Prompt Library 尋找工程任務範例。
+    </div>
+
+  </div>
+
+
+  <div class="framework-grid">
+
+
+    <!-- =================================================
+         A
+         ================================================= -->
+
+    <article class="framework-card framework-card-a">
+
+      <div class="framework-card-heading">
+
+        <div class="framework-letter">
+          A
+        </div>
+
+        <div>
+
+          <h3 class="framework-card-title">
+            一次性任務框架
+          </h3>
+
+          <p class="framework-structure">
+            Role / Task / Input / Output / Constraints
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="framework-use">
+
+        <div class="framework-use-title">
+          適用情境
+        </div>
+
+        <ul>
+          <li>新功能開發</li>
+          <li>建立 FB / FC</li>
+          <li>一次講清楚完整需求</li>
+          <li>標準化工程任務</li>
+        </ul>
+
+      </div>
+
+
+      <div class="framework-actions">
+
+        <button
+          class="framework-button example-button"
+          type="button"
+        >
+          查看範例
+        </button>
+
+        <button
+          class="framework-button primary copy-framework-button"
+          type="button"
+        >
+          複製模板
+        </button>
+
+      </div>
+
+
+      <div class="framework-definition">
+
+        <div class="framework-definition-row">
+          <div class="framework-definition-key">
+            Role
+          </div>
+          <div class="framework-definition-value">
+            扮演的角色
+          </div>
+        </div>
+
+        <div class="framework-definition-row">
+          <div class="framework-definition-key">
+            Task
+          </div>
+          <div class="framework-definition-value">
+            要完成的任務
+          </div>
+        </div>
+
+        <div class="framework-definition-row">
+          <div class="framework-definition-key">
+            Input
+          </div>
+          <div class="framework-definition-value">
+            提供的輸入資訊
+          </div>
+        </div>
+
+        <div class="framework-definition-row">
+          <div class="framework-definition-key">
+            Output
+          </div>
+          <div class="framework-definition-value">
+            期望的輸出內容
+          </div>
+        </div>
+
+        <div class="framework-definition-row">
+          <div class="framework-definition-key">
+            Constraints
+          </div>
+          <div class="framework-definition-value">
+            限制條件與注意事項
+          </div>
+        </div>
+
+      </div>
+
+
+      <div
+        class="framework-example"
+data-template="Role：
+[請描述希望 Eigen 扮演的角色]
+
+Task：
+[請描述要完成的工程任務]
+
+Input：
+[請提供執行任務所需的輸入資訊]
+
+Output：
+[請定義期望的輸出內容]
+
+Constraints：
+[請列出限制條件、規則與注意事項]"
+      >Role：
+請扮演 Siemens TIA Portal PLC 工程師。
+
+Task：
+請依照需求建立一個 SCL Function Block。
+
+Input：
+啟動按鈕、停止按鈕、馬達輸出。
+
+Output：
+提供完整 SCL FB、I/O 定義與控制流程說明。
+
+Constraints：
+不得自行新增未提供的 PLC Tag。
+Timer 必須明確指定 PT。
+停止命令具有最高優先權。</div>
+
+    </article>
+
+
+    <!-- =================================================
+         B
+         ================================================= -->
+
+    <article class="framework-card framework-card-b">
+
+      <div class="framework-card-heading">
+
+        <div class="framework-letter">
+          B
+        </div>
+
+        <div>
+
+          <h3 class="framework-card-title">
+            迭代優化框架
+          </h3>
+
+          <p class="framework-structure">
+            Task / Context / Reference / Evaluate / Iterate
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="framework-use">
+
+        <div class="framework-use-title">
+          適用情境
+        </div>
+
+        <ul>
+          <li>程式除錯</li>
+          <li>邏輯優化</li>
+          <li>審核與驗證</li>
+          <li>故障排除</li>
+          <li>需要多輪互動</li>
+        </ul>
+
+      </div>
+
+
+      <div class="framework-actions">
+
+        <button
+          class="framework-button example-button"
+          type="button"
+        >
+          查看範例
+        </button>
+
+        <button
+          class="framework-button primary copy-framework-button"
+          type="button"
+        >
+          複製模板
+        </button>
+
+      </div>
+
+
+      <div class="framework-definition">
+
+        <div class="framework-definition-row">
+          <div class="framework-definition-key">
+            Task
+          </div>
+          <div class="framework-definition-value">
+            要解決的任務
+          </div>
+        </div>
+
+        <div class="framework-definition-row">
+          <div class="framework-definition-key">
+            Context
+          </div>
+          <div class="framework-definition-value">
+            專案背景與現況
+          </div>
+        </div>
+
+        <div class="framework-definition-row">
+          <div class="framework-definition-key">
+            Reference
+          </div>
+          <div class="framework-definition-value">
+            參考資訊或標準
+          </div>
+        </div>
+
+        <div class="framework-definition-row">
+          <div class="framework-definition-key">
+            Evaluate
+          </div>
+          <div class="framework-definition-value">
+            分析與評估要求
+          </div>
+        </div>
+
+        <div class="framework-definition-row">
+          <div class="framework-definition-key">
+            Iterate
+          </div>
+          <div class="framework-definition-value">
+            迭代優化方式
+          </div>
+        </div>
+
+      </div>
+
+
+      <div
+        class="framework-example"
+data-template="Task：
+[請描述要解決或改善的任務]
+
+Context：
+[請提供目前專案背景、現況與問題]
+
+Reference：
+[請提供參考文件、標準、程式或需求]
+
+Evaluate：
+[請定義需要分析、比較或驗證的內容]
+
+Iterate：
+[請說明希望如何逐步修正或優化]"
+      >Task：
+請檢查這段 SCL 為什麼沒有符合控制需求。
+
+Context：
+此 FB 用於馬達正轉控制。
+
+Reference：
+需求為 Start 後運轉 5 秒，停止 6 秒，再持續運轉。
+
+Evaluate：
+逐項比較需求與實際程式邏輯，列出不一致處。
+
+Iterate：
+先說明錯誤原因，再提出最小修改方案，不要直接整段重寫。</div>
+
+    </article>
+
+
+    <!-- =================================================
+         C
+         ================================================= -->
+
+    <article class="framework-card framework-card-c">
+
+      <div class="framework-card-heading">
+
+        <div class="framework-letter">
+          C
+        </div>
+
+        <div>
+
+          <h3 class="framework-card-title">
+            教學與格式框架
+          </h3>
+
+          <p class="framework-structure">
+            任務 / 背景 / 範例 / 角色 / 格式與語氣
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="framework-use">
+
+        <div class="framework-use-title">
+          適用情境
+        </div>
+
+        <ul>
+          <li>教學與學習</li>
+          <li>需要參考範例</li>
+          <li>固定輸出格式</li>
+          <li>限定回答風格</li>
+          <li>知識轉移與文件撰寫</li>
+        </ul>
+
+      </div>
+
+
+      <div class="framework-actions">
+
+        <button
+          class="framework-button example-button"
+          type="button"
+        >
+          查看範例
+        </button>
+
+        <button
+          class="framework-button primary copy-framework-button"
+          type="button"
+        >
+          複製模板
+        </button>
+
+      </div>
+
+
+      <div class="framework-definition">
+
+        <div class="framework-definition-row">
+          <div class="framework-definition-key">
+            任務
+          </div>
+          <div class="framework-definition-value">
+            要達成的目標
+          </div>
+        </div>
+
+        <div class="framework-definition-row">
+          <div class="framework-definition-key">
+            背景
+          </div>
+          <div class="framework-definition-value">
+            應用情境與前提
+          </div>
+        </div>
+
+        <div class="framework-definition-row">
+          <div class="framework-definition-key">
+            範例
+          </div>
+          <div class="framework-definition-value">
+            提供參考範例
+          </div>
+        </div>
+
+        <div class="framework-definition-row">
+          <div class="framework-definition-key">
+            角色
+          </div>
+          <div class="framework-definition-value">
+            設定 Agent 的角色
+          </div>
+        </div>
+
+        <div class="framework-definition-row">
+          <div class="framework-definition-key">
+            格式與語氣
+          </div>
+          <div class="framework-definition-value">
+            輸出格式與語氣要求
+          </div>
+        </div>
+
+      </div>
+
+
+      <div
+        class="framework-example"
+data-template="任務：
+[請描述要完成的目標]
+
+背景：
+[請描述應用情境與前提]
+
+範例：
+[請提供希望 Eigen 參考的範例]
+
+角色：
+[請定義 Eigen 應扮演的角色]
+
+格式與語氣：
+[請指定輸出格式、語言、深度與語氣]"
+        
+      >任務：
+請將以下控制需求轉成 SCL。
+
+背景：
+此範例用於 PLC 初學者課程。
+
+範例：
+TON(IN := #Start, PT := T#5s);
+
+角色：
+請扮演熟悉 Siemens TIA Portal 的自動化講師。
+
+格式與語氣：
+使用繁體中文。
+先說明控制思路，再提供 SCL。
+程式加入必要註解。
+不要加入未指定功能。</div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- Engineering Prompt Library 標題 -->
+
+<div
+  style="
+    max-width:1180px;
+    margin:0 auto 18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  "
+>
+  <h2 style="margin:0;font-size:22px;">
+    📖 工程 Prompt Library
+  </h2>
+
+<span
+  id="libraryDescription"
+  style="
+    color:var(--text-secondary);
+    font-size:13px;
+  "
+>
+  依照不同工程領域分類，瀏覽工程 Prompt。
+</span>
+  
+</div>
 
     <!-- PROMPTS -->
 
@@ -2201,7 +3096,15 @@ function updateStickyState() {
           Array.isArray(data)
             ? data
             : [];
+const libraryDescription =
+  document.getElementById("libraryDescription");
 
+if (libraryDescription) {
+
+  libraryDescription.textContent =
+    `依照不同工程領域分類，瀏覽目前 ${prompts.length} 筆工程 Prompt。`;
+
+}
 
         buildCategories();
 
@@ -3324,9 +4227,90 @@ function updateStickyState() {
       }
     );
 
+/* =====================================================
+   15. BHP Prompt Framework
+   ===================================================== */
 
+document
+  .querySelectorAll(".framework-card")
+  .forEach(card => {
+
+    const exampleButton =
+      card.querySelector(".example-button");
+
+    const copyButton =
+      card.querySelector(".copy-framework-button");
+
+    const example =
+      card.querySelector(".framework-example");
+
+
+    /* View Example */
+
+    exampleButton.addEventListener(
+      "click",
+      () => {
+
+        const open =
+          example.classList.toggle("open");
+
+        exampleButton.textContent =
+          open
+            ? "收合範例"
+            : "查看範例";
+
+      }
+    );
+
+
+    /* Copy Template */
+
+    copyButton.addEventListener(
+      "click",
+      async () => {
+
+        const template =
+          example.dataset.template || "";
+
+
+        try {
+
+          await navigator.clipboard
+            .writeText(template);
+
+
+          copyButton.textContent =
+            "已複製";
+
+
+          setTimeout(
+            () => {
+
+              copyButton.textContent =
+                "複製模板";
+
+            },
+            1300
+          );
+
+        }
+
+        catch (error) {
+
+          console.error(error);
+
+          showToast(
+            "無法複製模板"
+          );
+
+        }
+
+      }
+    );
+
+  });
     /* =====================================================
-       15. Initial
+       16. Initial
        ===================================================== */
 
     updateStickyState();
