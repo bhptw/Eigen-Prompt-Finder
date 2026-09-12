@@ -1,0 +1,38 @@
+[
+  {
+    "id": "PLC-ANALYSIS-001",
+    "category": "PLC Programming",
+    "title": "分析 PLC FB 控制邏輯",
+    "tags": [
+      "PLC Programming",
+      "FB",
+      "Analysis"
+    ],
+    "description": "用於分析既有 PLC Function Block 的控制目的、Network 邏輯、I/O 因果與狀態切換。",
+    "prompt": "請分析此完整 PLC FB 的實際控制邏輯，不修改程式。\n\n先說明整體目的與控制思路，\n再依 Network 執行順序分析各段 Condition、Action、Result 與前後因果。"
+  },
+  {
+    "id": "PLC-SCL-001",
+    "category": "PLC Programming",
+    "title": "自然語言生成 SCL FB",
+    "tags": [
+      "PLC Programming",
+      "SCL",
+      "FB"
+    ],
+    "description": "將自然語言控制需求轉換為 Siemens TIA Portal SCL Function Block。",
+    "prompt": "我要建立一個 SCL Function Block。\n\n請先確認：\nPLC Family\nProgramming Language\nInput\nOutput\n功能需求\n驗收條件\n\n需求不完整時，不要直接 Coding。"
+  },
+  {
+    "id": "TEST-AT-001",
+    "category": "Testing / QA",
+    "title": "Application Test Script",
+    "tags": [
+      "Testing / QA",
+      "Application Test",
+      "TIA Portal"
+    ],
+    "description": "將自然語言功能需求轉換成 TIA Portal Application Test Script。",
+    "prompt": "以上是本次測試可使用的 PLC Tag List。\n\n從下一則訊息開始，\n我會直接使用自然語言描述 PLC 的輸入動作、\n時間條件與預期輸出。\n\n請將需求轉換為 TIA Portal Application Test Script。"
+  }
+]
