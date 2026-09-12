@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Eigen Prompt Finder</title>
 
   <style>
@@ -22,7 +21,7 @@
     }
 
     main {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 40px auto;
       padding: 20px;
     }
@@ -42,30 +41,168 @@
       border: 1px solid #bbb;
       border-radius: 8px;
     }
+
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .category-button {
+      border: 1px solid #bbb;
+      background: white;
+      padding: 10px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .category-button:hover {
+      background: #eef2f5;
+    }
+
+    .results {
+      margin-top: 30px;
+    }
+
+    .prompt-card {
+      background: white;
+      padding: 24px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .prompt-card h3 {
+      margin-top: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #eef2f5;
+      padding: 5px 10px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+      border-radius: 12px;
+      font-size: 13px;
+    }
+
+    .prompt-text {
+      white-space: pre-wrap;
+      background: #f8f9fb;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      line-height: 1.6;
+    }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>Eigen Prompt Finder</h1>
-    <p>Siemens Eigen Engineering Agent Plain Text Prompt Library</p>
-  </header>
+<header>
+  <h1>Eigen Prompt Finder</h1>
+  <p>Siemens Eigen Engineering Agent Plain Text Prompt Library</p>
+</header>
 
-  <main>
+<main>
 
-    <div class="search-box">
+  <div class="search-box">
 
-      <h2>你想讓 Eigen 做什麼？</h2>
+    <h2>你想讓 Eigen 做什麼？</h2>
 
-      <input
-        type="text"
-        placeholder="例如：分析 FB、建立 SCL、Application Test"
-      >
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="例如：分析 FB、建立 SCL、Application Test"
+    >
 
+    <div class="categories">
+      <button class="category-button">全部</button>
+      <button class="category-button">Hardware</button>
+      <button class="category-button">PLC Programming</button>
+      <button class="category-button">Documentation</button>
+      <button class="category-button">Testing / QA</button>
+      <button class="category-button">HMI</button>
+      <button class="category-button">Drive</button>
+      <button class="category-button">Project Context</button>
     </div>
 
-  </main>
+  </div>
+
+  <div class="results">
+
+    <div class="prompt-card">
+      <h3>分析 PLC FB 控制邏輯</h3>
+
+      <span class="tag">PLC Programming</span>
+      <span class="tag">FB</span>
+      <span class="tag">Analysis</span>
+
+      <p>
+        用於分析既有 PLC Function Block 的控制目的、
+        Network 邏輯、I/O 因果與狀態切換。
+      </p>
+
+      <div class="prompt-text">
+請分析此完整 PLC FB 的實際控制邏輯，不修改程式。
+
+先說明整體目的與控制思路，
+再依 Network 執行順序分析各段 Condition、Action、Result 與前後因果。
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <h3>自然語言生成 SCL FB</h3>
+
+      <span class="tag">PLC Programming</span>
+      <span class="tag">SCL</span>
+      <span class="tag">FB</span>
+
+      <p>
+        將自然語言控制需求轉換為 Siemens TIA Portal SCL Function Block。
+      </p>
+
+      <div class="prompt-text">
+我要建立一個 SCL Function Block。
+
+請先確認：
+PLC Family
+Programming Language
+Input
+Output
+功能需求
+驗收條件
+
+需求不完整時，不要直接 Coding。
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <h3>Application Test Script</h3>
+
+      <span class="tag">Testing / QA</span>
+      <span class="tag">Application Test</span>
+      <span class="tag">TIA Portal</span>
+
+      <p>
+        將自然語言功能需求轉換成 TIA Portal Application Test Script。
+      </p>
+
+      <div class="prompt-text">
+以上是本次測試可使用的 PLC Tag List。
+
+從下一則訊息開始，
+我會直接使用自然語言描述 PLC 的輸入動作、
+時間條件與預期輸出。
+
+請將需求轉換為 TIA Portal Application Test Script。
+      </div>
+    </div>
+
+  </div>
+
+</main>
 
 </body>
 </html>
