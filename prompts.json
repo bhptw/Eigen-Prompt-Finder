@@ -830,5 +830,207 @@
   "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
   "version": "1.0",
   "prompt": "請檢查此 TIA Portal Application Test Script。\n\n請依序檢查 PLC Tag Reference、Alias、Assignment、RUN、ASSERT、時間條件與測試刺激是否正確。\n\n不得自行建立不存在的 PLC Tag，也不要把 %Q 輸出當成外部測試刺激。\n\n若 Script FAIL，請先判斷是 Script 問題、測試條件問題或 PLC 程式本身不符合需求。\n\n請先說明原因，再提出最小修改方案。"
+},
+  {
+  "id": "DRV-CATALOG-001",
+  "category": "Drive",
+  "title": "搜尋 SINAMICS Drive",
+  "tags": [
+    "Drive",
+    "SINAMICS",
+    "Hardware Catalog",
+    "G120"
+  ],
+  "description": "依功率、電壓、產品系列與應用需求搜尋適合的 SINAMICS Drive。",
+  "usage": "適合新專案選型、既有 Drive 更換或確認適合的 SINAMICS 系列與硬體。",
+  "requiredInput": [
+    "SINAMICS 系列或應用類型",
+    "馬達功率",
+    "輸入電壓",
+    "控制需求",
+    "已知 Order Number",
+    "通訊需求"
+  ],
+  "officialCategory": "Drive",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請協助我搜尋適合的 SINAMICS Drive。\n\n請先確認應用類型、馬達功率、電壓、控制需求與通訊方式。\n\n若我已提供 Order Number，請優先確認該型號。\n\n若型號不確定，請先搜尋 Hardware Catalog，不要自行猜測完整 Order Number。\n\n請列出候選 Drive 與選擇理由。"
+},
+{
+  "id": "DRV-CREATE-001",
+  "category": "Drive",
+  "title": "新增 SINAMICS Drive",
+  "tags": [
+    "Drive",
+    "SINAMICS",
+    "Configuration",
+    "TIA Portal"
+  ],
+  "description": "在 TIA Portal 專案中新增指定 SINAMICS Drive。",
+  "usage": "適合已確認 Drive 型號後建立 Drive 裝置與基本工程配置。",
+  "requiredInput": [
+    "SINAMICS 系列",
+    "Order Number",
+    "硬體版本",
+    "Drive 名稱",
+    "PROFINET Device Name",
+    "IP Address"
+  ],
+  "officialCategory": "Drive",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請依我提供的 SINAMICS 型號與 Order Number 新增 Drive。\n\n請先確認產品系列、Order Number、硬體版本與 Drive 名稱。\n\n若使用 PROFINET，請另外確認 Device Name 與 IP Address。\n\n不得自行替換成其他近似型號。\n\n完成後請列出新增的 Drive、型號與主要網路設定。"
+},
+{
+  "id": "DRV-TELEGRAM-001",
+  "category": "Drive",
+  "title": "Drive Telegram 選擇",
+  "tags": [
+    "Drive",
+    "Telegram",
+    "PROFINET",
+    "SINAMICS"
+  ],
+  "description": "依 Drive 控制與資料交換需求選擇適合的 Telegram。",
+  "usage": "適合規劃 PLC 與 SINAMICS Drive 之間的控制字、狀態字、速度命令與回授資料。",
+  "requiredInput": [
+    "SINAMICS 系列",
+    "控制方式",
+    "需要交換的命令",
+    "需要交換的狀態",
+    "速度或位置需求",
+    "目前 Telegram"
+  ],
+  "officialCategory": "Drive",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請依此 SINAMICS Drive 的控制需求協助選擇 Telegram。\n\n請先確認 PLC 需要傳送與接收哪些控制字、狀態字、速度命令與回授資訊。\n\n若目前已設定 Telegram，請先分析現有資料交換內容是否足夠。\n\n不要在需求未確認前任意更換 Telegram。\n\n請說明建議 Telegram 與選擇理由。"
+},
+{
+  "id": "DRV-SPEED-001",
+  "category": "Drive",
+  "title": "Drive 速度控制設定",
+  "tags": [
+    "Drive",
+    "Speed Control",
+    "Setpoint",
+    "SINAMICS"
+  ],
+  "description": "規劃 PLC 對 SINAMICS Drive 的速度命令與回授控制。",
+  "usage": "適合輸送帶、風機、泵浦、馬達正反轉與可變速控制。",
+  "requiredInput": [
+    "SINAMICS 系列",
+    "速度單位",
+    "最大速度",
+    "最小速度",
+    "速度來源",
+    "Telegram 或控制介面"
+  ],
+  "officialCategory": "Drive",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請協助建立此 SINAMICS Drive 的速度控制設定。\n\n請先確認速度單位、最大速度、最小速度、速度 Setpoint 來源與實際值回授方式。\n\n請說明 PLC 命令值與 Drive 實際速度之間的比例或工程值轉換。\n\n若 Telegram 或 Scaling 資訊不足，請先列出需要確認的項目，不要自行假設。"
+},
+{
+  "id": "DRV-CONTROL-001",
+  "category": "Drive",
+  "title": "Drive Start Stop Direction 控制",
+  "tags": [
+    "Drive",
+    "Start Stop",
+    "Direction",
+    "Control Word"
+  ],
+  "description": "整理 PLC 對 Drive 啟動、停止、正轉與反轉的控制邏輯。",
+  "usage": "適合建立基本 Drive 控制流程與檢查 Control Word 行為。",
+  "requiredInput": [
+    "SINAMICS 系列",
+    "Start 條件",
+    "Stop 條件",
+    "Forward 條件",
+    "Reverse 條件",
+    "Telegram",
+    "優先權規則"
+  ],
+  "officialCategory": "Drive",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請分析或建立 PLC 對 SINAMICS Drive 的 Start、Stop、Forward 與 Reverse 控制。\n\n請先確認各命令的實際訊號語意與優先權。\n\nStop 必須依功能需求具有明確優先權，正轉與反轉不得同時成立。\n\n請說明 PLC Command、Control Word、Drive State 與實際馬達動作之間的因果關係。"
+},
+{
+  "id": "DRV-PARAM-001",
+  "category": "Drive",
+  "title": "Drive Parameter 檢查",
+  "tags": [
+    "Drive",
+    "Parameter",
+    "SINAMICS",
+    "Commissioning"
+  ],
+  "description": "檢查 SINAMICS Drive 參數設定與控制需求是否一致。",
+  "usage": "適合試車、參數異常、功能被鎖定或控制來源與預期不一致的情況。",
+  "requiredInput": [
+    "SINAMICS 系列",
+    "參數編號",
+    "目前參數值",
+    "預期功能",
+    "控制來源",
+    "Telegram 或 Macro"
+  ],
+  "officialCategory": "Drive",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請檢查此 SINAMICS Drive 的參數設定。\n\n請依我提供的參數編號、目前值與預期功能分析其影響。\n\n若某個參數受到其他參數、Macro、Telegram、控制模式或裝置狀態影響，請先說明相依關係。\n\n不得只依參數名稱推測原因。\n\n請區分為設定問題、相依條件與需要現場確認的項目。"
+},
+{
+  "id": "DRV-FAULT-001",
+  "category": "Drive",
+  "title": "Drive Fault Alarm 分析",
+  "tags": [
+    "Drive",
+    "Fault",
+    "Alarm",
+    "Diagnostics"
+  ],
+  "description": "分析 SINAMICS Drive Fault、Alarm 與可能的工程原因。",
+  "usage": "適合 Drive 出現 Fault Code、Alarm Code、無法啟動或運轉異常時使用。",
+  "requiredInput": [
+    "SINAMICS 系列",
+    "Fault Code 或 Alarm Code",
+    "發生時機",
+    "Drive 狀態",
+    "相關參數",
+    "PLC 狀態"
+  ],
+  "officialCategory": "Drive",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請分析此 SINAMICS Drive 的 Fault 或 Alarm。\n\n請先依 Fault Code 或 Alarm Code 說明其代表的狀態，再分析可能的觸發條件。\n\n請區分 Drive 本體、馬達、參數設定、PROFINET 通訊與 PLC Command 等可能來源。\n\n如果資訊不足，請列出下一步需要確認的參數或診斷資料，不要直接判定單一原因。"
+},
+{
+  "id": "DRV-COMM-001",
+  "category": "Drive",
+  "title": "PLC 與 Drive 通訊檢查",
+  "tags": [
+    "Drive",
+    "PROFINET",
+    "Communication",
+    "Telegram"
+  ],
+  "description": "檢查 PLC 與 SINAMICS Drive 之間的 PROFINET 與 Telegram 通訊。",
+  "usage": "適合 Drive 已加入專案但無法接收命令、無狀態回授或 PLC 與 Drive 資料不一致的情況。",
+  "requiredInput": [
+    "PLC 型號",
+    "SINAMICS 系列",
+    "PROFINET Device Name",
+    "IP Address",
+    "Telegram",
+    "PLC I/O Address",
+    "異常現象"
+  ],
+  "officialCategory": "Drive",
+  "officialReference": "Siemens Eigen Engineering Agent V1.4.0",
+  "version": "1.0",
+  "prompt": "請檢查 PLC 與 SINAMICS Drive 的通訊設定。\n\n請依序確認 PROFINET Device Name、IP Address、Subnet、Telegram、PLC I/O Address、Control Word 與 Status Word。\n\n請區分為網路設定問題、Telegram Mapping 問題、PLC 程式問題與 Drive 狀態問題。\n\n不要直接修改設定，先列出檢查結果與可能原因。"
 }
 ]
