@@ -2,87 +2,94 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Eigen Prompt Finder</title>
-
-  <style>
-    body {
-      font-family: Arial, "Microsoft JhengHei", sans-serif;
-      margin: 0;
-      background: #f5f7fa;
-      color: #222;
-    }<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Eigen Prompt Finder</title>
 
   <meta
     name="description"
     content="Siemens Eigen Engineering Agent Plain Text Prompt Library"
-  />
+  >
 
   <style>
     /* =========================================================
-       Base / Theme
+       01. Theme Variables
        ========================================================= */
 
     :root {
-      --ui-scale: 1;
+      --bg: #f6f7f9;
 
-      --bg: #f4f6f8;
       --surface: #ffffff;
-      --surface-soft: #f7f9fb;
-      --surface-code: #f2f5f8;
+      --surface-soft: #f4f6f8;
+      --surface-code: #eef2f5;
 
-      --text: #1f2933;
-      --text-secondary: #667085;
-      --text-muted: #88929d;
+      --text: #161b22;
+      --text-secondary: #4f5965;
+      --text-muted: #76818d;
 
-      --border: #dce2e8;
-      --border-strong: #c9d1d9;
+      /* Light Mode：提高白底邊框辨識度 */
+      --border: #aeb7c2;
+      --border-strong: #7f8a96;
 
-      --accent: #0068b5;
-      --accent-hover: #00548f;
-      --accent-soft: #eaf4fb;
+      --accent: #0072ce;
+      --accent-hover: #005da8;
+      --accent-soft: #e8f3fb;
 
-      --success: #0f7b4d;
+      --success: #168357;
 
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 8px 26px rgba(0, 0, 0, 0.08);
+      --shadow-small:
+        0 2px 8px rgba(0, 0, 0, 0.05);
 
-      --toolbar-bg: rgba(255, 255, 255, 0.96);
-      --toolbar-hover: #eef4f8;
+      --shadow-medium:
+        0 8px 24px rgba(0, 0, 0, 0.09);
+
+      --toolbar-bg:
+        rgba(255, 255, 255, 0.96);
+
+      --toolbar-hover: #edf3f7;
     }
 
     body.dark-mode {
-      --bg: #111418;
-      --surface: #1b1f24;
-      --surface-soft: #22282e;
-      --surface-code: #242b32;
+      --bg: #101418;
+
+      --surface: #1b2026;
+      --surface-soft: #222930;
+      --surface-code: #252d35;
 
       --text: #f2f4f7;
-      --text-secondary: #b7c0c9;
-      --text-muted: #8e99a5;
+      --text-secondary: #bec6ce;
+      --text-muted: #919ba6;
 
-      --border: #37404a;
-      --border-strong: #48535f;
+      /* Dark Mode Border */
+      --border: #414b56;
+      --border-strong: #66717d;
 
-      --accent: #4da3e6;
-      --accent-hover: #70b5eb;
-      --accent-soft: #172b3d;
+      --accent: #42a5e8;
+      --accent-hover: #65b5eb;
+      --accent-soft: #17334a;
 
       --success: #55c791;
 
-      --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.22);
-      --shadow-md: 0 8px 28px rgba(0, 0, 0, 0.34);
+      --shadow-small:
+        0 2px 10px rgba(0, 0, 0, 0.25);
 
-      --toolbar-bg: rgba(27, 31, 36, 0.96);
-      --toolbar-hover: #2b333c;
+      --shadow-medium:
+        0 8px 28px rgba(0, 0, 0, 0.36);
+
+      --toolbar-bg:
+        rgba(27, 32, 38, 0.97);
+
+      --toolbar-hover: #303943;
     }
+
+
+    /* =========================================================
+       02. Reset / Base
+       ========================================================= */
 
     * {
       box-sizing: border-box;
@@ -94,8 +101,10 @@
 
     body {
       margin: 0;
+
       background: var(--bg);
       color: var(--text);
+
       font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -105,7 +114,7 @@
         Arial,
         sans-serif;
 
-      font-size: calc(16px * var(--ui-scale));
+      font-size: 16px;
       line-height: 1.6;
 
       transition:
@@ -118,47 +127,66 @@
       font: inherit;
     }
 
+    button {
+      color: inherit;
+    }
+
     a {
       color: inherit;
     }
 
+
     /* =========================================================
-       Header
+       03. Header
        ========================================================= */
 
     .site-header {
       background: var(--surface);
-      border-bottom: 1px solid var(--border);
+
+      border-bottom:
+        1px solid var(--border);
     }
 
     .header-wrap {
       max-width: 1180px;
+
       margin: 0 auto;
+
       padding: 22px 24px;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+
+      gap: 28px;
     }
 
     .brand-area {
       display: flex;
       align-items: center;
-      gap: 18px;
+
+      gap: 20px;
+
       min-width: 0;
     }
 
     .brand-logo-link {
-      display: inline-flex;
+      display: flex;
+
+      align-items: center;
+
       flex-shrink: 0;
     }
 
     .brand-logo {
-      width: 170px;
-      max-height: 62px;
-      object-fit: contain;
       display: block;
+
+      width: 170px;
+      height: auto;
+
+      max-height: 62px;
+
+      object-fit: contain;
     }
 
     .brand-text {
@@ -167,157 +195,210 @@
 
     .brand-text h1 {
       margin: 0;
-      font-size: 28px;
+
+      font-size: 29px;
       line-height: 1.25;
+
       letter-spacing: -0.3px;
     }
 
     .brand-text p {
       margin: 5px 0 0;
+
       color: var(--text-secondary);
+
       font-size: 14px;
     }
 
     .company-link {
-      flex-shrink: 0;
       color: var(--accent);
+
       text-decoration: none;
+
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
+
+      flex-shrink: 0;
     }
 
     .company-link:hover {
       text-decoration: underline;
     }
 
+
     /* =========================================================
-       Main
+       04. Main Layout
        ========================================================= */
 
     .page-wrap {
       max-width: 1180px;
+
       margin: 0 auto;
-      padding: 34px 24px 70px;
+
+      padding: 36px 24px 72px;
     }
+
+
+    /* =========================================================
+       05. Hero
+       ========================================================= */
 
     .hero {
       text-align: center;
-      margin-bottom: 28px;
+
+      margin-bottom: 30px;
     }
 
     .hero-title {
       margin: 0;
-      font-size: 30px;
+
+      font-size: 31px;
       line-height: 1.3;
     }
 
     .hero-subtitle {
-      margin: 8px auto 0;
-      color: var(--text-secondary);
       max-width: 760px;
+
+      margin: 8px auto 0;
+
+      color: var(--text-secondary);
+
+      font-size: 15px;
     }
 
+
     /* =========================================================
-       Search
+       06. Search
        ========================================================= */
 
     .search-section {
-      max-width: 820px;
-      margin: 0 auto 24px;
+      max-width: 900px;
+
+      margin: 0 auto 22px;
     }
 
     .search-label {
       display: block;
-      margin-bottom: 9px;
-      font-weight: 700;
+
+      margin-bottom: 8px;
+
       font-size: 17px;
+      font-weight: 700;
     }
 
     .search-box {
       width: 100%;
-      padding: 16px 18px;
 
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      padding: 15px 17px;
 
       background: var(--surface);
       color: var(--text);
 
+      border:
+        1px solid var(--border);
+
+      border-radius: 13px;
+
       outline: none;
-      box-shadow: var(--shadow-sm);
+
+      box-shadow: var(--shadow-small);
 
       transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+    .search-box:hover {
+      border-color:
+        var(--border-strong);
     }
 
     .search-box:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-soft);
+
+      box-shadow:
+        0 0 0 3px var(--accent-soft);
     }
 
     .search-box::placeholder {
       color: var(--text-muted);
     }
 
+
     /* =========================================================
-       Stats
+       07. Statistics
        ========================================================= */
 
     .stats-panel {
-      max-width: 820px;
-      margin: 0 auto 22px;
+      max-width: 900px;
 
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      margin: 0 auto 24px;
 
       padding: 15px 18px;
+
+      background: var(--surface);
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 13px;
+
+      box-shadow: var(--shadow-small);
 
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
 
-      box-shadow: var(--shadow-sm);
+      gap: 20px;
     }
 
     .stats-main {
       font-weight: 700;
+
+      flex-shrink: 0;
     }
 
     .stats-detail {
       color: var(--text-secondary);
+
       font-size: 14px;
+
       text-align: right;
     }
 
+
     /* =========================================================
-       Category Filters
+       08. Category Buttons
        ========================================================= */
 
     .category-section {
-      margin-bottom: 30px;
+      margin-bottom: 32px;
     }
 
     .category-buttons {
       display: flex;
       flex-wrap: wrap;
+
       justify-content: center;
+
       gap: 10px;
     }
 
     .category-button {
-      padding: 9px 14px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
+      padding: 9px 15px;
 
       background: var(--surface);
       color: var(--text);
 
+      border:
+        1px solid var(--border);
+
+      border-radius: 999px;
+
       cursor: pointer;
-      font-weight: 600;
+
       font-size: 14px;
+      font-weight: 650;
 
       transition:
         background-color 0.18s ease,
@@ -328,56 +409,81 @@
 
     .category-button:hover {
       border-color: var(--accent);
+
       transform: translateY(-1px);
     }
 
     .category-button.active {
       background: var(--accent);
+
       color: #ffffff;
+
       border-color: var(--accent);
     }
 
     .category-button.disabled {
-      opacity: 0.45;
+      opacity: 0.4;
+
       cursor: not-allowed;
+
       transform: none;
     }
 
+
     /* =========================================================
-       Prompt Grid / Card
+       09. Prompt Grid
        ========================================================= */
 
     .prompt-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 22px;
     }
 
+
+    /* =========================================================
+       10. Prompt Card
+       ========================================================= */
+
     .prompt-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 22px;
-
-      box-shadow: var(--shadow-sm);
-
       display: flex;
       flex-direction: column;
 
+      min-width: 0;
+
+      padding: 23px;
+
+      background: var(--surface);
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 17px;
+
+      box-shadow: var(--shadow-small);
+
       transition:
-        box-shadow 0.18s ease,
         transform 0.18s ease,
-        border-color 0.18s ease;
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
     }
 
     .prompt-card:hover {
       transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--border-strong);
+
+      border-color:
+        var(--border-strong);
+
+      box-shadow:
+        var(--shadow-medium);
     }
 
     .prompt-title {
       margin: 0 0 10px;
+
       font-size: 21px;
       line-height: 1.4;
     }
@@ -385,53 +491,86 @@
     .prompt-meta {
       display: flex;
       flex-wrap: wrap;
+
       gap: 7px;
+
       margin-bottom: 13px;
     }
 
     .tag {
       display: inline-flex;
+
       align-items: center;
 
       padding: 5px 9px;
+
+      background:
+        var(--surface-soft);
+
+      color:
+        var(--text-secondary);
+
+      border:
+        1px solid var(--border);
+
       border-radius: 999px;
 
-      background: var(--surface-soft);
-      border: 1px solid var(--border);
-
-      color: var(--text-secondary);
-
       font-size: 12px;
+
       line-height: 1.2;
     }
 
     .tag.category {
-      background: var(--accent-soft);
-      color: var(--accent);
-      border-color: transparent;
+      background:
+        var(--accent-soft);
+
+      color:
+        var(--accent);
+
+      border-color:
+        var(--accent);
+
       font-weight: 700;
     }
 
     .prompt-description {
       margin: 0 0 15px;
-      color: var(--text-secondary);
+
+      color:
+        var(--text-secondary);
+
       font-size: 14px;
     }
 
+
+    /* =========================================================
+       11. Prompt Text
+       ========================================================= */
+
     .prompt-content-wrap {
-      position: relative;
       margin-bottom: 16px;
+
+      position: relative;
     }
 
     .prompt-content {
       margin: 0;
+
       padding: 15px 16px;
 
-      background: var(--surface-code);
-      border-left: 4px solid var(--accent);
-      border-radius: 10px;
+      background:
+        var(--surface-code);
 
-      color: var(--text);
+      color:
+        var(--text);
+
+      border:
+        1px solid var(--border);
+
+      border-left:
+        4px solid var(--accent);
+
+      border-radius: 10px;
 
       white-space: pre-wrap;
       word-break: break-word;
@@ -444,37 +583,53 @@
         monospace;
 
       font-size: 13px;
+
       line-height: 1.65;
 
       max-height: 220px;
+
       overflow: hidden;
 
-      transition: max-height 0.25s ease;
+      transition:
+        max-height 0.25s ease;
     }
 
     .prompt-content.expanded {
-      max-height: 2000px;
+      max-height: 3000px;
     }
+
+
+    /* =========================================================
+       12. Prompt Actions
+       ========================================================= */
 
     .prompt-actions {
       display: flex;
       flex-wrap: wrap;
+
       gap: 9px;
+
       margin-top: auto;
     }
 
     .action-button {
-      border-radius: 9px;
       padding: 9px 13px;
 
-      border: 1px solid var(--border);
+      background:
+        var(--surface);
 
-      background: var(--surface);
-      color: var(--text);
+      color:
+        var(--text);
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 9px;
 
       cursor: pointer;
-      font-weight: 700;
+
       font-size: 13px;
+      font-weight: 700;
 
       transition:
         background-color 0.18s ease,
@@ -483,31 +638,54 @@
     }
 
     .action-button:hover {
-      border-color: var(--accent);
+      border-color:
+        var(--accent);
     }
 
     .action-button.primary {
-      background: var(--accent);
-      color: #ffffff;
-      border-color: var(--accent);
+      background:
+        var(--accent);
+
+      color:
+        #ffffff;
+
+      border-color:
+        var(--accent);
     }
 
     .action-button.primary:hover {
-      background: var(--accent-hover);
-      border-color: var(--accent-hover);
+      background:
+        var(--accent-hover);
+
+      border-color:
+        var(--accent-hover);
     }
 
     .action-button.success {
-      background: var(--success);
-      border-color: var(--success);
-      color: #ffffff;
+      background:
+        var(--success);
+
+      color:
+        #ffffff;
+
+      border-color:
+        var(--success);
     }
+
+
+    /* =========================================================
+       13. Details
+       ========================================================= */
 
     .prompt-details {
       display: none;
-      margin-top: 15px;
-      padding-top: 15px;
-      border-top: 1px solid var(--border);
+
+      margin-top: 16px;
+
+      padding-top: 16px;
+
+      border-top:
+        1px solid var(--border);
     }
 
     .prompt-details.open {
@@ -516,90 +694,119 @@
 
     .detail-row {
       display: grid;
-      grid-template-columns: 140px 1fr;
+
+      grid-template-columns:
+        145px 1fr;
+
       gap: 12px;
+
       margin-bottom: 9px;
+
       font-size: 13px;
     }
 
     .detail-label {
-      font-weight: 700;
       color: var(--text);
+
+      font-weight: 700;
     }
 
     .detail-value {
-      color: var(--text-secondary);
+      color:
+        var(--text-secondary);
+
       word-break: break-word;
     }
 
+
     /* =========================================================
-       Empty State
+       14. Empty State
        ========================================================= */
 
     .empty-state {
       display: none;
+
+      padding: 60px 20px;
+
       text-align: center;
-      padding: 50px 20px;
-      color: var(--text-secondary);
+
+      color:
+        var(--text-secondary);
     }
 
     .empty-state.show {
       display: block;
     }
 
+
     /* =========================================================
-       Footer
+       15. Footer
        ========================================================= */
 
     .site-footer {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
+      background:
+        var(--surface);
+
+      border-top:
+        1px solid var(--border);
     }
 
     .footer-wrap {
       max-width: 1180px;
+
       margin: 0 auto;
-      padding: 24px;
+
+      padding: 25px 24px;
 
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+
       gap: 20px;
     }
 
     .footer-brand {
       display: flex;
       flex-direction: column;
+
       gap: 3px;
     }
 
     .footer-brand span {
-      color: var(--text-secondary);
+      color:
+        var(--text-secondary);
+
       font-size: 13px;
     }
 
     .footer-link {
-      color: var(--accent);
+      color:
+        var(--accent);
+
       text-decoration: none;
-      font-weight: 600;
+
       font-size: 14px;
+      font-weight: 700;
     }
 
     .footer-link:hover {
       text-decoration: underline;
     }
 
+
     /* =========================================================
-       Floating Utility Toolbar
+       16. Floating Toolbar
        ========================================================= */
 
     .floating-toolbar {
       position: fixed;
+
       right: 22px;
       bottom: 24px;
 
       display: flex;
       flex-direction: column;
+
       gap: 8px;
 
       z-index: 9999;
@@ -608,25 +815,33 @@
     .tool-button {
       position: relative;
 
-      width: 44px;
-      height: 44px;
-
-      border: 1px solid var(--border);
-      border-radius: 12px;
-
-      background: var(--toolbar-bg);
-      color: var(--text);
+      width: 46px;
+      height: 46px;
 
       display: flex;
       align-items: center;
       justify-content: center;
+
+      padding: 0;
+
+      background:
+        var(--toolbar-bg);
+
+      color:
+        var(--text);
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 12px;
 
       cursor: pointer;
 
       font-size: 18px;
       font-weight: 700;
 
-      box-shadow: var(--shadow-sm);
+      box-shadow:
+        var(--shadow-small);
 
       backdrop-filter: blur(8px);
 
@@ -637,26 +852,41 @@
     }
 
     .tool-button:hover {
-      background: var(--toolbar-hover);
-      border-color: var(--accent);
-      transform: translateY(-1px);
+      background:
+        var(--toolbar-hover);
+
+      border-color:
+        var(--accent);
+
+      transform:
+        translateY(-1px);
     }
 
     .tool-button::before {
-      content: attr(data-tooltip);
+      content:
+        attr(data-tooltip);
 
       position: absolute;
-      right: 54px;
+
+      right: 56px;
 
       white-space: nowrap;
 
-      background: var(--surface);
-      color: var(--text);
+      padding: 6px 9px;
 
-      border: 1px solid var(--border);
+      background:
+        var(--surface);
+
+      color:
+        var(--text);
+
+      border:
+        1px solid var(--border);
+
       border-radius: 8px;
 
-      padding: 6px 9px;
+      box-shadow:
+        var(--shadow-small);
 
       font-size: 12px;
       font-weight: 600;
@@ -666,9 +896,8 @@
 
       pointer-events: none;
 
-      box-shadow: var(--shadow-sm);
-
-      transition: opacity 0.15s ease;
+      transition:
+        opacity 0.15s ease;
     }
 
     .tool-button:hover::before {
@@ -676,30 +905,43 @@
       visibility: visible;
     }
 
+
+    /* =========================================================
+       17. Zoom Indicator
+       ========================================================= */
+
     .zoom-indicator {
       position: fixed;
-      right: 78px;
-      bottom: 118px;
 
-      background: var(--surface);
-      color: var(--text);
-
-      border: 1px solid var(--border);
-      border-radius: 9px;
+      right: 80px;
+      bottom: 125px;
 
       padding: 6px 10px;
 
+      background:
+        var(--surface);
+
+      color:
+        var(--text);
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 8px;
+
+      box-shadow:
+        var(--shadow-small);
+
       font-size: 12px;
       font-weight: 700;
-
-      box-shadow: var(--shadow-sm);
 
       opacity: 0;
       visibility: hidden;
 
       z-index: 9998;
 
-      transition: opacity 0.18s ease;
+      transition:
+        opacity 0.18s ease;
     }
 
     .zoom-indicator.show {
@@ -707,22 +949,33 @@
       visibility: visible;
     }
 
+
     /* =========================================================
-       Toast
+       18. Toast
        ========================================================= */
 
     .toast {
       position: fixed;
+
       left: 50%;
       bottom: 30px;
 
-      transform: translateX(-50%) translateY(12px);
-
-      background: var(--text);
-      color: var(--surface);
+      transform:
+        translateX(-50%)
+        translateY(12px);
 
       padding: 10px 16px;
+
+      background:
+        var(--text);
+
+      color:
+        var(--surface);
+
       border-radius: 10px;
+
+      box-shadow:
+        var(--shadow-medium);
 
       font-size: 13px;
       font-weight: 700;
@@ -740,31 +993,27 @@
     .toast.show {
       opacity: 1;
       visibility: visible;
-      transform: translateX(-50%) translateY(0);
+
+      transform:
+        translateX(-50%)
+        translateY(0);
     }
 
+
     /* =========================================================
-       Responsive
+       19. Responsive
        ========================================================= */
 
-    @media (max-width: 860px) {
+    @media (max-width: 900px) {
       .prompt-grid {
         grid-template-columns: 1fr;
-      }
-
-      .header-wrap {
-        align-items: flex-start;
-      }
-
-      .brand-logo {
-        width: 145px;
       }
     }
 
     @media (max-width: 700px) {
-      .header-wrap,
-      .footer-wrap {
+      .header-wrap {
         flex-direction: column;
+
         align-items: flex-start;
       }
 
@@ -772,16 +1021,21 @@
         align-items: flex-start;
       }
 
+      .brand-logo {
+        width: 145px;
+      }
+
       .brand-text h1 {
-        font-size: 23px;
+        font-size: 24px;
       }
 
       .hero-title {
-        font-size: 25px;
+        font-size: 26px;
       }
 
       .stats-panel {
         flex-direction: column;
+
         align-items: flex-start;
       }
 
@@ -791,19 +1045,29 @@
 
       .detail-row {
         grid-template-columns: 1fr;
+
         gap: 3px;
+      }
+
+      .footer-wrap {
+        flex-direction: column;
+
+        align-items: flex-start;
       }
 
       .floating-toolbar {
         right: 12px;
         bottom: 14px;
+
         gap: 6px;
       }
 
       .tool-button {
         width: 40px;
         height: 40px;
+
         border-radius: 10px;
+
         font-size: 16px;
       }
 
@@ -813,76 +1077,102 @@
 
       .zoom-indicator {
         right: 60px;
-        bottom: 104px;
+        bottom: 105px;
       }
 
       .toast {
-        max-width: calc(100% - 30px);
-        text-align: center;
         bottom: 18px;
+
+        max-width:
+          calc(100% - 30px);
+
+        text-align: center;
       }
     }
   </style>
 </head>
 
+
 <body>
 
-  <!-- ======================================================
-       Header
-       ====================================================== -->
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
 
   <header class="site-header">
+
     <div class="header-wrap">
 
       <div class="brand-area">
+
         <a
+          class="brand-logo-link"
           href="https://www.bhp.com.tw/"
           target="_blank"
           rel="noopener noreferrer"
-          class="brand-logo-link"
         >
           <img
+            class="brand-logo"
             src="bhp-logo.png"
             alt="BHP 司騰達股份有限公司"
-            class="brand-logo"
-          />
+          >
         </a>
 
         <div class="brand-text">
-          <h1>Eigen Prompt Finder</h1>
-          <p>Siemens Eigen Engineering Agent Plain Text Prompt Library</p>
+
+          <h1>
+            Eigen Prompt Finder
+          </h1>
+
+          <p>
+            Siemens Eigen Engineering Agent Plain Text Prompt Library
+          </p>
+
         </div>
+
       </div>
 
       <a
+        class="company-link"
         href="https://www.bhp.com.tw/"
         target="_blank"
         rel="noopener noreferrer"
-        class="company-link"
       >
         www.bhp.com.tw
       </a>
 
     </div>
+
   </header>
 
-  <!-- ======================================================
-       Main
-       ====================================================== -->
+
+  <!-- =====================================================
+       MAIN
+       ===================================================== -->
 
   <main class="page-wrap">
 
     <section class="hero">
-      <h2 class="hero-title">Eigen Engineering Prompt Library</h2>
+
+      <h2 class="hero-title">
+        Eigen Engineering Prompt Library
+      </h2>
+
       <p class="hero-subtitle">
         使用自然語言快速搜尋適合 Siemens Eigen Engineering Agent 的工程 Prompt。
       </p>
+
     </section>
 
-    <!-- Search -->
+
+    <!-- SEARCH -->
 
     <section class="search-section">
-      <label class="search-label" for="searchInput">
+
+      <label
+        class="search-label"
+        for="searchInput"
+      >
         你想讓 Eigen 做什麼？
       </label>
 
@@ -890,76 +1180,115 @@
         id="searchInput"
         class="search-box"
         type="search"
-        placeholder="例如：分析 FB、建立 SCL、Application Test"
         autocomplete="off"
-      />
+        placeholder="例如：分析 FB、建立 SCL、Application Test"
+      >
+
     </section>
 
-    <!-- Stats -->
+
+    <!-- STATISTICS -->
 
     <section class="stats-panel">
-      <div id="totalStats" class="stats-main">
+
+      <div
+        id="totalStats"
+        class="stats-main"
+      >
         載入 Prompt 中...
       </div>
 
-      <div id="categoryStats" class="stats-detail"></div>
+      <div
+        id="categoryStats"
+        class="stats-detail"
+      ></div>
+
     </section>
 
-    <!-- Categories -->
+
+    <!-- CATEGORY -->
 
     <section class="category-section">
-      <div id="categoryButtons" class="category-buttons"></div>
+
+      <div
+        id="categoryButtons"
+        class="category-buttons"
+      ></div>
+
     </section>
 
-    <!-- Prompt Cards -->
 
-    <section id="promptGrid" class="prompt-grid"></section>
+    <!-- PROMPTS -->
 
-    <div id="emptyState" class="empty-state">
+    <section
+      id="promptGrid"
+      class="prompt-grid"
+    ></section>
+
+
+    <div
+      id="emptyState"
+      class="empty-state"
+    >
       找不到符合條件的 Prompt。
     </div>
 
   </main>
 
-  <!-- ======================================================
-       Footer
-       ====================================================== -->
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
 
   <footer class="site-footer">
+
     <div class="footer-wrap">
 
       <div class="footer-brand">
-        <strong>BHP 司騰達股份有限公司</strong>
-        <span>Eigen Prompt Finder</span>
+
+        <strong>
+          BHP 司騰達股份有限公司
+        </strong>
+
+        <span>
+          Eigen Prompt Finder
+        </span>
+
       </div>
 
       <a
+        class="footer-link"
         href="https://www.bhp.com.tw/"
         target="_blank"
         rel="noopener noreferrer"
-        class="footer-link"
       >
         www.bhp.com.tw
       </a>
 
     </div>
+
   </footer>
 
-  <!-- ======================================================
-       Floating Utility Toolbar
-       ====================================================== -->
 
-  <div class="floating-toolbar" aria-label="網站工具列">
+  <!-- =====================================================
+       FLOATING TOOLBAR
+       ===================================================== -->
+
+  <div
+    class="floating-toolbar"
+    aria-label="網站工具列"
+  >
 
     <button
       id="themeToggle"
       class="tool-button"
       type="button"
-      data-tooltip="Light / Dark Mode"
-      aria-label="切換深色模式"
+      data-tooltip="切換 Dark Mode"
+      aria-label="切換 Light / Dark Mode"
     >
       🌙
     </button>
+
 
     <button
       id="zoomIn"
@@ -971,6 +1300,7 @@
       ＋
     </button>
 
+
     <button
       id="zoomOut"
       class="tool-button"
@@ -980,6 +1310,7 @@
     >
       −
     </button>
+
 
     <button
       id="zoomReset"
@@ -991,6 +1322,7 @@
       ↺
     </button>
 
+
     <button
       id="resetFilters"
       class="tool-button"
@@ -1001,6 +1333,7 @@
       ×
     </button>
 
+
     <button
       id="copyUrl"
       class="tool-button"
@@ -1010,6 +1343,7 @@
     >
       🔗
     </button>
+
 
     <button
       id="scrollTop"
@@ -1023,191 +1357,419 @@
 
   </div>
 
-  <div id="zoomIndicator" class="zoom-indicator">100%</div>
-  <div id="toast" class="toast"></div>
 
-  <!-- ======================================================
-       JavaScript
-       ====================================================== -->
+  <div
+    id="zoomIndicator"
+    class="zoom-indicator"
+  >
+    100%
+  </div>
+
+
+  <div
+    id="toast"
+    class="toast"
+  ></div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+       ===================================================== -->
 
   <script>
+    "use strict";
+
+
+    /* =====================================================
+       01. State
+       ===================================================== */
+
     let prompts = [];
+
     let currentCategory = "全部";
 
-    const searchInput = document.getElementById("searchInput");
-    const promptGrid = document.getElementById("promptGrid");
-    const categoryButtons = document.getElementById("categoryButtons");
-    const totalStats = document.getElementById("totalStats");
-    const categoryStats = document.getElementById("categoryStats");
-    const emptyState = document.getElementById("emptyState");
 
-    const themeToggle = document.getElementById("themeToggle");
-    const zoomIn = document.getElementById("zoomIn");
-    const zoomOut = document.getElementById("zoomOut");
-    const zoomReset = document.getElementById("zoomReset");
-    const resetFilters = document.getElementById("resetFilters");
-    const copyUrl = document.getElementById("copyUrl");
-    const scrollTopButton = document.getElementById("scrollTop");
+    /* =====================================================
+       02. Elements
+       ===================================================== */
 
-    const zoomIndicator = document.getElementById("zoomIndicator");
-    const toast = document.getElementById("toast");
+    const searchInput =
+      document.getElementById("searchInput");
 
-    /* ======================================================
-       Utility
-       ====================================================== */
+    const promptGrid =
+      document.getElementById("promptGrid");
+
+    const categoryButtons =
+      document.getElementById("categoryButtons");
+
+    const totalStats =
+      document.getElementById("totalStats");
+
+    const categoryStats =
+      document.getElementById("categoryStats");
+
+    const emptyState =
+      document.getElementById("emptyState");
+
+
+    const themeToggle =
+      document.getElementById("themeToggle");
+
+    const zoomIn =
+      document.getElementById("zoomIn");
+
+    const zoomOut =
+      document.getElementById("zoomOut");
+
+    const zoomReset =
+      document.getElementById("zoomReset");
+
+    const resetFilters =
+      document.getElementById("resetFilters");
+
+    const copyUrl =
+      document.getElementById("copyUrl");
+
+    const scrollTopButton =
+      document.getElementById("scrollTop");
+
+
+    const zoomIndicator =
+      document.getElementById("zoomIndicator");
+
+    const toast =
+      document.getElementById("toast");
+
+
+    /* =====================================================
+       03. Utilities
+       ===================================================== */
 
     function escapeHtml(value) {
+
       return String(value ?? "")
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+
     }
 
+
     function showToast(message) {
+
       toast.textContent = message;
+
       toast.classList.add("show");
+
 
       clearTimeout(showToast.timer);
 
-      showToast.timer = setTimeout(() => {
-        toast.classList.remove("show");
-      }, 1800);
+
+      showToast.timer =
+        setTimeout(() => {
+
+          toast.classList.remove("show");
+
+        }, 1600);
+
     }
 
+
     function showZoomIndicator(value) {
-      zoomIndicator.textContent = `${Math.round(value * 100)}%`;
+
+      zoomIndicator.textContent =
+        `${Math.round(value * 100)}%`;
+
+
       zoomIndicator.classList.add("show");
+
 
       clearTimeout(showZoomIndicator.timer);
 
-      showZoomIndicator.timer = setTimeout(() => {
-        zoomIndicator.classList.remove("show");
-      }, 1000);
+
+      showZoomIndicator.timer =
+        setTimeout(() => {
+
+          zoomIndicator.classList.remove("show");
+
+        }, 1000);
+
     }
 
-    /* ======================================================
-       Load Prompt JSON
-       ====================================================== */
+
+    /* =====================================================
+       04. Load prompts.json
+       ===================================================== */
 
     fetch("prompts.json")
+
       .then(response => {
+
         if (!response.ok) {
-          throw new Error("無法載入 prompts.json");
+
+          throw new Error(
+            "prompts.json 載入失敗"
+          );
+
         }
 
+
         return response.json();
+
       })
+
       .then(data => {
-        prompts = Array.isArray(data) ? data : [];
+
+        prompts =
+          Array.isArray(data)
+            ? data
+            : [];
+
+
         buildCategories();
+
         updateStats();
+
         renderPrompts();
+
       })
+
       .catch(error => {
+
         console.error(error);
 
-        totalStats.textContent = "Prompt 載入失敗";
+
+        totalStats.textContent =
+          "Prompt 載入失敗";
+
+
+        categoryStats.textContent =
+          "";
+
 
         promptGrid.innerHTML = `
-          <div class="prompt-card">
-            <h3 class="prompt-title">無法載入 prompts.json</h3>
+
+          <article class="prompt-card">
+
+            <h3 class="prompt-title">
+              無法載入 prompts.json
+            </h3>
+
             <p class="prompt-description">
-              請確認 prompts.json 與 index.html 位於同一個 Repository 路徑。
+              請確認 prompts.json 與 index.html 位於 Repository 根目錄。
             </p>
-          </div>
+
+          </article>
+
         `;
+
       });
 
-    /* ======================================================
-       Category
-       ====================================================== */
+
+    /* =====================================================
+       05. Categories
+       ===================================================== */
 
     function getCategoryCounts() {
+
       const counts = {};
 
+
       prompts.forEach(item => {
-        const category = item.category || "未分類";
-        counts[category] = (counts[category] || 0) + 1;
+
+        const category =
+          item.category || "未分類";
+
+
+        counts[category] =
+          (counts[category] || 0) + 1;
+
       });
 
+
       return counts;
+
     }
 
+
     function buildCategories() {
-      const counts = getCategoryCounts();
-      const categories = Object.keys(counts);
+
+      const counts =
+        getCategoryCounts();
+
+
+      const preferredOrder = [
+
+        "PLC Programming",
+        "Hardware",
+        "Documentation",
+        "Testing / QA",
+        "HMI",
+        "Drive",
+        "Project Context"
+
+      ];
+
+
+      const actualCategories =
+        Object.keys(counts);
+
+
+      const categories = [
+
+        ...preferredOrder.filter(
+          category =>
+            actualCategories.includes(category)
+        ),
+
+        ...actualCategories.filter(
+          category =>
+            !preferredOrder.includes(category)
+        )
+
+      ];
+
 
       categoryButtons.innerHTML = "";
 
-      const allButton = createCategoryButton(
-        "全部",
-        prompts.length,
-        prompts.length === 0
+
+      categoryButtons.appendChild(
+
+        createCategoryButton(
+          "全部",
+          prompts.length
+        )
+
       );
 
-      categoryButtons.appendChild(allButton);
 
       categories.forEach(category => {
-        const button = createCategoryButton(
-          category,
-          counts[category],
-          counts[category] === 0
+
+        categoryButtons.appendChild(
+
+          createCategoryButton(
+            category,
+            counts[category]
+          )
+
         );
 
-        categoryButtons.appendChild(button);
       });
+
 
       updateCategoryActiveState();
+
     }
 
-    function createCategoryButton(category, count, disabled) {
-      const button = document.createElement("button");
+
+    function createCategoryButton(
+      category,
+      count
+    ) {
+
+      const button =
+        document.createElement("button");
+
 
       button.type = "button";
-      button.className = "category-button";
-      button.dataset.category = category;
-      button.textContent = `${category} (${count})`;
 
-      if (disabled) {
-        button.classList.add("disabled");
+      button.className =
+        "category-button";
+
+      button.dataset.category =
+        category;
+
+      button.textContent =
+        `${category} (${count})`;
+
+
+      if (count === 0) {
+
         button.disabled = true;
+
+        button.classList.add(
+          "disabled"
+        );
+
       }
 
-      button.addEventListener("click", () => {
-        currentCategory = category;
-        updateCategoryActiveState();
-        renderPrompts();
-      });
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          currentCategory =
+            category;
+
+
+          updateCategoryActiveState();
+
+          renderPrompts();
+
+        }
+      );
+
 
       return button;
+
     }
+
 
     function updateCategoryActiveState() {
+
       document
-        .querySelectorAll(".category-button")
+        .querySelectorAll(
+          ".category-button"
+        )
         .forEach(button => {
+
           button.classList.toggle(
+
             "active",
-            button.dataset.category === currentCategory
+
+            button.dataset.category ===
+              currentCategory
+
           );
+
         });
+
     }
 
-    /* ======================================================
-       Search / Filter
-       ====================================================== */
+
+    /* =====================================================
+       06. Search
+       ===================================================== */
+
+    searchInput.addEventListener(
+      "input",
+      renderPrompts
+    );
+
 
     function getFilteredPrompts() {
-      const keyword = searchInput.value.trim().toLowerCase();
+
+      const keyword =
+        searchInput
+          .value
+          .trim()
+          .toLowerCase();
+
 
       return prompts.filter(item => {
+
         const matchesCategory =
+
           currentCategory === "全部" ||
-          item.category === currentCategory;
+
+          item.category ===
+            currentCategory;
+
 
         const searchableText = [
+
           item.id,
           item.category,
           item.title,
@@ -1218,1063 +1780,756 @@
           item.officialCategory,
           item.officialReference,
           item.version,
-          ...(Array.isArray(item.tags) ? item.tags : [])
+
+          ...(
+            Array.isArray(item.tags)
+              ? item.tags
+              : []
+          )
+
         ]
           .filter(Boolean)
           .join(" ")
           .toLowerCase();
 
-        const matchesKeyword =
-          keyword === "" ||
-          searchableText.includes(keyword);
 
-        return matchesCategory && matchesKeyword;
+        const matchesKeyword =
+
+          keyword === "" ||
+
+          searchableText.includes(
+            keyword
+          );
+
+
+        return (
+          matchesCategory &&
+          matchesKeyword
+        );
+
       });
+
     }
 
-    searchInput.addEventListener("input", renderPrompts);
 
-    /* ======================================================
-       Stats
-       ====================================================== */
+    /* =====================================================
+       07. Statistics
+       ===================================================== */
 
     function updateStats() {
-      const counts = getCategoryCounts();
+
+      const counts =
+        getCategoryCounts();
+
 
       totalStats.textContent =
+
         `目前共 ${prompts.length} 筆工程 Prompt`;
 
+
       categoryStats.textContent =
-        Object.entries(counts)
-          .map(([category, count]) => `${category}: ${count}`)
+
+        Object
+          .entries(counts)
+          .map(
+            ([category, count]) =>
+              `${category}: ${count}`
+          )
           .join(" ｜ ");
+
     }
 
-    /* ======================================================
-       Render Prompt Cards
-       ====================================================== */
+
+    /* =====================================================
+       08. Render Prompt Cards
+       ===================================================== */
 
     function renderPrompts() {
-      const filtered = getFilteredPrompts();
+
+      const filtered =
+        getFilteredPrompts();
+
 
       promptGrid.innerHTML = "";
-      emptyState.classList.toggle("show", filtered.length === 0);
+
+
+      emptyState.classList.toggle(
+
+        "show",
+
+        filtered.length === 0
+
+      );
+
 
       filtered.forEach(item => {
-        const card = createPromptCard(item);
-        promptGrid.appendChild(card);
+
+        promptGrid.appendChild(
+
+          createPromptCard(item)
+
+        );
+
       });
+
     }
 
+
     function createPromptCard(item) {
-      const card = document.createElement("article");
-      card.className = "prompt-card";
 
-      const tags = Array.isArray(item.tags)
-        ? item.tags
-        : [];
+      const card =
+        document.createElement(
+          "article"
+        );
 
-      const tagsHtml = tags
-        .map(tag => `<span class="tag">${escapeHtml(tag)}</span>`)
-        .join("");
+
+      card.className =
+        "prompt-card";
+
+
+      const tags =
+        Array.isArray(item.tags)
+          ? item.tags
+          : [];
+
+
+      const tagsHtml =
+
+        tags
+
+          .map(
+            tag =>
+              `<span class="tag">${escapeHtml(tag)}</span>`
+          )
+
+          .join("");
+
 
       card.innerHTML = `
+
         <h3 class="prompt-title">
-          ${escapeHtml(item.title || "未命名 Prompt")}
+
+          ${escapeHtml(
+            item.title ||
+            "未命名 Prompt"
+          )}
+
         </h3>
 
+
         <div class="prompt-meta">
+
           <span class="tag category">
-            ${escapeHtml(item.category || "未分類")}
+
+            ${escapeHtml(
+              item.category ||
+              "未分類"
+            )}
+
           </span>
+
           ${tagsHtml}
+
         </div>
+
 
         <p class="prompt-description">
-          ${escapeHtml(item.description || "")}
+
+          ${escapeHtml(
+            item.description || ""
+          )}
+
         </p>
 
+
         <div class="prompt-content-wrap">
+
           <pre class="prompt-content">${escapeHtml(item.prompt || "")}</pre>
+
         </div>
+
 
         <div class="prompt-actions">
 
           <button
-            type="button"
             class="action-button primary copy-prompt-button"
+            type="button"
           >
             複製 Prompt
           </button>
 
+
           <button
-            type="button"
             class="action-button expand-prompt-button"
+            type="button"
           >
             展開全文
           </button>
 
+
           <button
-            type="button"
             class="action-button details-button"
+            type="button"
           >
             詳細資訊
           </button>
 
         </div>
 
+
         <div class="prompt-details">
 
+
           <div class="detail-row">
-            <div class="detail-label">使用情境</div>
+
+            <div class="detail-label">
+              使用情境
+            </div>
+
             <div class="detail-value">
               ${escapeHtml(item.usage || "—")}
             </div>
+
           </div>
 
+
           <div class="detail-row">
-            <div class="detail-label">需要輸入</div>
+
+            <div class="detail-label">
+              需要輸入
+            </div>
+
             <div class="detail-value">
               ${escapeHtml(item.requiredInput || "—")}
             </div>
+
           </div>
 
-          <div class="detail-row">
-            <div class="detail-label">分類</div>
-            <div class="detail-value">
-              ${escapeHtml(item.officialCategory || item.category || "—")}
-            </div>
-          </div>
 
           <div class="detail-row">
-            <div class="detail-label">參考</div>
-            <div class="detail-value">
-              ${escapeHtml(item.officialReference || "—")}
+
+            <div class="detail-label">
+              Prompt Library 分類
             </div>
+
+            <div class="detail-value">
+              ${escapeHtml(
+                item.officialCategory ||
+                item.category ||
+                "—"
+              )}
+            </div>
+
           </div>
 
-          <div class="detail-row">
-            <div class="detail-label">版本</div>
-            <div class="detail-value">
-              ${escapeHtml(item.version || "—")}
-            </div>
-          </div>
 
           <div class="detail-row">
-            <div class="detail-label">Prompt ID</div>
-            <div class="detail-value">
-              ${escapeHtml(item.id || "—")}
+
+            <div class="detail-label">
+              參考來源
             </div>
+
+            <div class="detail-value">
+              ${escapeHtml(
+                item.officialReference ||
+                "—"
+              )}
+            </div>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <div class="detail-label">
+              版本
+            </div>
+
+            <div class="detail-value">
+              ${escapeHtml(
+                item.version ||
+                "—"
+              )}
+            </div>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <div class="detail-label">
+              Prompt ID
+            </div>
+
+            <div class="detail-value">
+              ${escapeHtml(
+                item.id ||
+                "—"
+              )}
+            </div>
+
           </div>
 
         </div>
       `;
 
+
       const promptContent =
-        card.querySelector(".prompt-content");
+        card.querySelector(
+          ".prompt-content"
+        );
+
 
       const copyButton =
-        card.querySelector(".copy-prompt-button");
+        card.querySelector(
+          ".copy-prompt-button"
+        );
+
 
       const expandButton =
-        card.querySelector(".expand-prompt-button");
+        card.querySelector(
+          ".expand-prompt-button"
+        );
+
 
       const detailsButton =
-        card.querySelector(".details-button");
+        card.querySelector(
+          ".details-button"
+        );
+
 
       const details =
-        card.querySelector(".prompt-details");
+        card.querySelector(
+          ".prompt-details"
+        );
 
-      /* Copy Prompt */
 
-      copyButton.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(item.prompt || "");
+      /* COPY PROMPT */
 
-          copyButton.textContent = "已複製";
-          copyButton.classList.add("success");
+      copyButton.addEventListener(
+        "click",
+        async () => {
 
-          setTimeout(() => {
-            copyButton.textContent = "複製 Prompt";
-            copyButton.classList.remove("success");
-          }, 1400);
+          try {
 
-        } catch (error) {
-          console.error(error);
-          showToast("無法複製 Prompt");
+            await navigator.clipboard
+              .writeText(
+                item.prompt || ""
+              );
+
+
+            copyButton.textContent =
+              "已複製";
+
+
+            copyButton.classList.add(
+              "success"
+            );
+
+
+            setTimeout(
+              () => {
+
+                copyButton.textContent =
+                  "複製 Prompt";
+
+
+                copyButton.classList.remove(
+                  "success"
+                );
+
+              },
+              1300
+            );
+
+          }
+
+          catch (error) {
+
+            console.error(error);
+
+            showToast(
+              "無法複製 Prompt"
+            );
+
+          }
+
         }
-      });
+      );
 
-      /* Expand */
 
-      expandButton.addEventListener("click", () => {
-        const expanded =
-          promptContent.classList.toggle("expanded");
+      /* EXPAND */
 
-        expandButton.textContent =
-          expanded
-            ? "收合全文"
-            : "展開全文";
-      });
+      expandButton.addEventListener(
+        "click",
+        () => {
 
-      /* Details */
+          const expanded =
 
-      detailsButton.addEventListener("click", () => {
-        const open =
-          details.classList.toggle("open");
+            promptContent
+              .classList
+              .toggle("expanded");
 
-        detailsButton.textContent =
-          open
-            ? "收合資訊"
-            : "詳細資訊";
-      });
+
+          expandButton.textContent =
+
+            expanded
+              ? "收合全文"
+              : "展開全文";
+
+        }
+      );
+
+
+      /* DETAILS */
+
+      detailsButton.addEventListener(
+        "click",
+        () => {
+
+          const open =
+
+            details
+              .classList
+              .toggle("open");
+
+
+          detailsButton.textContent =
+
+            open
+              ? "收合資訊"
+              : "詳細資訊";
+
+        }
+      );
+
 
       return card;
+
     }
 
-    /* ======================================================
-       Light / Dark Mode
-       ====================================================== */
+
+    /* =====================================================
+       09. Theme
+       ===================================================== */
 
     function applyTheme(theme) {
-      const isDark = theme === "dark";
+
+      const dark =
+        theme === "dark";
+
 
       document.body.classList.toggle(
+
         "dark-mode",
-        isDark
+
+        dark
+
       );
+
 
       themeToggle.textContent =
-        isDark ? "☀" : "🌙";
 
-      themeToggle.setAttribute(
-        "data-tooltip",
-        isDark
+        dark
+          ? "☀"
+          : "🌙";
+
+
+      themeToggle.dataset.tooltip =
+
+        dark
           ? "切換 Light Mode"
-          : "切換 Dark Mode"
-      );
+          : "切換 Dark Mode";
+
 
       localStorage.setItem(
+
         "eigenPromptTheme",
+
         theme
+
       );
+
     }
+
 
     const savedTheme =
-      localStorage.getItem("eigenPromptTheme");
+      localStorage.getItem(
+        "eigenPromptTheme"
+      );
 
-    if (savedTheme === "dark" || savedTheme === "light") {
+
+    if (
+      savedTheme === "light" ||
+      savedTheme === "dark"
+    ) {
+
       applyTheme(savedTheme);
-    } else {
-      const prefersDark =
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-      applyTheme(prefersDark ? "dark" : "light");
     }
 
-    themeToggle.addEventListener("click", () => {
-      const isDark =
-        document.body.classList.contains("dark-mode");
+    else {
 
-      applyTheme(isDark ? "light" : "dark");
-    });
+      const systemDark =
 
-    /* ======================================================
-       Zoom
-       ====================================================== */
+        window.matchMedia &&
+        window
+          .matchMedia(
+            "(prefers-color-scheme: dark)"
+          )
+          .matches;
+
+
+      applyTheme(
+        systemDark
+          ? "dark"
+          : "light"
+      );
+
+    }
+
+
+    themeToggle.addEventListener(
+      "click",
+      () => {
+
+        const dark =
+          document.body
+            .classList
+            .contains(
+              "dark-mode"
+            );
+
+
+        applyTheme(
+          dark
+            ? "light"
+            : "dark"
+        );
+
+      }
+    );
+
+
+    /* =====================================================
+       10. Zoom
+       ===================================================== */
 
     const ZOOM_MIN = 0.8;
+
     const ZOOM_MAX = 1.4;
+
     const ZOOM_STEP = 0.1;
 
+
     let currentZoom =
+
       parseFloat(
-        localStorage.getItem("eigenPromptZoom")
+        localStorage.getItem(
+          "eigenPromptZoom"
+        )
       ) || 1;
 
+
     function clampZoom(value) {
+
       return Math.min(
+
         ZOOM_MAX,
-        Math.max(ZOOM_MIN, value)
+
+        Math.max(
+          ZOOM_MIN,
+          value
+        )
+
       );
+
     }
 
-    function applyZoom(value, showIndicator = false) {
-      currentZoom =
-        Math.round(clampZoom(value) * 10) / 10;
 
-      document.documentElement.style.setProperty(
-        "--ui-scale",
-        currentZoom
-      );
+    function applyZoom(
+      value,
+      showIndicator = false
+    ) {
+
+      currentZoom =
+
+        Math.round(
+          clampZoom(value) * 10
+        ) / 10;
+
+
+      /*
+        Chrome / Edge：
+        讓整體 UI 一起縮放，
+        包含文字、卡片、按鈕與間距。
+      */
+
+      document.body.style.zoom =
+        currentZoom;
+
 
       localStorage.setItem(
+
         "eigenPromptZoom",
+
         currentZoom
+
       );
 
+
       if (showIndicator) {
-        showZoomIndicator(currentZoom);
+
+        showZoomIndicator(
+          currentZoom
+        );
+
       }
+
     }
+
 
     applyZoom(currentZoom);
 
-    zoomIn.addEventListener("click", () => {
-      applyZoom(
-        currentZoom + ZOOM_STEP,
-        true
-      );
-    });
 
-    zoomOut.addEventListener("click", () => {
-      applyZoom(
-        currentZoom - ZOOM_STEP,
-        true
-      );
-    });
+    zoomIn.addEventListener(
+      "click",
+      () => {
 
-    zoomReset.addEventListener("click", () => {
-      applyZoom(1, true);
-    });
+        applyZoom(
 
-    /* ======================================================
-       Reset Search / Filter
-       ====================================================== */
+          currentZoom +
+          ZOOM_STEP,
 
-    resetFilters.addEventListener("click", () => {
-      searchInput.value = "";
-      currentCategory = "全部";
+          true
 
-      updateCategoryActiveState();
-      renderPrompts();
-
-      searchInput.focus();
-
-      showToast("已清除搜尋與分類");
-    });
-
-    /* ======================================================
-       Copy URL
-       ====================================================== */
-
-    copyUrl.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(
-          window.location.href
         );
 
-        showToast("網址已複製");
-      } catch (error) {
-        console.error(error);
-        showToast("無法複製網址");
       }
-    });
+    );
 
-    /* ======================================================
-       Scroll Top
-       ====================================================== */
 
-    scrollTopButton.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    });
+    zoomOut.addEventListener(
+      "click",
+      () => {
 
-  </script>
+        applyZoom(
 
-</body>
-</html>
+          currentZoom -
+          ZOOM_STEP,
 
-.site-header {
-  background: white;
-  border-bottom: 1px solid #ddd;
-  padding: 24px 30px;
-}
+          true
 
-.brand-wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
+        );
 
-.brand-logo-link {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.brand-logo {
-  max-width: 260px;
-  max-height: 90px;
-  width: auto;
-  height: auto;
-  display: block;
-}
-
-.brand-text {
-  flex: 1;
-}
-
-.brand-text h1 {
-  margin: 0 0 8px 0;
-  font-size: 32px;
-}
-
-.subtitle {
-  margin: 0 0 8px 0;
-  color: #444;
-}
-
-.company-link {
-  color: #444;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.company-link:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 700px) {
-  .brand-wrap {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .brand-logo {
-    max-width: 220px;
-  }
-
-  .brand-text h1 {
-    font-size: 26px;
-  }
-}
-
-    main {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 20px;
-    }
-
-    .search-box {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    }
-
-    input {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 16px;
-      font-size: 18px;
-      border: 1px solid #bbb;
-      border-radius: 8px;
-    }
-
-    .categories {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .category-button {
-      border: 1px solid #bbb;
-      background: white;
-      padding: 10px 16px;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-
-    .category-button:hover {
-      background: #eef2f5;
-    }
-
-    .results {
-      margin-top: 30px;
-    }
-
-    .prompt-card {
-      background: white;
-      padding: 24px;
-      margin-bottom: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    }
-
-    .prompt-card h3 {
-      margin-top: 0;
-    }
-
-    .tag {
-      display: inline-block;
-      background: #eef2f5;
-      padding: 5px 10px;
-      margin-right: 6px;
-      margin-bottom: 6px;
-      border-radius: 12px;
-      font-size: 13px;
-    }
-
-    .prompt-text {
-      white-space: pre-wrap;
-      background: #f8f9fb;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 15px;
-      line-height: 1.6;
-    }
-    .copy-button {
-  margin-top: 15px;
-  padding: 10px 16px;
-  border: 1px solid #bbb;
-  background: white;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.copy-button:hover {
-  background: #eef2f5;
-}
-    .details-button {
-  margin-top: 15px;
-  margin-left: 8px;
-  padding: 10px 16px;
-  border: 1px solid #bbb;
-  background: white;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.details-button:hover {
-  background: #eef2f5;
-}
-
-.prompt-details {
-  display: none;
-  margin-top: 15px;
-  padding: 15px;
-  background: #f8f9fb;
-  border-radius: 8px;
-  line-height: 1.6;
-}
-
-.prompt-details ul {
-  margin-top: 6px;
-  padding-left: 22px;
-}
-
-.prompt-stats {
-  margin-top: 18px;
-  padding: 14px 16px;
-  background: #f8f9fb;
-  border-radius: 8px;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #444;
-}
-
-.prompt-stats strong {
-  color: #222;
-}    
-
-.category-button.disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-  background: #f5f5f5;
-}
-
-.site-footer {
-  margin-top: 50px;
-  background: white;
-  border-top: 1px solid #ddd;
-  padding: 24px 30px;
-}
-
-.footer-wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-.footer-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 14px;
-  color: #444;
-}
-
-.footer-brand strong {
-  color: #222;
-}
-
-.footer-link {
-  color: #444;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.footer-link:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 700px) {
-  .footer-wrap {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}    
-    
-  </style>
-</head>
-
-<body>
-
-<header class="site-header">
-  <div class="brand-wrap">
-
-    <a
-      href="https://www.bhp.com.tw/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="brand-logo-link"
-    >
-      <img
-        src="bhp-logo.png"
-        alt="BHP 司騰達股份有限公司"
-        class="brand-logo"
-      >
-    </a>
-
-    <div class="brand-text">
-      <h1>Eigen Prompt Finder</h1>
-
-      <p class="subtitle">
-        Siemens Eigen Engineering Agent Plain Text Prompt Library
-      </p>
-
-      <a
-        href="https://www.bhp.com.tw/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="company-link"
-      >
-        www.bhp.com.tw
-      </a>
-    </div>
-
-  </div>
-</header>
-
-<main>
-
-  <div class="search-box">
-
-    <h2>你想讓 Eigen 做什麼？</h2>
-
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="例如：分析 FB、建立 SCL、Application Test"
-    >
-
-    <div class="prompt-stats" id="promptStats">
-  正在載入 Prompt 統計資料...
-</div>
-
-    <div class="categories">
-      <button class="category-button">全部</button>
-      <button class="category-button">Hardware</button>
-      <button class="category-button">PLC Programming</button>
-      <button class="category-button">Documentation</button>
-      <button class="category-button">Testing / QA</button>
-      <button class="category-button">HMI</button>
-      <button class="category-button">Drive</button>
-      <button class="category-button">Project Context</button>
-    </div>
-
-  </div>
-
-  <div class="results" id="results"></div>
-
-</main>
-
-<footer class="site-footer">
-  <div class="footer-wrap">
-
-    <div class="footer-brand">
-      <strong>BHP 司騰達股份有限公司</strong>
-      <span>Eigen Prompt Finder</span>
-    </div>
-
-    <a
-      href="https://www.bhp.com.tw/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="footer-link"
-    >
-      www.bhp.com.tw
-    </a>
-
-  </div>
-</footer>
-  
-<script>
-  const searchInput = document.getElementById("searchInput");
-  const categoryButtons = document.querySelectorAll(".category-button");
-  const results = document.getElementById("results");
-  const promptStats = document.getElementById("promptStats");
-
-  let prompts = [];
-  let activeCategory = "全部";
-
-  async function loadPrompts() {
-    try {
-      const response = await fetch("prompts.json");
-
-      if (!response.ok) {
-        throw new Error("Failed to load prompts.json");
       }
+    );
 
-      prompts = await response.json();
 
-      renderStats();
-      renderCategoryCounts();
-      renderPrompts();
+    zoomReset.addEventListener(
+      "click",
+      () => {
 
-    } catch (error) {
+        applyZoom(
+          1,
+          true
+        );
 
-      results.innerHTML = `
-        <div class="prompt-card">
-          <h3>資料載入失敗</h3>
-          <p>無法讀取 prompts.json。</p>
-        </div>
-      `;
+      }
+    );
 
-      console.error(error);
-    }
-  }
 
-  function renderStats() {
+    /* =====================================================
+       11. Reset Search / Filter
+       ===================================================== */
 
-    const total = prompts.length;
-    const categoryCounts = {};
+    resetFilters.addEventListener(
+      "click",
+      () => {
 
-    prompts.forEach(item => {
-      const category = item.category || "未分類";
+        searchInput.value = "";
 
-      categoryCounts[category] =
-        (categoryCounts[category] || 0) + 1;
-    });
+        currentCategory = "全部";
 
-    const categoryText =
-      Object.entries(categoryCounts)
-        .map(([category, count]) =>
-          `${category}：${count}`
-        )
-        .join("　｜　");
 
-    promptStats.innerHTML = `
-      <strong>目前共 ${total} 筆工程 Prompt</strong><br>
-      ${categoryText}
-    `;
-  }
+        updateCategoryActiveState();
 
-  function renderCategoryCounts() {
+        renderPrompts();
 
-    const total = prompts.length;
-    const categoryCounts = {};
 
-    prompts.forEach(item => {
-      const category = item.category || "未分類";
+        window.scrollTo({
 
-      categoryCounts[category] =
-        (categoryCounts[category] || 0) + 1;
-    });
+          top: 0,
 
-    categoryButtons.forEach(button => {
+          behavior: "smooth"
 
-      const category =
-        button.innerText
-          .replace(/\s*\(\d+\)\s*$/, "")
-          .trim();
+        });
 
-      if (category === "全部") {
-  button.innerText = `全部 (${total})`;
-  button.disabled = false;
-  button.classList.remove("disabled");
 
-} else {
+        showToast(
+          "已清除搜尋與分類"
+        );
 
-  const count = categoryCounts[category] || 0;
+      }
+    );
 
-  button.innerText = `${category} (${count})`;
 
-  if (count === 0) {
-    button.disabled = true;
-    button.classList.add("disabled");
-  } else {
-    button.disabled = false;
-    button.classList.remove("disabled");
-  }
-}
+    /* =====================================================
+       12. Copy URL
+       ===================================================== */
 
-button.dataset.category = category;
-    });
-  }
-
-  function renderPrompts() {
-
-    const keyword =
-      searchInput.value.toLowerCase().trim();
-
-    const filteredPrompts = prompts.filter(item => {
-
-      const searchableText = [
-        item.title,
-        item.category,
-        item.description,
-        item.usage || "",
-        item.prompt,
-        ...(item.tags || []),
-        ...(item.requiredInput || [])
-      ]
-      .join(" ")
-      .toLowerCase();
-
-      const matchesKeyword =
-        keyword === "" ||
-        searchableText.includes(keyword);
-
-      const matchesCategory =
-        activeCategory === "全部" ||
-        item.category === activeCategory;
-
-      return matchesKeyword && matchesCategory;
-    });
-
-    if (filteredPrompts.length === 0) {
-
-      results.innerHTML = `
-        <div class="prompt-card">
-          <h3>找不到符合條件的 Prompt</h3>
-          <p>請嘗試其他關鍵字或分類。</p>
-        </div>
-      `;
-
-      return;
-    }
-
-    results.innerHTML =
-      filteredPrompts.map(item => {
-
-        const tags =
-          (item.tags || [])
-          .map(tag =>
-            `<span class="tag">${tag}</span>`
-          )
-          .join("");
-
-        const requiredInput =
-          (item.requiredInput || [])
-          .map(input => `<li>${input}</li>`)
-          .join("");
-
-        return `
-          <div class="prompt-card">
-
-            <h3>${item.title}</h3>
-
-            <div>
-              ${tags}
-            </div>
-
-            <p>${item.description}</p>
-
-            <div class="prompt-text">${item.prompt}</div>
-
-            <button
-              class="copy-button"
-              data-id="${item.id}"
-            >
-              複製 Prompt
-            </button>
-
-            <button
-              class="details-button"
-              data-id="${item.id}"
-            >
-              詳細資訊
-            </button>
-
-            <div
-              class="prompt-details"
-              id="details-${item.id}"
-            >
-              <p>
-                <strong>適用情境：</strong><br>
-                ${item.usage || "尚未設定"}
-              </p>
-
-              <p>
-                <strong>需要準備：</strong>
-              </p>
-
-              ${
-                requiredInput
-                ? `<ul>${requiredInput}</ul>`
-                : `<p>尚未設定</p>`
-              }
-
-              <p>
-                <strong>官方分類：</strong>
-                ${item.officialCategory || "尚未設定"}
-              </p>
-
-              <p>
-                <strong>參考版本：</strong>
-                ${item.officialReference || "尚未設定"}
-              </p>
-
-              <p>
-                <strong>版本：</strong>
-                ${item.version || "尚未設定"}
-              </p>
-
-              <p>
-                <strong>Prompt ID：</strong>
-                ${item.id}
-              </p>
-
-            </div>
-
-          </div>
-        `;
-
-      }).join("");
-
-    addCopyButtonEvents();
-    addDetailsButtonEvents();
-  }
-
-  function addCopyButtonEvents() {
-
-    const copyButtons =
-      document.querySelectorAll(".copy-button");
-
-    copyButtons.forEach(button => {
-
-      button.addEventListener("click", async function () {
-
-        const promptId =
-          this.getAttribute("data-id");
-
-        const item =
-          prompts.find(p => p.id === promptId);
-
-        if (!item) {
-          return;
-        }
+    copyUrl.addEventListener(
+      "click",
+      async () => {
 
         try {
 
-          await navigator.clipboard.writeText(
-            item.prompt
+          await navigator.clipboard
+            .writeText(
+              window.location.href
+            );
+
+
+          showToast(
+            "網址已複製"
           );
 
-          const originalText =
-            this.innerText;
-
-          this.innerText = "已複製";
-
-          setTimeout(() => {
-            this.innerText = originalText;
-          }, 1500);
-
-        } catch (error) {
-
-          console.error("Copy failed:", error);
-
-          alert("複製失敗，請手動選取 Prompt 文字。");
         }
-      });
 
-    });
-  }
+        catch (error) {
 
-  function addDetailsButtonEvents() {
+          console.error(error);
 
-    const detailButtons =
-      document.querySelectorAll(".details-button");
-
-    detailButtons.forEach(button => {
-
-      button.addEventListener("click", function () {
-
-        const promptId =
-          this.getAttribute("data-id");
-
-        const details =
-          document.getElementById(
-            `details-${promptId}`
+          showToast(
+            "無法複製網址"
           );
 
-        if (!details) {
-          return;
         }
 
-        const isOpen =
-          details.style.display === "block";
+      }
+    );
 
-        details.style.display =
-          isOpen ? "none" : "block";
 
-        this.innerText =
-          isOpen ? "詳細資訊" : "收合資訊";
-      });
+    /* =====================================================
+       13. Scroll Top
+       ===================================================== */
 
-    });
-  }
+    scrollTopButton.addEventListener(
+      "click",
+      () => {
 
-  searchInput.addEventListener(
-    "input",
-    renderPrompts
-  );
+        window.scrollTo({
 
-  categoryButtons.forEach(button => {
+          top: 0,
 
-    button.addEventListener("click", function () {
+          behavior: "smooth"
 
-      activeCategory =
-        this.dataset.category;
+        });
 
-      categoryButtons.forEach(btn => {
-        btn.style.background = "white";
-        btn.style.fontWeight = "normal";
-      });
+      }
+    );
 
-      this.style.background = "#e5eef5";
-      this.style.fontWeight = "bold";
-
-      renderPrompts();
-    });
-
-  });
-
-  loadPrompts();
-</script>
+  </script>
 
 </body>
 </html>
