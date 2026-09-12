@@ -96,6 +96,19 @@
       margin-top: 15px;
       line-height: 1.6;
     }
+    .copy-button {
+  margin-top: 15px;
+  padding: 10px 16px;
+  border: 1px solid #bbb;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.copy-button:hover {
+  background: #eef2f5;
+}
   </style>
 </head>
 
@@ -231,10 +244,64 @@
 
             <div class="prompt-text">${item.prompt}</div>
 
+            <button
+              class="copy-button"
+              data-id="${item.id}"
+            >
+              複製 Prompt
+            </button>
+
           </div>
         `;
 
       }).join("");
+
+    addCopyButtonEvents();
+  }
+
+  function addCopyButtonEvents() {
+
+    const copyButtons =
+      document.querySelectorAll(".copy-button");
+
+    copyButtons.forEach(button => {
+
+      button.addEventListener("click", async function () {
+
+        const promptId =
+          this.getAttribute("data-id");
+
+        const item =
+          prompts.find(p => p.id === promptId);
+
+        if (!item) {
+          return;
+        }
+
+        try {
+
+          await navigator.clipboard.writeText(
+            item.prompt
+          );
+
+          const originalText =
+            this.innerText;
+
+          this.innerText = "已複製";
+
+          setTimeout(() => {
+            this.innerText = originalText;
+          }, 1500);
+
+        } catch (error) {
+
+          console.error("Copy failed:", error);
+
+          alert("複製失敗，請手動選取 Prompt 文字。");
+        }
+      });
+
+    });
   }
 
   searchInput.addEventListener(
