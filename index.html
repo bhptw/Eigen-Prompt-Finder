@@ -12,7 +12,1581 @@
       margin: 0;
       background: #f5f7fa;
       color: #222;
+    }<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Eigen Prompt Finder</title>
+
+  <meta
+    name="description"
+    content="Siemens Eigen Engineering Agent Plain Text Prompt Library"
+  />
+
+  <style>
+    /* =========================================================
+       Base / Theme
+       ========================================================= */
+
+    :root {
+      --ui-scale: 1;
+
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fb;
+      --surface-code: #f2f5f8;
+
+      --text: #1f2933;
+      --text-secondary: #667085;
+      --text-muted: #88929d;
+
+      --border: #dce2e8;
+      --border-strong: #c9d1d9;
+
+      --accent: #0068b5;
+      --accent-hover: #00548f;
+      --accent-soft: #eaf4fb;
+
+      --success: #0f7b4d;
+
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 8px 26px rgba(0, 0, 0, 0.08);
+
+      --toolbar-bg: rgba(255, 255, 255, 0.96);
+      --toolbar-hover: #eef4f8;
     }
+
+    body.dark-mode {
+      --bg: #111418;
+      --surface: #1b1f24;
+      --surface-soft: #22282e;
+      --surface-code: #242b32;
+
+      --text: #f2f4f7;
+      --text-secondary: #b7c0c9;
+      --text-muted: #8e99a5;
+
+      --border: #37404a;
+      --border-strong: #48535f;
+
+      --accent: #4da3e6;
+      --accent-hover: #70b5eb;
+      --accent-soft: #172b3d;
+
+      --success: #55c791;
+
+      --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.22);
+      --shadow-md: 0 8px 28px rgba(0, 0, 0, 0.34);
+
+      --toolbar-bg: rgba(27, 31, 36, 0.96);
+      --toolbar-hover: #2b333c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        Arial,
+        sans-serif;
+
+      font-size: calc(16px * var(--ui-scale));
+      line-height: 1.6;
+
+      transition:
+        background-color 0.22s ease,
+        color 0.22s ease;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* =========================================================
+       Header
+       ========================================================= */
+
+    .site-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 22px 24px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .brand-logo-link {
+      display: inline-flex;
+      flex-shrink: 0;
+    }
+
+    .brand-logo {
+      width: 170px;
+      max-height: 62px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .brand-text {
+      min-width: 0;
+    }
+
+    .brand-text h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.25;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-text p {
+      margin: 5px 0 0;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .company-link {
+      flex-shrink: 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .company-link:hover {
+      text-decoration: underline;
+    }
+
+    /* =========================================================
+       Main
+       ========================================================= */
+
+    .page-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 34px 24px 70px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .hero-title {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.3;
+    }
+
+    .hero-subtitle {
+      margin: 8px auto 0;
+      color: var(--text-secondary);
+      max-width: 760px;
+    }
+
+    /* =========================================================
+       Search
+       ========================================================= */
+
+    .search-section {
+      max-width: 820px;
+      margin: 0 auto 24px;
+    }
+
+    .search-label {
+      display: block;
+      margin-bottom: 9px;
+      font-weight: 700;
+      font-size: 17px;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 16px 18px;
+
+      border: 1px solid var(--border);
+      border-radius: 14px;
+
+      background: var(--surface);
+      color: var(--text);
+
+      outline: none;
+      box-shadow: var(--shadow-sm);
+
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .search-box:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .search-box::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* =========================================================
+       Stats
+       ========================================================= */
+
+    .stats-panel {
+      max-width: 820px;
+      margin: 0 auto 22px;
+
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+
+      padding: 15px 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stats-main {
+      font-weight: 700;
+    }
+
+    .stats-detail {
+      color: var(--text-secondary);
+      font-size: 14px;
+      text-align: right;
+    }
+
+    /* =========================================================
+       Category Filters
+       ========================================================= */
+
+    .category-section {
+      margin-bottom: 30px;
+    }
+
+    .category-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .category-button {
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+
+      background: var(--surface);
+      color: var(--text);
+
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+
+      transition:
+        background-color 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.15s ease;
+    }
+
+    .category-button:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .category-button.active {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    .category-button.disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* =========================================================
+       Prompt Grid / Card
+       ========================================================= */
+
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .prompt-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+
+      box-shadow: var(--shadow-sm);
+
+      display: flex;
+      flex-direction: column;
+
+      transition:
+        box-shadow 0.18s ease,
+        transform 0.18s ease,
+        border-color 0.18s ease;
+    }
+
+    .prompt-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-strong);
+    }
+
+    .prompt-title {
+      margin: 0 0 10px;
+      font-size: 21px;
+      line-height: 1.4;
+    }
+
+    .prompt-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 13px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+
+      padding: 5px 9px;
+      border-radius: 999px;
+
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+
+      color: var(--text-secondary);
+
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .tag.category {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: transparent;
+      font-weight: 700;
+    }
+
+    .prompt-description {
+      margin: 0 0 15px;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .prompt-content-wrap {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .prompt-content {
+      margin: 0;
+      padding: 15px 16px;
+
+      background: var(--surface-code);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+
+      color: var(--text);
+
+      white-space: pre-wrap;
+      word-break: break-word;
+
+      font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        Menlo,
+        monospace;
+
+      font-size: 13px;
+      line-height: 1.65;
+
+      max-height: 220px;
+      overflow: hidden;
+
+      transition: max-height 0.25s ease;
+    }
+
+    .prompt-content.expanded {
+      max-height: 2000px;
+    }
+
+    .prompt-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: auto;
+    }
+
+    .action-button {
+      border-radius: 9px;
+      padding: 9px 13px;
+
+      border: 1px solid var(--border);
+
+      background: var(--surface);
+      color: var(--text);
+
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+
+      transition:
+        background-color 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease;
+    }
+
+    .action-button:hover {
+      border-color: var(--accent);
+    }
+
+    .action-button.primary {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    .action-button.primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    .action-button.success {
+      background: var(--success);
+      border-color: var(--success);
+      color: #ffffff;
+    }
+
+    .prompt-details {
+      display: none;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border);
+    }
+
+    .prompt-details.open {
+      display: block;
+    }
+
+    .detail-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 12px;
+      margin-bottom: 9px;
+      font-size: 13px;
+    }
+
+    .detail-label {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .detail-value {
+      color: var(--text-secondary);
+      word-break: break-word;
+    }
+
+    /* =========================================================
+       Empty State
+       ========================================================= */
+
+    .empty-state {
+      display: none;
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--text-secondary);
+    }
+
+    .empty-state.show {
+      display: block;
+    }
+
+    /* =========================================================
+       Footer
+       ========================================================= */
+
+    .site-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .footer-brand span {
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    .footer-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+
+    /* =========================================================
+       Floating Utility Toolbar
+       ========================================================= */
+
+    .floating-toolbar {
+      position: fixed;
+      right: 22px;
+      bottom: 24px;
+
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      z-index: 9999;
+    }
+
+    .tool-button {
+      position: relative;
+
+      width: 44px;
+      height: 44px;
+
+      border: 1px solid var(--border);
+      border-radius: 12px;
+
+      background: var(--toolbar-bg);
+      color: var(--text);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      cursor: pointer;
+
+      font-size: 18px;
+      font-weight: 700;
+
+      box-shadow: var(--shadow-sm);
+
+      backdrop-filter: blur(8px);
+
+      transition:
+        background-color 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.15s ease;
+    }
+
+    .tool-button:hover {
+      background: var(--toolbar-hover);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .tool-button::before {
+      content: attr(data-tooltip);
+
+      position: absolute;
+      right: 54px;
+
+      white-space: nowrap;
+
+      background: var(--surface);
+      color: var(--text);
+
+      border: 1px solid var(--border);
+      border-radius: 8px;
+
+      padding: 6px 9px;
+
+      font-size: 12px;
+      font-weight: 600;
+
+      opacity: 0;
+      visibility: hidden;
+
+      pointer-events: none;
+
+      box-shadow: var(--shadow-sm);
+
+      transition: opacity 0.15s ease;
+    }
+
+    .tool-button:hover::before {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .zoom-indicator {
+      position: fixed;
+      right: 78px;
+      bottom: 118px;
+
+      background: var(--surface);
+      color: var(--text);
+
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      padding: 6px 10px;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      box-shadow: var(--shadow-sm);
+
+      opacity: 0;
+      visibility: hidden;
+
+      z-index: 9998;
+
+      transition: opacity 0.18s ease;
+    }
+
+    .zoom-indicator.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* =========================================================
+       Toast
+       ========================================================= */
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 30px;
+
+      transform: translateX(-50%) translateY(12px);
+
+      background: var(--text);
+      color: var(--surface);
+
+      padding: 10px 16px;
+      border-radius: 10px;
+
+      font-size: 13px;
+      font-weight: 700;
+
+      opacity: 0;
+      visibility: hidden;
+
+      z-index: 10000;
+
+      transition:
+        opacity 0.18s ease,
+        transform 0.18s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* =========================================================
+       Responsive
+       ========================================================= */
+
+    @media (max-width: 860px) {
+      .prompt-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header-wrap {
+        align-items: flex-start;
+      }
+
+      .brand-logo {
+        width: 145px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .header-wrap,
+      .footer-wrap {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .brand-area {
+        align-items: flex-start;
+      }
+
+      .brand-text h1 {
+        font-size: 23px;
+      }
+
+      .hero-title {
+        font-size: 25px;
+      }
+
+      .stats-panel {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .stats-detail {
+        text-align: left;
+      }
+
+      .detail-row {
+        grid-template-columns: 1fr;
+        gap: 3px;
+      }
+
+      .floating-toolbar {
+        right: 12px;
+        bottom: 14px;
+        gap: 6px;
+      }
+
+      .tool-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        font-size: 16px;
+      }
+
+      .tool-button::before {
+        display: none;
+      }
+
+      .zoom-indicator {
+        right: 60px;
+        bottom: 104px;
+      }
+
+      .toast {
+        max-width: calc(100% - 30px);
+        text-align: center;
+        bottom: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ======================================================
+       Header
+       ====================================================== -->
+
+  <header class="site-header">
+    <div class="header-wrap">
+
+      <div class="brand-area">
+        <a
+          href="https://www.bhp.com.tw/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="brand-logo-link"
+        >
+          <img
+            src="bhp-logo.png"
+            alt="BHP 司騰達股份有限公司"
+            class="brand-logo"
+          />
+        </a>
+
+        <div class="brand-text">
+          <h1>Eigen Prompt Finder</h1>
+          <p>Siemens Eigen Engineering Agent Plain Text Prompt Library</p>
+        </div>
+      </div>
+
+      <a
+        href="https://www.bhp.com.tw/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="company-link"
+      >
+        www.bhp.com.tw
+      </a>
+
+    </div>
+  </header>
+
+  <!-- ======================================================
+       Main
+       ====================================================== -->
+
+  <main class="page-wrap">
+
+    <section class="hero">
+      <h2 class="hero-title">Eigen Engineering Prompt Library</h2>
+      <p class="hero-subtitle">
+        使用自然語言快速搜尋適合 Siemens Eigen Engineering Agent 的工程 Prompt。
+      </p>
+    </section>
+
+    <!-- Search -->
+
+    <section class="search-section">
+      <label class="search-label" for="searchInput">
+        你想讓 Eigen 做什麼？
+      </label>
+
+      <input
+        id="searchInput"
+        class="search-box"
+        type="search"
+        placeholder="例如：分析 FB、建立 SCL、Application Test"
+        autocomplete="off"
+      />
+    </section>
+
+    <!-- Stats -->
+
+    <section class="stats-panel">
+      <div id="totalStats" class="stats-main">
+        載入 Prompt 中...
+      </div>
+
+      <div id="categoryStats" class="stats-detail"></div>
+    </section>
+
+    <!-- Categories -->
+
+    <section class="category-section">
+      <div id="categoryButtons" class="category-buttons"></div>
+    </section>
+
+    <!-- Prompt Cards -->
+
+    <section id="promptGrid" class="prompt-grid"></section>
+
+    <div id="emptyState" class="empty-state">
+      找不到符合條件的 Prompt。
+    </div>
+
+  </main>
+
+  <!-- ======================================================
+       Footer
+       ====================================================== -->
+
+  <footer class="site-footer">
+    <div class="footer-wrap">
+
+      <div class="footer-brand">
+        <strong>BHP 司騰達股份有限公司</strong>
+        <span>Eigen Prompt Finder</span>
+      </div>
+
+      <a
+        href="https://www.bhp.com.tw/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer-link"
+      >
+        www.bhp.com.tw
+      </a>
+
+    </div>
+  </footer>
+
+  <!-- ======================================================
+       Floating Utility Toolbar
+       ====================================================== -->
+
+  <div class="floating-toolbar" aria-label="網站工具列">
+
+    <button
+      id="themeToggle"
+      class="tool-button"
+      type="button"
+      data-tooltip="Light / Dark Mode"
+      aria-label="切換深色模式"
+    >
+      🌙
+    </button>
+
+    <button
+      id="zoomIn"
+      class="tool-button"
+      type="button"
+      data-tooltip="放大"
+      aria-label="放大"
+    >
+      ＋
+    </button>
+
+    <button
+      id="zoomOut"
+      class="tool-button"
+      type="button"
+      data-tooltip="縮小"
+      aria-label="縮小"
+    >
+      −
+    </button>
+
+    <button
+      id="zoomReset"
+      class="tool-button"
+      type="button"
+      data-tooltip="預設大小 100%"
+      aria-label="恢復預設大小"
+    >
+      ↺
+    </button>
+
+    <button
+      id="resetFilters"
+      class="tool-button"
+      type="button"
+      data-tooltip="清除搜尋與篩選"
+      aria-label="清除搜尋與篩選"
+    >
+      ×
+    </button>
+
+    <button
+      id="copyUrl"
+      class="tool-button"
+      type="button"
+      data-tooltip="複製目前網址"
+      aria-label="複製目前網址"
+    >
+      🔗
+    </button>
+
+    <button
+      id="scrollTop"
+      class="tool-button"
+      type="button"
+      data-tooltip="回到最上頁"
+      aria-label="回到最上頁"
+    >
+      ↑
+    </button>
+
+  </div>
+
+  <div id="zoomIndicator" class="zoom-indicator">100%</div>
+  <div id="toast" class="toast"></div>
+
+  <!-- ======================================================
+       JavaScript
+       ====================================================== -->
+
+  <script>
+    let prompts = [];
+    let currentCategory = "全部";
+
+    const searchInput = document.getElementById("searchInput");
+    const promptGrid = document.getElementById("promptGrid");
+    const categoryButtons = document.getElementById("categoryButtons");
+    const totalStats = document.getElementById("totalStats");
+    const categoryStats = document.getElementById("categoryStats");
+    const emptyState = document.getElementById("emptyState");
+
+    const themeToggle = document.getElementById("themeToggle");
+    const zoomIn = document.getElementById("zoomIn");
+    const zoomOut = document.getElementById("zoomOut");
+    const zoomReset = document.getElementById("zoomReset");
+    const resetFilters = document.getElementById("resetFilters");
+    const copyUrl = document.getElementById("copyUrl");
+    const scrollTopButton = document.getElementById("scrollTop");
+
+    const zoomIndicator = document.getElementById("zoomIndicator");
+    const toast = document.getElementById("toast");
+
+    /* ======================================================
+       Utility
+       ====================================================== */
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      clearTimeout(showToast.timer);
+
+      showToast.timer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 1800);
+    }
+
+    function showZoomIndicator(value) {
+      zoomIndicator.textContent = `${Math.round(value * 100)}%`;
+      zoomIndicator.classList.add("show");
+
+      clearTimeout(showZoomIndicator.timer);
+
+      showZoomIndicator.timer = setTimeout(() => {
+        zoomIndicator.classList.remove("show");
+      }, 1000);
+    }
+
+    /* ======================================================
+       Load Prompt JSON
+       ====================================================== */
+
+    fetch("prompts.json")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("無法載入 prompts.json");
+        }
+
+        return response.json();
+      })
+      .then(data => {
+        prompts = Array.isArray(data) ? data : [];
+        buildCategories();
+        updateStats();
+        renderPrompts();
+      })
+      .catch(error => {
+        console.error(error);
+
+        totalStats.textContent = "Prompt 載入失敗";
+
+        promptGrid.innerHTML = `
+          <div class="prompt-card">
+            <h3 class="prompt-title">無法載入 prompts.json</h3>
+            <p class="prompt-description">
+              請確認 prompts.json 與 index.html 位於同一個 Repository 路徑。
+            </p>
+          </div>
+        `;
+      });
+
+    /* ======================================================
+       Category
+       ====================================================== */
+
+    function getCategoryCounts() {
+      const counts = {};
+
+      prompts.forEach(item => {
+        const category = item.category || "未分類";
+        counts[category] = (counts[category] || 0) + 1;
+      });
+
+      return counts;
+    }
+
+    function buildCategories() {
+      const counts = getCategoryCounts();
+      const categories = Object.keys(counts);
+
+      categoryButtons.innerHTML = "";
+
+      const allButton = createCategoryButton(
+        "全部",
+        prompts.length,
+        prompts.length === 0
+      );
+
+      categoryButtons.appendChild(allButton);
+
+      categories.forEach(category => {
+        const button = createCategoryButton(
+          category,
+          counts[category],
+          counts[category] === 0
+        );
+
+        categoryButtons.appendChild(button);
+      });
+
+      updateCategoryActiveState();
+    }
+
+    function createCategoryButton(category, count, disabled) {
+      const button = document.createElement("button");
+
+      button.type = "button";
+      button.className = "category-button";
+      button.dataset.category = category;
+      button.textContent = `${category} (${count})`;
+
+      if (disabled) {
+        button.classList.add("disabled");
+        button.disabled = true;
+      }
+
+      button.addEventListener("click", () => {
+        currentCategory = category;
+        updateCategoryActiveState();
+        renderPrompts();
+      });
+
+      return button;
+    }
+
+    function updateCategoryActiveState() {
+      document
+        .querySelectorAll(".category-button")
+        .forEach(button => {
+          button.classList.toggle(
+            "active",
+            button.dataset.category === currentCategory
+          );
+        });
+    }
+
+    /* ======================================================
+       Search / Filter
+       ====================================================== */
+
+    function getFilteredPrompts() {
+      const keyword = searchInput.value.trim().toLowerCase();
+
+      return prompts.filter(item => {
+        const matchesCategory =
+          currentCategory === "全部" ||
+          item.category === currentCategory;
+
+        const searchableText = [
+          item.id,
+          item.category,
+          item.title,
+          item.description,
+          item.usage,
+          item.prompt,
+          item.requiredInput,
+          item.officialCategory,
+          item.officialReference,
+          item.version,
+          ...(Array.isArray(item.tags) ? item.tags : [])
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+
+        const matchesKeyword =
+          keyword === "" ||
+          searchableText.includes(keyword);
+
+        return matchesCategory && matchesKeyword;
+      });
+    }
+
+    searchInput.addEventListener("input", renderPrompts);
+
+    /* ======================================================
+       Stats
+       ====================================================== */
+
+    function updateStats() {
+      const counts = getCategoryCounts();
+
+      totalStats.textContent =
+        `目前共 ${prompts.length} 筆工程 Prompt`;
+
+      categoryStats.textContent =
+        Object.entries(counts)
+          .map(([category, count]) => `${category}: ${count}`)
+          .join(" ｜ ");
+    }
+
+    /* ======================================================
+       Render Prompt Cards
+       ====================================================== */
+
+    function renderPrompts() {
+      const filtered = getFilteredPrompts();
+
+      promptGrid.innerHTML = "";
+      emptyState.classList.toggle("show", filtered.length === 0);
+
+      filtered.forEach(item => {
+        const card = createPromptCard(item);
+        promptGrid.appendChild(card);
+      });
+    }
+
+    function createPromptCard(item) {
+      const card = document.createElement("article");
+      card.className = "prompt-card";
+
+      const tags = Array.isArray(item.tags)
+        ? item.tags
+        : [];
+
+      const tagsHtml = tags
+        .map(tag => `<span class="tag">${escapeHtml(tag)}</span>`)
+        .join("");
+
+      card.innerHTML = `
+        <h3 class="prompt-title">
+          ${escapeHtml(item.title || "未命名 Prompt")}
+        </h3>
+
+        <div class="prompt-meta">
+          <span class="tag category">
+            ${escapeHtml(item.category || "未分類")}
+          </span>
+          ${tagsHtml}
+        </div>
+
+        <p class="prompt-description">
+          ${escapeHtml(item.description || "")}
+        </p>
+
+        <div class="prompt-content-wrap">
+          <pre class="prompt-content">${escapeHtml(item.prompt || "")}</pre>
+        </div>
+
+        <div class="prompt-actions">
+
+          <button
+            type="button"
+            class="action-button primary copy-prompt-button"
+          >
+            複製 Prompt
+          </button>
+
+          <button
+            type="button"
+            class="action-button expand-prompt-button"
+          >
+            展開全文
+          </button>
+
+          <button
+            type="button"
+            class="action-button details-button"
+          >
+            詳細資訊
+          </button>
+
+        </div>
+
+        <div class="prompt-details">
+
+          <div class="detail-row">
+            <div class="detail-label">使用情境</div>
+            <div class="detail-value">
+              ${escapeHtml(item.usage || "—")}
+            </div>
+          </div>
+
+          <div class="detail-row">
+            <div class="detail-label">需要輸入</div>
+            <div class="detail-value">
+              ${escapeHtml(item.requiredInput || "—")}
+            </div>
+          </div>
+
+          <div class="detail-row">
+            <div class="detail-label">分類</div>
+            <div class="detail-value">
+              ${escapeHtml(item.officialCategory || item.category || "—")}
+            </div>
+          </div>
+
+          <div class="detail-row">
+            <div class="detail-label">參考</div>
+            <div class="detail-value">
+              ${escapeHtml(item.officialReference || "—")}
+            </div>
+          </div>
+
+          <div class="detail-row">
+            <div class="detail-label">版本</div>
+            <div class="detail-value">
+              ${escapeHtml(item.version || "—")}
+            </div>
+          </div>
+
+          <div class="detail-row">
+            <div class="detail-label">Prompt ID</div>
+            <div class="detail-value">
+              ${escapeHtml(item.id || "—")}
+            </div>
+          </div>
+
+        </div>
+      `;
+
+      const promptContent =
+        card.querySelector(".prompt-content");
+
+      const copyButton =
+        card.querySelector(".copy-prompt-button");
+
+      const expandButton =
+        card.querySelector(".expand-prompt-button");
+
+      const detailsButton =
+        card.querySelector(".details-button");
+
+      const details =
+        card.querySelector(".prompt-details");
+
+      /* Copy Prompt */
+
+      copyButton.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(item.prompt || "");
+
+          copyButton.textContent = "已複製";
+          copyButton.classList.add("success");
+
+          setTimeout(() => {
+            copyButton.textContent = "複製 Prompt";
+            copyButton.classList.remove("success");
+          }, 1400);
+
+        } catch (error) {
+          console.error(error);
+          showToast("無法複製 Prompt");
+        }
+      });
+
+      /* Expand */
+
+      expandButton.addEventListener("click", () => {
+        const expanded =
+          promptContent.classList.toggle("expanded");
+
+        expandButton.textContent =
+          expanded
+            ? "收合全文"
+            : "展開全文";
+      });
+
+      /* Details */
+
+      detailsButton.addEventListener("click", () => {
+        const open =
+          details.classList.toggle("open");
+
+        detailsButton.textContent =
+          open
+            ? "收合資訊"
+            : "詳細資訊";
+      });
+
+      return card;
+    }
+
+    /* ======================================================
+       Light / Dark Mode
+       ====================================================== */
+
+    function applyTheme(theme) {
+      const isDark = theme === "dark";
+
+      document.body.classList.toggle(
+        "dark-mode",
+        isDark
+      );
+
+      themeToggle.textContent =
+        isDark ? "☀" : "🌙";
+
+      themeToggle.setAttribute(
+        "data-tooltip",
+        isDark
+          ? "切換 Light Mode"
+          : "切換 Dark Mode"
+      );
+
+      localStorage.setItem(
+        "eigenPromptTheme",
+        theme
+      );
+    }
+
+    const savedTheme =
+      localStorage.getItem("eigenPromptTheme");
+
+    if (savedTheme === "dark" || savedTheme === "light") {
+      applyTheme(savedTheme);
+    } else {
+      const prefersDark =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      applyTheme(prefersDark ? "dark" : "light");
+    }
+
+    themeToggle.addEventListener("click", () => {
+      const isDark =
+        document.body.classList.contains("dark-mode");
+
+      applyTheme(isDark ? "light" : "dark");
+    });
+
+    /* ======================================================
+       Zoom
+       ====================================================== */
+
+    const ZOOM_MIN = 0.8;
+    const ZOOM_MAX = 1.4;
+    const ZOOM_STEP = 0.1;
+
+    let currentZoom =
+      parseFloat(
+        localStorage.getItem("eigenPromptZoom")
+      ) || 1;
+
+    function clampZoom(value) {
+      return Math.min(
+        ZOOM_MAX,
+        Math.max(ZOOM_MIN, value)
+      );
+    }
+
+    function applyZoom(value, showIndicator = false) {
+      currentZoom =
+        Math.round(clampZoom(value) * 10) / 10;
+
+      document.documentElement.style.setProperty(
+        "--ui-scale",
+        currentZoom
+      );
+
+      localStorage.setItem(
+        "eigenPromptZoom",
+        currentZoom
+      );
+
+      if (showIndicator) {
+        showZoomIndicator(currentZoom);
+      }
+    }
+
+    applyZoom(currentZoom);
+
+    zoomIn.addEventListener("click", () => {
+      applyZoom(
+        currentZoom + ZOOM_STEP,
+        true
+      );
+    });
+
+    zoomOut.addEventListener("click", () => {
+      applyZoom(
+        currentZoom - ZOOM_STEP,
+        true
+      );
+    });
+
+    zoomReset.addEventListener("click", () => {
+      applyZoom(1, true);
+    });
+
+    /* ======================================================
+       Reset Search / Filter
+       ====================================================== */
+
+    resetFilters.addEventListener("click", () => {
+      searchInput.value = "";
+      currentCategory = "全部";
+
+      updateCategoryActiveState();
+      renderPrompts();
+
+      searchInput.focus();
+
+      showToast("已清除搜尋與分類");
+    });
+
+    /* ======================================================
+       Copy URL
+       ====================================================== */
+
+    copyUrl.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(
+          window.location.href
+        );
+
+        showToast("網址已複製");
+      } catch (error) {
+        console.error(error);
+        showToast("無法複製網址");
+      }
+    });
+
+    /* ======================================================
+       Scroll Top
+       ====================================================== */
+
+    scrollTopButton.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+  </script>
+
+</body>
+</html>
 
 .site-header {
   background: white;
