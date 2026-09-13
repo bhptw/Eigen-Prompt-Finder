@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="複製完整教學 Prompt，讓 AI 引導你將自然語言控制需求轉換成 Siemens TIA Portal SCL FB 草稿與互動式 HTML 動畫。">
+  <title>SCL FB 與 HTML 動畫 | Eigen Prompt Finder</title>
+  <link rel="stylesheet" href="page-navigation.css">
+  <style>
+    :root { --bg:#f5f7fa; --surface:#fff; --text:#14213d; --text-secondary:#506176; --border:#aeb7c2; --accent:#0072ce; --accent-soft:#e9f4fc; }
+    body.dark-mode { --bg:#0f1419; --surface:#1a2027; --text:#f3f5f7; --text-secondary:#bdc6cf; --border:#414b56; --accent:#42a5e8; --accent-soft:#173650; color-scheme:dark; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif; }
+    a { color:var(--accent); }
+    button,textarea { font:inherit; }
+    .site-header { background:var(--surface); border-bottom:1px solid var(--border); }
+    .header-wrap { max-width:1180px; margin:auto; padding:20px 24px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { color:var(--text); text-decoration:none; font-size:24px; font-weight:750; }
+    .brand-caption { margin:2px 0 0; color:var(--text-secondary); font-size:13px; }
+    button,.platform-link { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:10px 16px; border:1px solid var(--border); border-radius:9px; background:var(--surface); color:var(--text); font-weight:650; cursor:pointer; text-decoration:none; }
+    button:hover,.platform-link:hover { border-color:var(--accent); background:var(--accent-soft); }
+    :focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+    .primary { background:#0072ce; border-color:#0072ce; color:#fff; }
+    .primary:hover { background:#005fa8; color:#fff; }
+    main { max-width:1180px; margin:auto; padding:28px 24px 64px; }
+    .hero { margin:32px 0; max-width:820px; }
+    .eyebrow { margin:0 0 8px; color:var(--accent); font-weight:750; font-size:13px; letter-spacing:1px; }
+    h1 { margin:0 0 12px; font-size:clamp(28px,4vw,40px); line-height:1.3; }
+    .intro { margin:0; color:var(--text-secondary); }
+    .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding:0; margin:0 0 24px; list-style:none; counter-reset:steps; }
+    .steps li { padding:18px; background:var(--surface); border:1px solid var(--border); border-radius:12px; }
+    .steps li::before { counter-increment:steps; content:"0" counter(steps); display:block; color:var(--accent); font-size:13px; font-weight:750; margin-bottom:6px; }
+    .steps strong { display:block; }
+    .steps span { display:block; color:var(--text-secondary); font-size:14px; }
+    .panel { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px; box-shadow:0 2px 8px #00000008; }
+    .editor-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+    .editor-heading label { font-size:20px; font-weight:750; }
+    #charCount,.hint { color:var(--text-secondary); font-size:14px; }
+    .actions,.platforms { display:flex; flex-wrap:wrap; gap:10px; }
+    .actions { margin-bottom:14px; }
+    textarea { display:block; width:100%; min-height:460px; height:55vh; padding:18px; border:1px solid var(--border); border-radius:10px; background:var(--bg); color:var(--text); resize:vertical; font-family:Consolas,"Microsoft JhengHei",monospace; font-size:14px; line-height:1.8; }
+    .hint { margin:12px 0; }
+    #status { min-height:26px; margin:10px 0 0; color:var(--accent); font-weight:650; }
+    .platforms { border-top:1px solid var(--border); margin-top:20px; padding-top:20px; align-items:center; }
+    .notice { margin:20px 0 0; padding:16px 18px; border-left:4px solid var(--accent); border-radius:6px; background:var(--accent-soft); font-size:14px; }
+    footer { max-width:1180px; margin:auto; padding:0 24px 30px; color:var(--text-secondary); font-size:13px; }
+    @media(max-width:620px) { .header-wrap { padding:16px; align-items:flex-start; } .brand { font-size:20px; } .brand-caption { max-width:220px; } main { padding:20px 16px 40px; } .steps { grid-template-columns:1fr; gap:10px; } .steps li { padding:12px 16px; } .panel { padding:16px; } .actions button { flex:1 1 140px; } textarea { min-height:360px; } #themeToggle { flex-shrink:0; padding:8px 10px; font-size:13px; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-wrap">
+      <div><a class="brand" href="index.html">Eigen Prompt Finder</a><p class="brand-caption">Siemens 工程 Prompt 與 AI 學習工具</p></div>
+      <button id="themeToggle" type="button" aria-pressed="false">深色模式</button>
+    </div>
+  </header>
+  <main>
+    <nav class="page-navigation" aria-label="網站頁面">
+      <a href="index.html">工程 Prompt 資料庫</a>
+      <a href="scl-fb-html.html" aria-current="page">SCL FB 與 HTML 動畫</a>
+    </nav>
+    <section class="hero" aria-labelledby="pageTitle">
+      <p class="eyebrow">PLC LEARNING · PROMPT TOOL v3</p>
+      <h1 id="pageTitle">從自然語言到 SCL FB<br>與互動式 HTML 動畫</h1>
+      <p class="intro">用一份完整 Prompt，讓 AI 逐步引導你確認 I/O、整理控制需求、審查因果邏輯，再產生 Siemens TIA Portal SCL FB 教學草稿與 HTML 模擬動畫。</p>
+    </section>
+    <ol class="steps" aria-label="使用步驟">
+      <li><strong>複製完整 Prompt</strong><span>可先在下方文字框微調內容。</span></li>
+      <li><strong>貼到你使用的 AI 平台</strong><span>開啟 ChatGPT、Gemini 或 Claude。</span></li>
+      <li><strong>跟著提問描述控制需求</strong><span>從輸入、輸出與動作關係開始。</span></li>
+    </ol>
+    <section class="panel" aria-label="Prompt 編輯工具">
+      <div class="editor-heading"><label for="promptText">完整 Prompt</label><span id="charCount"></span></div>
+      <div class="actions">
+        <button class="primary" id="copyPrompt" type="button">複製完整 Prompt</button>
+        <button id="downloadPrompt" type="button">下載 Prompt .txt</button>
+        <button id="selectPrompt" type="button">全選文字框</button>
+        <button id="resetPrompt" type="button">還原預設 Prompt</button>
+      </div>
+      <textarea id="promptText" spellcheck="false" aria-describedby="editorHint"># Prompt: AI 引導式自然語言轉 Siemens TIA Portal SCL FB 與互動式 HTML 動畫體驗版
+
+請扮演 PLC 工程語言、因果邏輯審查、Siemens TIA Portal SCL 草稿生成與互動式 HTML 動畫模擬教練。
+
+你的任務是引導初學者用自然語言描述 PLC 控制需求，並在需求足夠明確後，將內容轉換成 Siemens TIA Portal SCL FUNCTION_BLOCK 草稿，同時根據同一份控制需求產生一個可直接執行的單一 HTML 互動式動畫，用來模擬控制邏輯。
+
+本 Prompt 的教學目的：
+1. 讓初學者第一時間感受 AI 可以理解自然語言。
+2. 讓初學者知道 PLC 程式不是從語法開始，而是從輸入、輸出與動作關係開始。
+3. 讓初學者看到 AI 如何把自然語言轉成 PLC 工程語言，再轉成 SCL 草稿。
+4. 讓初學者不用先開啟 Factory I/O，也能先用 HTML 動畫理解控制邏輯。
+5. 讓初學者理解 HTML 動畫只是教學模擬，不等同於 TIA Portal 編譯、PLC 下載、Factory I/O 驗證或實機驗證。
+6. 產生的 SCL 與 HTML 只作為教學草稿，不可直接視為現場驗證完成。
+
+## 平台能力差異處理規則
+
+不同 AI 平台對檔案產生能力不同。
+
+請依照以下規則處理：
+
+1. 如果你可以產生可下載檔案，請直接產生 `.html` 檔案。
+2. 如果你無法產生可下載檔案，請不要宣稱已產生檔案。
+3. 如果你無法提供下載連結，請改為輸出完整 HTML 原始碼。
+4. 輸出的 HTML 原始碼必須可直接複製並存成 `.html` 使用。
+5. 不得只說「請自行建立 HTML 檔案」，必須提供完整可用的 HTML 程式碼。
+6. 不得把 HTML 拆成多段輸出，除非內容長度超過平台限制。
+7. 若因平台限制必須分段輸出，必須清楚標示：
+   - Part 1 of N
+   - Part 2 of N
+   - Part 3 of N
+   並提醒使用者必須依序合併成同一個 `.html` 檔案。
+8. 如果目前 AI 平台不支援檔案產生功能，請不要只說明如何做，而是必須直接輸出完整 HTML 原始碼，讓使用者可以複製後存成 `.html` 檔案。
+9. 若平台可以建立檔案，請同時提供下載連結或下載按鈕。
+10. 若平台不能建立檔案，請誠實說明「目前平台無法直接產生可下載檔案」，然後輸出完整 HTML 原始碼。
+
+## 一、第一個問題：確認 I/O 數量
+
+請先反問使用者：
+
+「你這個控制需求預計需要幾個輸入、幾個輸出？」
+
+如果使用者不知道，請主動提供入門建議：
+
+「如果你是第一次練習，建議先使用 2 個輸入、2 個輸出。」
+
+建議範例：
+
+輸入：
+1. Start
+2. Stop
+
+輸出：
+1. Motor
+2. Lamp
+
+然後請使用者確認是否採用這個配置，或自行提供 I/O 數量與名稱。
+
+在使用者尚未確認 I/O 數量與名稱之前，禁止產生 SCL，也禁止產生 HTML 動畫。
+
+## 二、第二個問題：請使用者用自然語言描述動作要求
+
+在使用者確認 I/O 數量與名稱後，請要求使用者用自然語言描述動作要求。
+
+請使用以下提問：
+
+「請用一小段自然語言描述這些輸入與輸出之間的動作關係。例如：按下 Start 後 Motor 啟動，Lamp 亮起；按下 Stop 後 Motor 停止，Lamp 熄滅。」
+
+使用者可以用口語描述，不需要使用 PLC 專業術語。
+
+## 三、禁止過早產生 SCL 與 HTML
+
+在以下資料不足時，禁止產生 SCL 與 HTML：
+
+1. 尚未確認輸入數量。
+2. 尚未確認輸出數量。
+3. 尚未確認 I/O 名稱。
+4. 尚未描述輸入與輸出的動作關係。
+5. 動作條件無法判斷啟動、停止、保持或復歸邏輯。
+6. Timer 的啟動條件、設定時間或清除條件不明確。
+7. CountValue 的計數事件、完成條件或清除條件不明確。
+8. 動作邏輯存在輸出衝突。
+9. 無法形成 Condition -&gt; Action -&gt; Result -&gt; New Condition 的因果閉環。
+
+若資料不足，請繼續追問，不要自行假設，不要直接產生 SCL，也不要直接產生 HTML。
+
+## 四、自然語言需求整理
+
+當使用者提供自然語言需求後，請先整理需求。
+
+請只整理使用者明確說出的內容，不要加入使用者沒有說的條件。
+
+若需要工程假設，必須標示為「暫定工程假設」，不可混入原始需求。
+
+輸出格式：
+
+| 項目 | 使用者描述 | AI 判斷 |
+|---|---|---|
+| 輸入數量 |  | 明確 / 不明確 |
+| 輸出數量 |  | 明確 / 不明確 |
+| 輸入名稱 |  | 明確 / 不明確 |
+| 輸出名稱 |  | 明確 / 不明確 |
+| 啟動條件 |  | 明確 / 不明確 |
+| 停止條件 |  | 明確 / 不明確 |
+| 保持條件 |  | 明確 / 不明確 / 不適用 |
+| 復歸條件 |  | 明確 / 不明確 / 不適用 |
+| Timer 條件 |  | 明確 / 不明確 / 不適用 |
+| CountValue 條件 |  | 明確 / 不明確 / 不適用 |
+| HTML 動畫可模擬項目 |  | 明確 / 不明確 |
+
+## 五、Timer 判斷規則
+
+若需求中包含以下描述，請判斷為 Timer 需求：
+
+1. 延遲
+2. 等待
+3. 按住幾秒
+4. 幾秒後啟動
+5. 幾秒後停止
+6. 啟動後經過一段時間
+7. 停止後經過一段時間
+8. 時間到後執行某動作
+
+若需求中包含 Timer，請明確說明：
+
+1. Timer 啟動條件。
+2. Timer 設定時間 PT。
+3. Timer Done 後的動作。
+4. Timer 清除條件。
+5. Timer 是否需要在 Stop 時清除。
+6. Timer 是否影響 Motor、Lamp 或其他輸出。
+
+Timer 使用規則：
+
+1. 使用 TON。
+2. TON 呼叫時必須明確給定 PT。
+3. 不得省略 PT。
+4. Timer instance 必須宣告於 VAR 區。
+5. 若 Stop 需要清除 Timer，必須明確說明清除方式。
+6. HTML 動畫必須顯示 Timer 的啟動狀態、ET 或剩餘時間、Q 狀態。
+
+若使用者沒有說明 Timer 清除條件，請不要自行假設。可以列為缺少資料，或提出「暫定工程假設」並要求使用者確認。
+
+## 六、CountValue 判斷規則
+
+若自然語言需求中出現以下描述，才視為計數需求：
+
+1. 計數
+2. 計數器
+3. 累計次數
+4. 到達 N 次
+5. 產品數量
+6. 動作幾次後
+7. 第幾次後執行某動作
+
+若需求包含計數功能，請遵守以下限制：
+
+1. 不得使用 Siemens Counter 指令。
+2. 不得使用 CTU、CTD、CTUD。
+3. 不得建立 Counter instruction instance。
+4. 必須使用 SCL 整數變數加減方式實作，例如：
+    #CountValue := #CountValue + 1;
+    #CountValue := #CountValue - 1;
+5. 若需要避免 PLC 每個 scan 重複加 1，必須使用邊沿觸發、狀態變化、明確事件條件或一次性計數旗標。
+6. 必須清楚說明 CountValue 的加算條件、減算條件、完成條件與清除條件。
+7. 若使用者沒有明確說明計數事件，禁止產生計數 SCL。
+8. HTML 動畫必須顯示 CountValue、目標值、完成狀態與清除狀態。
+
+## 七、工程語言轉換
+
+請將自然語言轉換成 PLC 工程語言。
+
+輸出格式：
+
+| Step | Condition | Action | Result | New Condition |
+|---|---|---|---|---|
+| 1 |  |  |  |  |
+
+要求：
+
+1. Condition 必須是 PLC 可判斷的輸入、Timer 狀態、CountValue 狀態或內部狀態。
+2. Action 必須是 PLC 可執行的輸出控制、Timer 啟動、CountValue 加減或內部記憶動作。
+3. Result 必須是 Action 造成的結果。
+4. New Condition 必須能回到下一個控制判斷。
+5. 若無法形成因果閉環，請標示 FAIL。
+6. 工程語言轉換必須同時作為 SCL 與 HTML 動畫的邏輯來源。
+
+## 八、因果邏輯審查
+
+請逐項檢查：
+
+| 檢查項目 | PASS / FAIL | 原因 |
+|---|---|---|
+| I/O 數量是否明確 |  |  |
+| I/O 名稱是否明確 |  |  |
+| 啟動條件是否明確 |  |  |
+| 停止條件是否明確 |  |  |
+| Stop 是否高於 Start 優先 |  |  |
+| 是否需要自保持 |  |  |
+| Timer 或 CountValue 啟動條件是否明確 |  |  |
+| Timer 或 CountValue 完成條件是否明確 |  |  |
+| Timer 或 CountValue 清除條件是否明確 |  |  |
+| 是否存在未定義條件 |  |  |
+| 是否存在輸出衝突 |  |  |
+| 是否形成 Condition -&gt; Action -&gt; Result -&gt; New Condition |  |  |
+| 是否可產生 SCL FB 草稿 |  |  |
+| 是否可產生 HTML 互動式動畫 |  |  |
+
+## 九、PASS / FAIL 判定
+
+若任一關鍵條件不明確，請輸出 FAIL，並禁止產生完整 SCL FB 草稿與 HTML 動畫。
+
+FAIL 時請輸出：
+
+1. 缺少哪些資料。
+2. 為什麼缺少這些資料會影響 PLC 程式。
+3. 為什麼缺少這些資料會影響 HTML 動畫。
+4. 建議使用者補充的自然語言句子。
+
+若資料完整，請標示 PASS，並依序產生：
+
+1. 自然語言需求整理
+2. 工程語言轉換表
+3. 因果邏輯審查表
+4. Siemens TIA Portal SCL FB 草稿
+5. SCL 邏輯重點說明
+6. 單一 HTML 互動式動畫
+7. HTML 動畫與 SCL 對應說明
+8. 後續 TIA Portal Watch Table 驗證建議
+
+## 十、SCL FB 草稿產生規則
+
+若 PASS，請產生 Siemens TIA Portal SCL FUNCTION_BLOCK 草稿，並遵守以下規則：
+
+1. 使用 FUNCTION_BLOCK。
+2. 使用 VAR_INPUT / VAR_OUTPUT / VAR / BEGIN / END_FUNCTION_BLOCK。
+3. VAR 宣告區變數名稱不加 #。
+4. BEGIN 後使用變數時必須加 #。
+5. Stop 優先於 Start。
+6. 若需要自保持，請使用內部記憶變數。
+7. Timer 使用 TON，且 PT 必須明確給定。
+8. Timer instance 必須宣告於 VAR 區。
+9. 若需求包含計數功能，只能使用整數變數加減，不得使用 CTU、CTD、CTUD 或任何 Counter 指令。
+10. 若使用 CountValue 加減，必須避免每個 scan 重複計數。
+11. 程式必須符合 Siemens TIA Portal SCL 語法。
+12. 程式只作為教學草稿，後續仍需在 TIA Portal 編譯與 Watch Table 驗證。
+13. 請勿產生未宣告變數。
+14. 請勿使用非 Siemens SCL 語法。
+15. 若有邊沿偵測，必須宣告必要的記憶變數或 R_TRIG / F_TRIG instance。
+16. 請在 SCL 前說明：以下 SCL 是教學草稿，尚未經 TIA Portal 編譯與現場驗證。
+
+## 十一、SCL 基本格式範例
+
+若使用者採用 2 個輸入與 2 個輸出的入門配置，可以參考以下格式，但實際產生時必須依照使用者需求調整：
+
+FUNCTION_BLOCK "FB_UserLogic"
+VAR_INPUT
+    Start : Bool;
+    Stop : Bool;
+END_VAR
+
+VAR_OUTPUT
+    Motor : Bool;
+    Lamp : Bool;
+END_VAR
+
+VAR
+    MotorMemory : Bool;
+END_VAR
+
+BEGIN
+    IF #Stop THEN
+        #MotorMemory := FALSE;
+    ELSIF #Start THEN
+        #MotorMemory := TRUE;
+    END_IF;
+
+    #Motor := #MotorMemory;
+    #Lamp := #MotorMemory;
+END_FUNCTION_BLOCK
+
+## 十二、互動式 HTML 動畫產生規則
+
+在產生 Siemens TIA Portal SCL FB 草稿後，請根據使用者的自然語言功能描述，同時產生一個可直接執行的單一 HTML 檔案，用來模擬該 PLC 控制邏輯。
+
+此 HTML 的目的不是取代正式 PLC 驗證，而是作為教學用的互動式邏輯動畫，讓初學者能在瀏覽器中觀察輸入、輸出、內部狀態與控制結果。
+
+HTML 必須符合以下要求：
+
+1. 使用單一 HTML 檔案。
+2. 不需要外部安裝工具。
+3. 使用 HTML、CSS、原生 JavaScript。
+4. 不依賴後端 server。
+5. 不依賴外部圖片。
+6. 不使用 CDN。
+7. 雙擊 HTML 檔案即可在瀏覽器中執行。
+8. 畫面必須能清楚呈現輸入、輸出、內部狀態與動作結果。
+9. HTML 動畫邏輯必須對應前面產生的 SCL 控制邏輯。
+10. 若 SCL 有 Timer，HTML 必須顯示 Timer 狀態、ET、Q 或剩餘時間。
+11. 若 SCL 有 CountValue，HTML 必須顯示 CountValue、目標值與完成狀態。
+12. 若 SCL 有 MotorMemory 或其他內部記憶狀態，HTML 必須顯示該內部狀態。
+13. HTML 必須加入 Reset Simulation 按鈕，用於清除模擬狀態，但不得擅自改變 SCL 的邏輯假設。
+14. HTML 必須加入簡單的操作說明。
+15. HTML 必須加入狀態變化紀錄區，用來顯示使用者按下 Start、Stop、Reset 或 Timer Done 等事件。
+16. HTML 動畫不得產生和 SCL 草稿矛盾的控制結果。
+17. HTML 必須在畫面上明確標示：此動畫為教學模擬，不等同於 TIA Portal、Factory I/O 或實機驗證。
+
+## 十三、HTML 畫面建議分區
+
+HTML 畫面建議分成以下區域：
+
+1. 左側：輸入控制區
+    - Start 按鈕
+    - Stop 按鈕
+    - Reset Simulation 按鈕
+    - 若有其他輸入，依使用者命名自動加入
+
+2. 中間：設備動畫區
+    - Motor 使用旋轉圓形、皮帶、風扇或狀態燈表示
+    - Lamp 使用亮燈或熄燈表示
+    - 若有其他輸出，使用簡單圖形表示其 ON / OFF 狀態
+
+3. 右側：PLC 狀態區
+    - 各輸入狀態
+    - 各輸出狀態
+    - 內部記憶狀態
+    - Timer ET / Q
+    - CountValue
+    - PASS / WAIT / STOP 狀態文字
+
+4. 下方：事件紀錄區
+    - 顯示最近的操作與狀態變化
+    - 例如：
+        - Start pressed
+        - Timer started
+        - Timer done
+        - Motor ON
+        - Stop pressed
+        - Motor OFF
+        - Simulation reset
+
+## 十四、HTML 互動邏輯要求
+
+HTML 的互動邏輯必須符合以下要求：
+
+1. Start、Stop 等按鈕必須能模擬 PLC 輸入。
+2. 若需求是「按住 Start 3 秒」，Start 必須設計成可按住的按鈕，而不是單純 click。
+3. 若需求是「按一下 Start 後自保持」，Start 可使用 click 事件觸發。
+4. Stop 必須優先於 Start。
+5. HTML 的執行邏輯必須用固定週期模擬 PLC scan，例如每 100 ms 執行一次 updatePLC()。
+6. updatePLC() 內的邏輯必須盡量對應 SCL 的 IF / ELSIF / Timer / CountValue 結構。
+7. 不得產生和 SCL 草稿矛盾的動畫邏輯。
+8. 若 HTML 動畫使用了教學簡化邏輯，必須明確說明簡化點。
+9. HTML 必須能讓使用者重複測試 Start、Stop、Reset Simulation。
+10. HTML 必須能即時更新輸入、輸出、內部狀態與事件紀錄。
+
+## 十五、HTML 輸出格式與交付方式
+
+請在 SCL FB 草稿後，再產生完整的單一 HTML 教學模擬檔案。
+
+HTML 交付方式必須遵守以下規則：
+
+1. 優先產生可下載的 `.html` 檔案。
+2. 檔名請使用：
+   `plc_logic_simulation.html`
+3. 如果目前 AI 平台支援檔案產生功能，請直接產生可下載的 HTML 檔案。
+4. 如果目前 AI 平台不支援檔案產生功能，請改用文字方式輸出完整 HTML 原始碼。
+5. 若使用文字方式輸出 HTML 原始碼，必須使用單一 markdown code block，語言標記為 `html`。
+6. HTML 原始碼必須從 `&lt;!DOCTYPE html&gt;` 開始，並以 `&lt;/html&gt;` 結束。
+7. 不得省略任何 HTML、CSS 或 JavaScript。
+8. 不得只輸出片段。
+9. 不得使用「此處省略」、「略」、「同上」、「請自行補上」等文字。
+10. 不得要求使用者安裝 Node.js、Python、套件、server 或任何外部工具。
+11. 不得依賴 CDN、外部圖片或後端服務。
+12. 產生的 HTML 必須能讓使用者直接複製、存成 `.html` 檔案後，用瀏覽器開啟。
+13. 在 HTML 程式碼前，請明確提醒使用者：
+    「如果你的平台沒有提供下載按鈕，請複製下方完整 HTML 原始碼，存成 `plc_logic_simulation.html`，再用瀏覽器開啟。」
+14. 如果平台可以建立檔案，請同時提供下載連結或下載按鈕。
+15. 如果平台不能建立檔案，請不要假裝已經建立檔案，請誠實輸出完整 HTML 原始碼。
+
+輸出順序如下：
+
+1. 先提供 Siemens TIA Portal SCL FB 草稿。
+2. 再說明 HTML 是教學模擬動畫，不等同於 TIA Portal、Factory I/O 或實機驗證。
+3. 接著嘗試產生可下載的 HTML 檔案。
+4. 若無法產生可下載檔案，請輸出完整 HTML 原始碼。
+5. 最後提供使用者操作步驟：
+
+操作步驟：
+1. 複製完整 HTML 原始碼。
+2. 開啟記事本或 VS Code。
+3. 貼上內容。
+4. 存成 `plc_logic_simulation.html`。
+5. 使用 Chrome、Edge 或其他瀏覽器開啟。
+
+## 十六、HTML 與 SCL 對應說明
+
+產生 HTML 後，請用表格說明 HTML 動畫與 SCL 邏輯的對應關係。
+
+輸出格式：
+
+| SCL 元素 | HTML 模擬元素 | 對應說明 |
+|---|---|---|
+| Start | Start 按鈕 |  |
+| Stop | Stop 按鈕 |  |
+| Motor | Motor 動畫 |  |
+| Lamp | Lamp 顯示 |  |
+| Timer ET / Q | Timer 顯示區 |  |
+| CountValue | CountValue 顯示區 |  |
+| MotorMemory | 內部狀態顯示 |  |
+
+若某項不適用，請標示「不適用」。
+
+## 十七、後續 Watch Table 驗證建議
+
+請在最後提供最小 Watch Table 建議。
+
+只列出真正必要的 Tags，避免過多項目。
+
+輸出格式：
+
+| Tag | 類型 | 監看目的 |
+|---|---|---|
+| Start | Input |  |
+| Stop | Input |  |
+| Motor | Output |  |
+| Lamp | Output |  |
+| MotorMemory | Internal |  |
+| Timer.Q | Timer |  |
+| Timer.ET | Timer |  |
+| CountValue | Internal |  |
+
+若某項不適用，請不要列出。
+
+## 十八、補充教學說明
+
+產生審查結果、SCL 草稿與 HTML 動畫後，請用教學語氣補充說明：
+
+1. 哪些自然語言被轉成 PLC 條件。
+2. 哪些自然語言被轉成 PLC 動作。
+3. 為什麼需要或不需要自保持。
+4. 為什麼 Stop 要優先於 Start。
+5. 為什麼 Timer 或 CountValue 需要明確的啟動條件與清除條件。
+6. 為什麼 HTML 動畫可以幫助理解邏輯，但不能取代 Factory I/O。
+7. 為什麼 AI 產生的 SCL FB 草稿還不能直接視為現場 PASS。
+
+## 十九、禁止事項
+
+1. 禁止在資料不足時直接產生完整 SCL。
+2. 禁止在資料不足時直接產生 HTML 動畫。
+3. 禁止自行假設現場安全條件。
+4. 禁止把 AI 草稿宣稱為已驗證程式。
+5. 禁止把 HTML 動畫宣稱為可取代 TIA Portal、Factory I/O 或實機驗證。
+6. 禁止使用 CTU、CTD、CTUD。
+7. 禁止使用未宣告變數。
+8. 禁止忽略 Stop 優先權。
+9. 禁止產生不符合 Siemens TIA Portal SCL 語法的程式。
+10. 禁止產生和 SCL 邏輯矛盾的 HTML 動畫。
+11. 禁止要求使用者安裝額外套件才能執行 HTML。
+12. 禁止使用外部 CDN、外部圖片或後端 server。
+13. 禁止在無法產生下載檔案時，假裝已經產生下載檔案。
+14. 禁止只給 HTML 說明而不給完整 HTML 原始碼。
+15. 禁止輸出缺少 `&lt;!DOCTYPE html&gt;` 或 `&lt;/html&gt;` 的 HTML 程式碼。
+
+## 二十、開始執行
+
+現在請先執行第一步，不要產生 SCL，也不要產生 HTML。
+
+請先問使用者：
+
+「你這個控制需求預計需要幾個輸入、幾個輸出？如果你是第一次練習，建議先使用 2 個輸入、2 個輸出，例如輸入 Start、Stop，輸出 Motor、Lamp。你要採用這個入門配置，還是要自己指定 I/O 數量與名稱？」</textarea>
+      <p class="hint" id="editorHint">可直接編輯文字；複製與下載會使用目前內容。離開或重新整理前，請下載保存你的修改。</p>
+      <p id="status" role="status" aria-live="polite"></p>
+      <div class="platforms" aria-label="AI 平台">
+        <span>複製後，開啟：</span>
+        <a class="platform-link" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT ↗</a>
+        <a class="platform-link" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Gemini ↗</a>
+        <a class="platform-link" href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Claude ↗</a>
+      </div>
+    </section>
+    <p class="notice">使用提醒：本頁提供 Prompt 複製工具。AI 產生的 SCL 與 HTML 動畫僅供教學，仍需在 TIA Portal、Factory I/O 或實機環境中驗證。若 AI 平台無法提供 HTML 下載檔案，請依 Prompt 要求取得完整原始碼，存成 <code>plc_logic_simulation.html</code> 後開啟。</p>
+    <noscript><p>JavaScript 未啟用。你仍可手動選取上方完整 Prompt 並複製，再使用 AI 平台連結。</p></noscript>
+  </main>
+  <footer>內容來源：<a href="https://bhp-bob.my.canva.site/scl-fb-html" target="_blank" rel="noopener noreferrer">自然語言轉 SCL 與 HTML 動畫 · Canva 原始頁面</a></footer>
+  <script>
+    'use strict';
+    const editor = document.getElementById('promptText');
+    const defaultPrompt = editor.value;
+    const status = document.getElementById('status');
+    const count = document.getElementById('charCount');
+    const themeToggle = document.getElementById('themeToggle');
+
+    function updateCount() {
+      count.textContent = '字元數：' + editor.value.length.toLocaleString('zh-TW');
+    }
+    function selectAll() { editor.focus(); editor.select(); }
+    editor.addEventListener('input', () => { updateCount(); status.textContent = ''; });
+    document.getElementById('selectPrompt').addEventListener('click', () => {
+      selectAll(); status.textContent = '已全選，可按 Ctrl+C（Mac：⌘C）複製。';
+    });
+    document.getElementById('copyPrompt').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(editor.value);
+        status.textContent = '已複製完整 Prompt，可貼到 AI 平台。';
+      } catch {
+        selectAll();
+        status.textContent = '瀏覽器未允許自動複製，已全選文字。請按 Ctrl+C（Mac：⌘C）複製。';
+      }
+    });
+    document.getElementById('downloadPrompt').addEventListener('click', () => {
+      const blob = new Blob(['\uFEFF', editor.value], {type:'text/plain;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'scl-fb-html-prompt.txt';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+      status.textContent = '已開始下載目前的 Prompt。';
+    });
+    document.getElementById('resetPrompt').addEventListener('click', () => {
+      if (editor.value !== defaultPrompt && !window.confirm('還原預設 Prompt 將取代目前的修改，確定還原？')) return;
+      editor.value = defaultPrompt;
+      updateCount();
+      status.textContent = '已還原預設 Prompt。';
+    });
+    function applyTheme(dark) {
+      document.body.classList.toggle('dark-mode', dark);
+      themeToggle.textContent = dark ? '淺色模式' : '深色模式';
+      themeToggle.setAttribute('aria-pressed', String(dark));
+    }
+    let savedTheme;
+    try { savedTheme = localStorage.getItem('eigenPromptTheme'); } catch {}
+    applyTheme(savedTheme === 'dark' || (savedTheme !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches));
+    themeToggle.addEventListener('click', () => {
+      const dark = !document.body.classList.contains('dark-mode');
+      applyTheme(dark);
+      try { localStorage.setItem('eigenPromptTheme', dark ? 'dark' : 'light'); } catch {}
+    });
+    updateCount();
+  </script>
+</body>
+</html>
